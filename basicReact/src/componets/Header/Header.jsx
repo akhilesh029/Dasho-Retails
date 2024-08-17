@@ -12,12 +12,12 @@ function Header(){
         <p>Shop</p>
         <div className='verticalLine'></div>
         <form action="">
-            <input placeholder='What are you lookin for?' type="text" />
+            <input placeholder='What are you looking for?' type="text" />
             <button type='submit'>Search</button>
         </form>
       </div>
       <div id="header">
-        <button className='bulkReq'>Bulk Requirement</button>
+      <button className='bulkReq'>Bulk Requirement</button>
       </div>
 
     </div>
