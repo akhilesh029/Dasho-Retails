@@ -1,16 +1,27 @@
 import './mainDiv.css'
-import {assets} from '../../../assets/assets'
+import {assets} from '../../assets/assets'
 
 function Maindiv(){
+
+    //for demo
+const handleClick=()=>{
+    window.open('https://shopping.indiamart.com/search.php?ss=home+decor','_self')
+}
+
+const gift=(e)=>{
+    e.stopPropagation(); // to stop parent div
+    window.open('https://shopping.indiamart.com/search.php?ss=gift+items','_self')
+}
+
     return(
         <>
-        <div className="main">
+        <div onClick={handleClick}  className="main">
             <div className="left child">
                 <h1>Discover Top Brands </h1>
-                <h2>This Festival on IndeaMart Shopping</h2>
+                <h2>This Festival on व्यापारी Shopping</h2>
             </div>
             <div className="right child">
-                <div className="grid">
+                <div onClick={gift} className="grid">
                     <img src={assets.gift} alt="" />
                 </div>
                 <div className="grid">

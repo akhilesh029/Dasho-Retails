@@ -1,5 +1,5 @@
 import './Navbar.css'
-import { assets } from '../../../assets/assets'
+import { assets } from '../../assets/assets'
 
 function Navbar(){
     return(
@@ -8,9 +8,9 @@ function Navbar(){
            <div className="categories">
             {/* //<ul className='categories' > */}
                 <li  className="ctgtype"> 
-                    <a href="">
+                    <a href="/clothes">
                         <img src={assets.women} alt="" />
-                        <span>Ladies Wear</span>
+                        <span>Clothes</span>
                     </a>
                 </li>
                 
@@ -18,7 +18,7 @@ function Navbar(){
                     <a href="">
                             <img src={assets.men} alt="" />
                       
-                        <span>Men Wear</span>
+                        <span>Cosmetics</span>
                     </a>
                 </li>
                 <li className="ctgtype">
@@ -26,7 +26,7 @@ function Navbar(){
                        
                             <img src={assets.women} alt="" />
                        
-                        <span>Footwear</span>
+                        <span>Pharmaceuticals</span>
                     </a>
                 </li>
                 <li className="ctgtype">
@@ -34,7 +34,7 @@ function Navbar(){
                        
                             <img src={assets.men} alt="" />
                         
-                        <span>Beuty Products</span>
+                        <span>Wooden Articles</span>
                     </a>
                 </li>
                 <li className="ctgtype">
@@ -68,14 +68,14 @@ function Navbar(){
                         <span>Home doctor</span>
                     </a>
                 </li>
-                <li className="ctgtype">
+                {/* <li className="ctgtype">
                     <a href="http">
                         
                             <img src={assets.women} alt="" />
                        
                         <span>Lights</span>
                     </a>
-                </li> 
+                </li>  */}
                
             {/* </ul> */}
            </div>

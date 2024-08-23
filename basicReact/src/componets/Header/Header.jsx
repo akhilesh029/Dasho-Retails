@@ -6,7 +6,7 @@ function Header(){
     <>
     <div className="headerEle">
       <div id="header" className='logo'>
-        Traders Shopping
+        व्यापारी Shopping
       </div>
       <div id="header" className='div2'>
         <p>Shop</p>
