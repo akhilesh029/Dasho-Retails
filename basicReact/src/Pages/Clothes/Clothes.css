@@ -1,8 +1,19 @@
 .features{
     display: flex;
     flex-direction: column;
+    margin-left: 40px;
+    margin-right: 40px;
+
+    height: 100%;
+    overflow: hidden;
  
 }
+
+.view-more {
+    display: block;
+    margin-top: 10px; /* Adjust the margin as needed */
+  }
+
 .clothes{
     margin-top: 90px;
 }
@@ -10,7 +21,6 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    /* background-color: red; */
     
 }
 .dresses>img{
@@ -21,9 +31,9 @@
      flex-direction: column;
      justify-content: center;
     
-    /* border: 2px solid black; */
 }
 .dresses{
+  width: 100%;
   margin: 10px;
   display: flex;
   flex-direction: column;

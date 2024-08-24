@@ -18,7 +18,7 @@ const gift=(e)=>{
         <div onClick={handleClick}  className="main">
             <div className="left child">
                 <h1>Discover Top Brands </h1>
-                <h2>This Festival on व्यापारी Shopping</h2>
+                <h2>This Festival on Dasho</h2>
             </div>
             <div className="right child">
                 <div onClick={gift} className="grid">

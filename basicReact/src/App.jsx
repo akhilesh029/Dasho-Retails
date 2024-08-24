@@ -8,7 +8,12 @@ import Navbar from './componets/Navbar/Navbar';
 import Features from './componets/Features/Features';
 import Maindiv from './componets/MainDiv/MainDiv';
 
-import ContextProvider from './contexts/AppContext';
+import Clothesdetails from './Pages/Clothes/Clothesdetails/Clothesdetails';
+import FeaturedPro from './componets/FeaturedProducts/FeaturedPro';
+import Cosmetics from './Pages/Clothes/Cosmetics/Cosmetics';
+import Pharmaceuticals from './Pages/Pharmaceutical/Pharmaceutical';
+import SellerCreateAccount from './Pages/CreateAccOfSeller/CreateAccOfSeller';
+import Dropdown from './componets/Dropdown/Dropdown';
 
 
 
@@ -18,13 +23,18 @@ function App(){
     <>
     
 
-     <Header />
-     <Home />
+      <Header />
+     {/* <Home /> */}
      <Navbar />
+     {/* <Dropdown /> */}
      <Maindiv />
-     <Features/> 
-
-     <Clothes />
+     <FeaturedPro />
+     <Features/>  
+     {/* <SellerCreateAccount /> */}
+     <Cosmetics />
+     <Pharmaceuticals /> 
+      <Clothes />
+     
     
       
     </>
