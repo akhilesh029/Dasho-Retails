@@ -27,7 +27,7 @@ function Header(){
       <div id="header">
       {/* <button className='bulkReq'>Bulk Requirement</button> */}
       <button className="headerbtn">My Items</button>
-      <button onClick={signInAccount} className="headerbtn">Sin in <b>Account</b> </button>
+      <button onClick={signInAccount} className="headerbtn">Sign in <b>Account</b> </button>
       <button className="headerbtn">Cart</button>
 
       </div>
