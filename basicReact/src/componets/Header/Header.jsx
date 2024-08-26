@@ -33,7 +33,7 @@ function Header(){
             <li className="menu-item dropdown">
                 <a href="#">Sign In</a>
                 <ul class="dropdown-menu">
-                    <li><a href="#" >As a Seller</a></li>
+                    <li><a href="#" onClick={signInAccount} >As a Seller</a></li>
                     <li><a href="#">As a Customer</a></li>
                 </ul>
             </li>
@@ -44,8 +44,6 @@ function Header(){
 
       {/* <button className="headerbtn">Cart</button> */}
       </div>
-     
-
     </>
   )
 
