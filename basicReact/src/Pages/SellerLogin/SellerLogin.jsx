@@ -9,6 +9,7 @@ import UserPage from '../UserPage/UserPage';
 
 
 
+
 const SellerLogin = () => {
 
 const [email, setEmail] = useState('');
@@ -57,13 +58,12 @@ const handleSubmit = (event) => {
 return (
 <>
 
-
     <Header />
 <div className="login-container">
-<h2>Seller Login</h2>
-<form onSubmit={handleSubmit}>
-<div className="input-group">
-<label htmlFor="email">Email:</label>
+      <h2>Seller Login</h2>
+      <form onSubmit={handleSubmit}>
+          <div className="input-group">
+            <label htmlFor="email">Email:</label>
 <input
 type="email"
 id="email"

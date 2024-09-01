@@ -1,6 +1,7 @@
 import './Header.css'
 import { assets } from '../../assets/assets'
 import Dropdown from '../Dropdown/Dropdown'
+import Firebase from "../Firebase/FirebaseAuth";
 
 function Header(){
 
@@ -23,22 +24,15 @@ function Header(){
             <button type='submit'>Search</button>
         </form>
       </div>
-      {/* <button className='bulkReq'>Bulk Requirement</button> */}
-      {/* <button className="headerbtn">My Items</button> */}
-      {/* <button onClick={signInAccount} className="headerbtn">Sign in</button> */}
+     
       <nav>
         <ul class="menu">
             <li className="menu-item"><a href="#">My Items</a></li>
             <li className="menu-item"><a href="#">About</a></li>
-            <li className="menu-item dropdown">
-                <a href="#">Sign In</a>
-                <ul class="dropdown-menu">
-                    <li><a href="#" onClick={signInAccount} >As a Seller</a></li>
-                    <li><a href="#">As a Customer</a></li>
-                </ul>
-            </li>
             <li class="menu-item"><a href="#">Contact</a></li>
-            <li class="menu-item"><a href="#">Card</a></li>
+            <li className="menu-item dropdown">
+                     <Firebase />
+            </li>            
         </ul>
     </nav>
 
