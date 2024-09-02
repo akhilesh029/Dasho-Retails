@@ -3,6 +3,7 @@ import axios from 'axios';
 import 'firebase/auth';
 import { initializeApp } from 'firebase/app';
 import { getAuth, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 import "./firebase.css";
 
 const firebaseConfig = {
@@ -48,6 +49,14 @@ const FirebaseAuth = () => {
         console.error('Error logging in:', error);
       });
   };
+
+  
+  const navigate = useNavigate();
+
+  const handleProfileClick = () => {
+    navigate('/profile');  // Use navigate instead of history.push
+  };
+
 
   const handleLogout = () => {
     signOut(auth)
@@ -117,6 +126,7 @@ const FirebaseAuth = () => {
               <p>{user.displayName}</p>
               {dropdownVisible && (
                 <ul className='dropdown-menu'>
+                  <li className='profile-button' onClick={handleProfileClick}>Profile</li>
                   <li className='logout-button' onClick={handleLogoutClick}>Logout</li>
                 </ul>
               )}

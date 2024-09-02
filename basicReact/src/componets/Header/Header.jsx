@@ -29,7 +29,7 @@ function Header(){
         <ul class="menu">
             <li className="menu-item"><a href="#">My Items</a></li>
             <li className="menu-item"><a href="#">About</a></li>
-            <li class="menu-item"><a href="#">Contact</a></li>
+            <li className="menu-item"><a href="#">Contact</a></li>
             <li className="menu-item dropdown">
                      <Firebase />
             </li>            

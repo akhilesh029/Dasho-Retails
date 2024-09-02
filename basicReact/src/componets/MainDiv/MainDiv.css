@@ -5,6 +5,7 @@
     padding: 10px;
     display:  flex;
     flex-direction: row;
+    z-index:2;
     /* justify-content: cente; */
     border: 1px solid rgba(113, 108, 108, 0.767);
     height: 400px;

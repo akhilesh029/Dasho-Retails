@@ -11,6 +11,8 @@ body{
     padding-right: 20px;
 }
 
+
+
 @media screen and (max-width:600px) {
     body{
         margin-top: 0px;

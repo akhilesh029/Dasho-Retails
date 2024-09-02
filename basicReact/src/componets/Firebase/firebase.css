@@ -1,10 +1,122 @@
-.signup ul {
-    list-style: none;
-    /* margin-top: 10px; */
-    font-size: 1.2rem;
-    font-weight: 600;
-}
+/* Container for the signup dropdown */
+.signup {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Unordered list containing the user's display name */
+  .signup > ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* List item containing the display name */
+  .signup > ul > li {
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  /* .signup > ul > li:hover {
+    background-color: #e9ecef;
+  } */
+  
+  /* User's display name styling */
+  .signup p {
+    margin: 0;
+    color:#444;
+    font-weight: 500;
+  }
+  
+  
+  /* Dropdown menu styling */
+  .dropdown-menu {
+    list-style-type: none;
+    padding: 8px 0;
+    margin: 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    min-width: 120px;
+  }
+  
+  /* Logout button styling */
+  .logout-button {
+    padding: 10px 20px;
+    color:#444;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .logout-button:hover {
+    background-color: #f2dede;
+    /* color: #c9302c; */
+  }
+  
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Styling the Sign Up link */
+a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+  
+  /* Dropdown menu container */
+  .dropdown-menu {
+    list-style-type: none;
+    padding: 10px 0;
+    margin: 0;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 160px;
+    z-index: 1000;
+  }
+  
+  /* Dropdown menu items */
+  .dropdown-menu li {
+    padding: 8px 16px;
+    transition: background-color 0.3s;
+  }
+  
+  .dropdown-menu li:hover {
+    background-color: #e9ecef;
+  }
+  
+  /* Cursor pointer already applied inline */
+  
   
  
  

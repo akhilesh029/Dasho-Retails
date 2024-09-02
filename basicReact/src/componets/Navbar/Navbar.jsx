@@ -5,9 +5,6 @@ import Categories from '../Categories/Categories'
 
 function Navbar(){
     return(
-        <>
-       
-       
            <div className="categories">
             {/* //<ul className='categories' > */}
             <div className="dropdown">
@@ -90,7 +87,7 @@ function Navbar(){
                
             {/* </ul> */}
            </div>
-        </>
+           
     )
 }
 
