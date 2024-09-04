@@ -1,0 +1,166 @@
+.adminPage{
+    margin-top: 100px;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+}
+
+
+.sellerdiv{
+    /* position: relative; */
+    /* top: 50%;
+    left: 40%; */
+    /* align-items: center; */
+   width: 100%;
+    border: 1px solid black;
+   
+    padding: 10px;
+    background-color: rgb(6, 77, 101);
+    /* background-color: rgb(12, 9, 11); */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.sellerdiv>h2{
+    color: white;
+}
+
+.seller-form{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    column-gap: 10px;
+    background-color: #dfe3e9;
+    color: black;
+    border: 1px solid black;
+    align-items: center;
+    width: fit-content;
+    padding: 25px;
+    padding-right: 30px;
+    border-radius: 10px;
+    width: fit-content;
+    font-size: 2vmin;
+
+  
+}
+#itemImage{
+    background-color: white;
+    border-radius: 10px;
+}
+
+
+.form-fields{
+    display: flex;
+    flex-direction: column;
+    line-height: 30px;
+    
+    
+}
+.form-fields>input{
+    /* background-color: black; */
+    color: black;
+    /* width: 10vw; */
+    border: 1px solid black;
+}
+.form-fields>textarea{
+    color: black;
+    width: 20vw;
+    height: 30px;
+}
+.sellerbtn{
+    margin-left: 0;
+    background-color: #FCC300;
+    color: black;
+    font-size: 2vmin;
+    width: 5vmin;
+    height: 7vmin;
+    border-radius: 5px;
+    border: 1px solid black;
+    
+}
+
+
+/*  itemlist-----------------*/
+.photo{
+    width: 10vh;
+    height: auto;
+    /* border: 1px solid rgb(81, 5, 80); */
+    border-radius: 5px;
+    justify-content: center;
+}
+.photo:hover{
+    transform: scale(1);
+}
+
+.showItems{
+
+    padding: 10px;
+    width: 60vw;
+   
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    border: 1px solid purple;
+    border-radius: 5px;
+    background-color: white;
+
+    overflow-y: scroll;
+  height: 380px
+
+   
+}
+
+.showItems>table>tr>th{
+   /* text-align: center; */
+}
+
+table{
+    margin: 0.5vw;
+    border-radius: 5px;
+    
+}
+
+table>tr>td{
+    border: 1px solid rgb(223, 212, 212);
+    background-color: rgba(231, 226, 231, 0.142);
+    color: rgb(12, 15, 103);
+  
+    width: 50px;
+    text-align: center;
+    font-size: 1vw;
+   
+}
+
+
+
+/*-----------sidepannel---------------*/
+.sidepanel{
+  width: 33vmin;
+    background-color: #3B3F46;
+    color: white;
+    /* width: fit-content; */
+    padding: 15px;
+
+    
+}
+.sidepanellist{
+    display: flex;
+    flex-direction: column;
+    line-height: 8vh;
+    /* color:yellow; */
+    
+}
+.sidepanellist:hover{
+   
+   color: #FCC300;
+}
+
+/*----------------rightpanel------------*/
+
+
+
+
+  
+
+
+

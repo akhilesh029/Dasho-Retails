@@ -6,10 +6,13 @@ import Header from '../../componets/Header/Header';
 import {  useNavigate } from 'react-router-dom';
 import UserPage from '../UserPage/UserPage';
 
-
+// import SellerPage from '../SellerPage/SellerPage';
 
 
 const SellerLogin = () => {
+
+
+
 
 const [email, setEmail] = useState('');
 const [password, setPassword] = useState('');
@@ -27,22 +30,18 @@ const handleSubmit = (event) => {
     .then(result=>{
       setUserData(userData=>result.userData)
       const userData = {email, password}
-      console.log(userData)
+      // console.log(userData)
       
-
-      // console.log(result)
-      // console.log(result.name)
-      // console.log(result.email)
+  
       if(result.data === "Success"){
-        // console.log(email)
-        console.log(userData.name)
-        // console.log(result)
+      
        
-        
         loginSucc.innerHTML = "Login Succesfully!"
         loginSucc.style.color = "#7CFC00"
-       
-          navigate('/user')
+       setTimeout(() => {
+         navigate('/welcome', {replace:true, state:{email}})
+        
+       }, 1000);
           
        
       }
@@ -58,6 +57,7 @@ return (
 <>
 
 
+
     <Header />
 <div className="login-container">
 <h2>Seller Login</h2>
@@ -65,6 +65,7 @@ return (
 <div className="input-group">
 <label htmlFor="email">Email:</label>
 <input
+placeholder='email...'
 type="email"
 id="email"
 name="email"
@@ -76,6 +77,7 @@ required
 <div className="input-group">
 <label htmlFor="password">Password:</label>
 <input
+placeholder='password...'
 type="password"
 id="password"
 name="password"
@@ -85,7 +87,7 @@ required
 />
 </div>
 <button className='createbtn' type="submit">Login</button>
-{userData && <UserPage userData={userData} />}
+{/* {userData && <UserPage userData={userData} />} */}
 
 {/* {errorMessage && <p className="error-message">{errorMessage}</p>} */}
 <a  className='createAcc' href="/createselleracc">Create seller account</a>
@@ -94,6 +96,7 @@ required
 
 
 </div>
+
 
 </>
 )

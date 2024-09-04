@@ -32,7 +32,9 @@
   /* Input group */
   .input-group {
     margin-bottom: 10px;
+    
   }
+
   .input-group label {
     display: block;
     margin-bottom: 5px;
@@ -42,6 +44,8 @@
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 3px;
+    /* background-color: black; */
+    color: black;
   }
   
   /* Submit button */

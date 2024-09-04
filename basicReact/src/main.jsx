@@ -1,6 +1,9 @@
+import React from 'react';
+
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App.jsx';
+import './index.css'
 import Header from './componets/Header/Header.jsx'
 import Navbar from './componets/Navbar/Navbar.jsx'
 import MainDiv from './componets/MainDiv/MainDiv.jsx'
@@ -23,6 +26,8 @@ import Pharmaceuticaldetails from './Pages/Details/Pharmaceutical/Pharmaceutical
 import SellerCreateAccount from './Pages/CreateAccOfSeller/CreateAccOfSeller.jsx';
 import SellerLogin from './Pages/SellerLogin/SellerLogin.jsx'
 import UserPage from './Pages/UserPage/UserPage.jsx';
+import SellerPage from './Pages/SellerPage/SellerPage.jsx';
+import WelcomePage from './Pages/WelcomePage/WelcomePage.jsx';
 
 const router = createBrowserRouter([
     {
@@ -81,29 +86,30 @@ const router = createBrowserRouter([
        path: '/user',
        element: <UserPage />
       
+    },
+    {
+        path: '/sellerpage',
+        element: <SellerPage />
+    },
+    {
+        path:'/welcome',
+        element: <WelcomePage />
     }
-
   
 ]);
 
 
 
 createRoot(document.getElementById('root')).render(
-<ContextProvider>
+
+<React.StrictMode>
+    
+    <ContextProvider>
 
   <RouterProvider router={router} />
 </ContextProvider>
-  // <ContextProvider>
-  //    <App />
-  // </ContextProvider>
- 
-    // <App /> 
-    // <Header />
-    // <Navbar />
-    // <MainDiv />
-    // <Features/>
+  </React.StrictMode> 
 
-    // <Clothes />
    
 
 )

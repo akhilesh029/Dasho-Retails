@@ -1,5 +1,6 @@
 import React from 'react';
 import './app.css'
+
 import Clothes from './Pages/Clothes/Clothes'
 import Header from './componets/Header/Header';
 import Home from './Pages/Clothes/Home/Home';
