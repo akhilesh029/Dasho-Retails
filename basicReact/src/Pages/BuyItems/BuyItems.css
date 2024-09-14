@@ -1,0 +1,51 @@
+.maindivofbuy{
+    margin-top: 100px;
+}
+
+.buyMaindiv{
+   
+    margin: 0 auto;
+    /* width: 250px; */
+    height: 100px;
+
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: 1px solid red;
+    height: 30vw;
+    width: 80vw;
+}
+.bleftdiv{
+    border: 1px solid black;
+    width: 50%;
+}
+.brightdiv{
+    border: 1px solid black;
+    width: 50%;
+    padding-left: 5px;
+
+}
+#bimg{
+   
+    width: 60%;
+    
+    aspect-ratio: 2/3;
+    height: 29vw;
+    border-radius: 0px;
+}
+#bimg:hover{
+    transform: scale(0.99);
+}
+.buyPrice{
+    color: blue;
+    font-size: 3vmin
+}
+.buybtn{
+    background-color: #FCC300;
+    padding: 5px;
+    border-radius: 5px;
+}
+.bdescription{
+    font-size: 2.5vmin;
+}

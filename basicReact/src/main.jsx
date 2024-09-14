@@ -28,6 +28,7 @@ import SellerLogin from './Pages/SellerLogin/SellerLogin.jsx'
 import UserPage from './Pages/UserPage/UserPage.jsx';
 import SellerPage from './Pages/SellerPage/SellerPage.jsx';
 import WelcomePage from './Pages/WelcomePage/WelcomePage.jsx';
+import BuyItems from './Pages/BuyItems/BuyItems.jsx';
 
 const router = createBrowserRouter([
     {
@@ -94,6 +95,10 @@ const router = createBrowserRouter([
     {
         path:'/welcome',
         element: <WelcomePage />
+    },
+    {
+        path:'/buyitems',
+        element: <BuyItems />
     }
   
 ]);

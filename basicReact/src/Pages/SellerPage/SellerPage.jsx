@@ -99,19 +99,23 @@ function SellerPage({userEmail}) {
   };
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3000/getImage")
+    setInterval(() => {
+      
+      axios
+        .get("http://localhost:3000/getImage")
+  
+        .then((res) => {
+          // console.log(res);
+          setImage(res.data[0].image);
+          setName(res.data[0].itemName);
+          setPrice(res.data[0].itemPrice);
+          setDescription(res.data[0].itemDescription);
+  
+          setRes(res.data);
+        })
+        .catch((err) => console.log(err));
+    }, 1000);
 
-      .then((res) => {
-        // console.log(res);
-        setImage(res.data[0].image);
-        setName(res.data[0].itemName);
-        setPrice(res.data[0].itemPrice);
-        setDescription(res.data[0].itemDescription);
-
-        setRes(res.data);
-      })
-      .catch((err) => console.log(err));
   }, []);
 
   // console.log(res);

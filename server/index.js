@@ -94,6 +94,7 @@ app.get("/user", (req, res) => {
 
 app.post('/register', (req, res)=>{
     SellerModel.create(req.body)
+    
     .then(seller=>res.json(seller))
     .catch(err=> res.json(err))
 })

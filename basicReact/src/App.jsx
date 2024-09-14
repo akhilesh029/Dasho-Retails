@@ -15,6 +15,7 @@ import Cosmetics from './Pages/Clothes/Cosmetics/Cosmetics';
 import Pharmaceuticals from './Pages/Pharmaceutical/Pharmaceutical';
 import SellerCreateAccount from './Pages/CreateAccOfSeller/CreateAccOfSeller';
 import Dropdown from './componets/Dropdown/Dropdown';
+import ShowOnHOme from './componets/ShowOnHome/ShowOnHOme';
 
 
 
@@ -30,11 +31,13 @@ function App(){
      {/* <Dropdown /> */}
      <Maindiv />
      <FeaturedPro />
-     <Features/>  
+     <ShowOnHOme />
+     {/* <Features/>  */}
+
      {/* <SellerCreateAccount /> */}
-     <Cosmetics />
+     {/* <Cosmetics />
      <Pharmaceuticals /> 
-      <Clothes />
+      <Clothes /> */}
      
     
       
