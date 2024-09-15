@@ -156,7 +156,48 @@ table>tr>td{
 }
 
 /*----------------rightpanel------------*/
+/*----------------orderdatalist------------*/
+.mainorderdata{
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+.orderdataCustomer{
+    margin: 10px auto;
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border: 1px solid rgba(175, 175, 175, 0.268);
+    background-color: rgba(218, 222, 221, 0.638);
+    border-radius: 5px;
+}
+.orderdataCustomer>p{
+    font-size: 2.5vmin;
+}
+.orderdatalist{
+    margin: 10px auto;
+    width: 50vw;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: 1px solid rgba(175, 175, 175, 0.268);
+    font-family: 'Courier New', Courier, monospace;
+    border-radius: 5px;
 
+    
+}
+.orderdatalist>p{
+    font-size: 2.5vmin;
+}
+.orderdataimg{
+    width: 10vmin;
+    border-radius: 0px;
+    /* height: 170px; */
+    /* border: 1px solid black; */
+    aspect-ratio: 2/2;
+}
 
 
 

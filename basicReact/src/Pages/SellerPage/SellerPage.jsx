@@ -5,7 +5,6 @@ import { useLocation } from "react-router-dom";
 import { assets } from "../../assets/assets";
 import Header from "../../componets/Header/Header";
 
-
 // import { resolve } from 'path/posix';
 
 // import 'path-browserify';
@@ -14,26 +13,82 @@ import Header from "../../componets/Header/Header";
 // Now you can use path.posix.resolve
 // const resolvedPath = path.posix.resolve('/some/path', './relative/path');
 
-function SellerPage({userEmail}) {
+function SellerPage({ userEmail }) {
   //-------------getting data from login page-----
   const location = useLocation();
   // console.log(location.state.email)
-  const m = location.state.userEmail
+  const m = location.state.userEmail;
   // console.log(userEmail)
-  console.log(m);
+  // console.log(m);
   // console.log(m.email);
   //-----------------------------------------
   const [showContent, setShowContent] = useState(true);
   const [showShipping, setShowShipping] = useState(false);
-  
+  const [isOrder, setisOrder] = useState(false);
+  const [orders, setOrders] = useState([]);
+
+  const [ordersArray, setOrdersArray] = useState([]);
+  const [orderData, setOrderData] = useState([]);
 
   const handleClick = () => {
     setShowContent(!showContent);
-    setShowShipping(false)
+    setShowShipping(false);
+    setisOrder(false);
   };
   const handleShipping = () => {
     setShowShipping(!showShipping);
     setShowContent(false);
+    setisOrder(false);
+  };
+
+  const handleOrders = () => {
+    // ordersArray = [null];
+
+    axios
+      .get("http://localhost:3000/order")
+      .then((orders) => {
+        setisOrder(true);
+        setShowShipping(false);
+        setShowContent(false);
+        // setOrders(orders.data)
+        // console.log(orders)
+        setOrderData(orders.data);
+        //  orderData = orders.data
+        // console.log(orders.data)
+
+        console.log(orderData);
+        console.log(orderData[0].selectedItems[0].itemPrice);
+        // console.log(ordersArray)
+
+        // console.log(orders.data[0])
+        // console.log(orders.data[0]._id)
+        // console.log(orders.data[0].cartTotal)
+        // console.log(orders.data[0].name)
+        // console.log(orders.data[0].selectedItems)
+        // console.log(orders.data[0].selectedItems[0].image)
+        //  console.log(orders.data[0].selectedItems[0].itemPrice)
+        //  console.log(orders.data[0].selectedItems[0].itemName)
+
+        for (const order of orders.data) {
+          for (const item of order.selectedItems) {
+            setOrdersArray(item.itemPrice);
+            setOrdersArray(item.itemName);
+
+            // ordersArray.push( item.image);
+            // ordersArray.push(item.itemName);
+            // ordersArray.push(item.itemPrice);
+            // ordersArray.push(item.itemDescription);
+
+            // itemNames.push(item.itemName);
+          }
+        }
+        // console.log(ordersArray)
+        // for (let i of ordersArray) {
+        //   console.log(i);
+        // }
+      })
+
+      .catch((err) => console.log(err));
   };
 
   const [itemName, setItemName] = useState("");
@@ -99,57 +154,50 @@ function SellerPage({userEmail}) {
   };
 
   useEffect(() => {
-    setInterval(() => {
-      
-      axios
-        .get("http://localhost:3000/getImage")
-  
-        .then((res) => {
-          // console.log(res);
-          setImage(res.data[0].image);
-          setName(res.data[0].itemName);
-          setPrice(res.data[0].itemPrice);
-          setDescription(res.data[0].itemDescription);
-  
-          setRes(res.data);
-        })
-        .catch((err) => console.log(err));
-    }, 1000);
+    axios
+      .get("http://localhost:3000/getImage")
 
+      .then((res) => {
+        // console.log(res);
+        setImage(res.data[0].image);
+        setName(res.data[0].itemName);
+        setPrice(res.data[0].itemPrice);
+        setDescription(res.data[0].itemDescription);
+
+        setRes(res.data);
+      })
+      .catch((err) => console.log(err));
   }, []);
 
-  // console.log(res);
+  // console.log(ordersArray);
+  // console.log(orderData)
   const reverseArray = res.reverse();
 
   return (
     <>
       <Header />
-    
-      
 
       <div className="adminPage">
-       
         <div className="sidepanel">
-        
           <ul className="adminSetting">
-            
-          {users.map((item)=>{
-           if(item.email == m.email)
-            return(
-          <>
-                
-                 <h1 key={item._id}>Welcome @{item.name}</h1>
-          </>
-            )
-         
-        })}
+            {users.map((item) => {
+              if (item.email == m.email)
+                return (
+                  <>
+                    <h1 key={item._id}>Welcome @{item.name}</h1>
+                  </>
+                );
+            })}
             <li className="sidepanellist" onClick={handleClick}>
-              Dashboard 
+              Dashboard
             </li>
             <li className="sidepanellist" onClick={handleShipping}>
               Shipping
             </li>
-            <li className="sidepanellist">Pending Orders</li>
+            <li className="sidepanellist" onClick={handleOrders}>
+              {" "}
+              Orders
+            </li>
             <li className="sidepanellist">Shipped Orders</li>
             <li className="sidepanellist">Completed Order</li>
             <li className="sidepanellist">Support</li>
@@ -256,7 +304,46 @@ function SellerPage({userEmail}) {
           </div>
         )}
 
-      
+        {isOrder && (
+          
+          <div className="mainorderdata">
+           
+            <div className="orderdataCustomer">
+              <h2>Order Details</h2>
+              <p>Order ID: {orderData[0]._id}</p>
+              <p>Name: {orderData[0].name}</p>
+              <p>Total: {orderData[0].totalpay}</p>
+            </div>
+
+            <ul className="">
+              <h3>Ordered Items:</h3>
+
+              <div>
+                {orderData.map((order, orderIndex) => (
+                  <ul key={orderIndex}>
+                  
+                    <h4>Order {orderIndex + 1}</h4>
+                    {order.selectedItems.map((item, itemIndex) => (
+                      <li key={`${orderIndex}-${itemIndex}`}>
+                        <div className="orderdatalist">
+                          {/* <h4>Item {itemIndex + 1}</h4> */}
+                          <img
+                            className="orderdataimg"
+                            src={`http://localhost:3000/Images/` + item.image}
+                            alt={item.itemName}
+                          />
+                          <p> {item.itemName}</p>
+                          <p>Rs. {item.itemPrice}</p>
+                          <p> {item.itemDescription}</p>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                ))}
+              </div>
+            </ul>
+          </div>
+        )}
       </div>
     </>
   );

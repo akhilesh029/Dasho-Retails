@@ -8,6 +8,7 @@ const path = require('path')
 const SellerModel = require('./model/seller')
 const userModel = require('./model/users')
 const SellerPageModel = require('./model/sellerpage')
+const OrderModel = require('./model/orders')
 
 
 
@@ -59,6 +60,12 @@ app.get('/getImage', (req, res) => {
         .then(sellerpage => res.json(sellerpage))
         .catch(err => res.json(err))
 })
+// -------------for getting orders---------------
+app.get('/order', (req, res) => {
+    OrderModel.find()
+        .then(orders => res.json(orders))
+        .catch(err => res.json(err))
+})
 
 
 app.post("/sellerlogin", (req,res)=>{
@@ -90,7 +97,16 @@ app.get("/user", (req, res) => {
         .catch(err => res.json(err))
 })
 
+app.post('/orders', (req, res)=>{
+    OrderModel.create({
+       selectedItems:req.body.selectedItems,
+       totalpay: req.body.totalpay,
+        name: req.body.name, 
 
+    })
+    .then(orders=>res.json(orders))
+    .catch(err=> res.json(err))
+})
 
 app.post('/register', (req, res)=>{
     SellerModel.create(req.body)

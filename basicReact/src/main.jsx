@@ -29,6 +29,9 @@ import UserPage from './Pages/UserPage/UserPage.jsx';
 import SellerPage from './Pages/SellerPage/SellerPage.jsx';
 import WelcomePage from './Pages/WelcomePage/WelcomePage.jsx';
 import BuyItems from './Pages/BuyItems/BuyItems.jsx';
+import CartPage from './Pages/CartPage/CartPage.jsx';
+import ShowOnHOme from './componets/ShowOnHome/ShowOnHOme.jsx';
+import PayMethod from './Pages/PayMethod/PayMethod.jsx';
 
 const router = createBrowserRouter([
     {
@@ -99,7 +102,23 @@ const router = createBrowserRouter([
     {
         path:'/buyitems',
         element: <BuyItems />
+    },
+    {
+        path:'/cartpage',
+        element: <CartPage />
+    },
+    {
+        path:'/showonhome',
+        element: <ShowOnHOme />
+    },
+    {
+        path:'/paymethod',
+        element: <PayMethod />
     }
+
+    //   navbar react
+    //   {empty} // 20% empty []50% []30% ml best item show
+    //    multi page 
   
 ]);
 
