@@ -6,12 +6,14 @@ import Cosmetics from '../Clothes/Cosmetics/Cosmetics';
 import Pharmaceuticals from '../Pharmaceutical/Pharmaceutical';
 import Clothes from '../Clothes/Clothes'
 import "./home.css"
+import Shop from '../../componets/Shops/Shop';
 
 
 
 const Home = () => {
   return (
     <div className='home'>
+        <Shop />
         <Maindiv />
         <FeaturedPro />
         <Features />

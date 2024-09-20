@@ -104,18 +104,18 @@ const FirebaseAuth = () => {
     handleLogin(role); // Pass role ("Seller" or "Customer") to the login function
   };
 
-  const saveUserToMongoDB = async (user) => {
-    try {
-      const response = await axios.post('http://localhost:5000/api/users', {
-        name: user.displayName,
-        email: user.email,
-        phoneNumber: user.phoneNumber || 'N/A'
-      });
-      console.log('User data saved to MongoDB:', response.data);
-    } catch (error) {
-      console.error('Error saving user data to MongoDB:', error);
-    }
-  };
+  // const saveUserToMongoDB = async (user) => {
+  //   try {
+  //     const response = await axios.post('http://localhost:5000/api/users', {
+  //       name: user.displayName,
+  //       email: user.email,
+  //       phoneNumber: user.phoneNumber || 'N/A'
+  //     });
+  //     console.log('User data saved to MongoDB:', response.data);
+  //   } catch (error) {
+  //     console.error('Error saving user data to MongoDB:', error);
+  //   }
+  // };
 
   return (
     <div>

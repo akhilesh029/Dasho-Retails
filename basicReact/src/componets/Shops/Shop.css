@@ -1,0 +1,120 @@
+
+  .slider-container{
+    width: 100vw;
+  }
+
+
+  .trending-shop{
+    position: absolute;
+    margin-top: -7vh;   
+    margin-left: 35%;
+  }
+  
+
+
+  .shop-container {
+    width: 100vw;
+    margin: auto;
+    height: 20vh;
+    margin-top: 10vh;
+    margin-bottom: 3vh;
+    /* border: 2px solid black; */
+    font-family: "Inter", sans-serif;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background:linear-gradient(#ECEFFE,#CED6FB);
+  }
+
+
+/* slider */
+   /* Slider container */
+.slider-container {
+  width: 100%;
+  height: auto;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Style for individual cards */
+.slider-card {
+  height: 60vh;
+  background-color: #f7f7f7;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  text-align: center;
+  border: 2px solid transparent;
+}
+
+.card-image {
+  width: 100%; /* Ensure the image takes full width of its container */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 10px; /* Rounded corners */
+  object-fit: cover; /* Ensures the image covers the entire area, cropping if necessary */
+  margin-bottom: 15px; /* Add some space between the image and the rest of the content */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow for depth */
+  margin-top: 20px;
+}
+.slider-card:hover {
+  /* transform: scale(1.05); Enlarge card on hover */
+  border: 2px solid #5372F0;
+}
+
+
+
+.text-decoration{
+  display: flex;
+  justify-content: space-around;
+}
+
+
+/* Card title */
+.card-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+/* Card category */
+.card-category {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #5372F0;
+  padding: 8px 16px ;
+  margin: 16px 0 18px;
+  background: #DDE4FF;
+  width: fit-content;
+  border-radius: 20px;
+  border: 1px solid #5372F0;
+}
+
+/* Card items available */
+.card-items {
+  font-size: 14px;
+  color: #555;
+  margin-top: 25px;
+}
+
+/* Card description */
+.card-description {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 15px;
+}
+
+/* Swiper navigation buttons */
+.swiper-button-next,
+.swiper-button-prev {
+  color:#5372F0;
+  
+}
+
+/* Swiper pagination */
+.swiper-pagination-bullet {
+  background-color: #3498db;
+}

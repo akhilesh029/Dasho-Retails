@@ -6,14 +6,14 @@ import Categories from '../Categories/Categories'
 function Navbar(){
     return(
            <div className="categories">
-            {/* //<ul className='categories' > */}
+            
             <div className="dropdown">
-            <div className="dropdown">
-            <Dropdown />
-            </div>
-            <div className="dropdown">
-            <Categories />
-            </div>
+               <div className="dropdown">
+                 <Dropdown />
+               </div>
+               <div className="dropdown">
+                 <Categories />
+               </div>
             </div>
                 <li  className="ctgtype"> 
                     <a href="/clothes">
@@ -76,16 +76,7 @@ function Navbar(){
                         <span>Home doctor</span>
                     </a>
                 </li>
-                {/* <li className="ctgtype">
-                    <a href="http">
-                        
-                            <img src={assets.women} alt="" />
-                       
-                        <span>Lights</span>
-                    </a>
-                </li>  */}
-               
-            {/* </ul> */}
+          
            </div>
            
     )
