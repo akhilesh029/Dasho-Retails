@@ -4,11 +4,15 @@ const cors = require("cors")
 const multer = require('multer')
 const path = require('path')
 // const upload = multer({dest: 'uploads/'})
+const mongodb  = require('mongodb');
+
 
 const SellerModel = require('./model/seller')
 const userModel = require('./model/users')
 const SellerPageModel = require('./model/sellerpage')
 const OrderModel = require('./model/orders')
+
+
 
 
 
@@ -108,12 +112,37 @@ app.post('/orders', (req, res)=>{
     .catch(err=> res.json(err))
 })
 
-app.post('/register', (req, res)=>{
+// DELETE route to delete data
+app.delete('/delete/:id', async (req, res) => {
+    const itemId = req.params.id;
+    // console.log(itemId)
+    const result = await SellerPageModel.deleteOne({_id: new mongodb.ObjectId(itemId) });
+   
+    try {
+      if (result.deletedCount === 1) {
+        res.status(200).json({ message: 'Data deleted successfully' });
+      } else {
+        res.status(404).json({ error: 'Item not found' });
+      }
+    }
+     catch (err) {
+      res.status(500).json({ error: 'Error deleting data' });
+    }
+  });
+
+
+app.post('/register', async (req, res)=>{
+const {name, email, password}  = req.body;
+
+console.log(req.body)
+
     SellerModel.create(req.body)
-    
-    .then(seller=>res.json(seller))
-    .catch(err=> res.json(err))
+      .then(seller=>res.json(seller))
+      .catch(err=> res.json(err))
 })
+
+//------------------using collection on the basis of seller name---------
+
 
 app.listen(3000, () => {
     console.log("server is running! ")

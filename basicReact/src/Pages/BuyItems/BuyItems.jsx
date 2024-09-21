@@ -89,7 +89,7 @@ const BuyItems = (props) => {
                   <p className="bdescription" key={item._id}>
                     {item.itemDescription}
                   </p>
-                  <h5>Price: </h5>
+                  <h4>Price: </h4>
                   <p className="buyPrice" key={item._id}>
                     {" "}
                     ₹ {item.itemPrice}

@@ -27,7 +27,7 @@ const ShowOnHOme = () => {
 
   const handleAddItem = (item) => {
     const cartAdded = document.getElementById('cartAdded')
-    console.log(item)
+    // console.log(item)
     setSelectedItems([...selectedItems, item]);
     setCartTotal(cartTotal + item.itemPrice);
     // cartAdded.innerHTML = "Add"

@@ -5,6 +5,7 @@ import { useLocation } from "react-router-dom";
 import { assets } from "../../assets/assets";
 import Header from "../../componets/Header/Header";
 
+
 // import { resolve } from 'path/posix';
 
 // import 'path-browserify';
@@ -24,23 +25,30 @@ function SellerPage({ userEmail }) {
   //-----------------------------------------
   const [showContent, setShowContent] = useState(true);
   const [showShipping, setShowShipping] = useState(false);
-  const [isOrder, setisOrder] = useState(false);
   const [orders, setOrders] = useState([]);
+  const [isOrder, setisOrder] = useState(false);
+  const [isShipped, setShipped] = useState(false)
 
   const [ordersArray, setOrdersArray] = useState([]);
   const [orderData, setOrderData] = useState([]);
+  
+
 
   const handleClick = () => {
     setShowContent(!showContent);
     setShowShipping(false);
     setisOrder(false);
+    setShipped(false)
   };
   const handleShipping = () => {
     setShowShipping(!showShipping);
     setShowContent(false);
     setisOrder(false);
+    setShipped(false)
   };
 
+  
+  
   const handleOrders = () => {
     // ordersArray = [null];
 
@@ -50,46 +58,31 @@ function SellerPage({ userEmail }) {
         setisOrder(true);
         setShowShipping(false);
         setShowContent(false);
+        setShipped(false)
         // setOrders(orders.data)
         // console.log(orders)
         setOrderData(orders.data);
-        //  orderData = orders.data
-        // console.log(orders.data)
-
-        console.log(orderData);
-        console.log(orderData[0].selectedItems[0].itemPrice);
-        // console.log(ordersArray)
-
-        // console.log(orders.data[0])
-        // console.log(orders.data[0]._id)
-        // console.log(orders.data[0].cartTotal)
-        // console.log(orders.data[0].name)
-        // console.log(orders.data[0].selectedItems)
-        // console.log(orders.data[0].selectedItems[0].image)
-        //  console.log(orders.data[0].selectedItems[0].itemPrice)
-        //  console.log(orders.data[0].selectedItems[0].itemName)
+       
 
         for (const order of orders.data) {
           for (const item of order.selectedItems) {
             setOrdersArray(item.itemPrice);
             setOrdersArray(item.itemName);
 
-            // ordersArray.push( item.image);
-            // ordersArray.push(item.itemName);
-            // ordersArray.push(item.itemPrice);
-            // ordersArray.push(item.itemDescription);
-
-            // itemNames.push(item.itemName);
           }
         }
-        // console.log(ordersArray)
-        // for (let i of ordersArray) {
-        //   console.log(i);
-        // }
+      
       })
 
       .catch((err) => console.log(err));
   };
+
+  const SeeShippedOrders = ()=>{
+    setShipped(true)
+    setisOrder(false)
+    setShowShipping(false);
+    setShowContent(false);
+  }
 
   const [itemName, setItemName] = useState("");
   const [itemDescription, setItemDescription] = useState("");
@@ -102,7 +95,6 @@ function SellerPage({ userEmail }) {
   const [Description, setDescription] = useState();
 
   const [res, setRes] = useState([]);
-
   const [users, setUsers] = useState([]);
 
   const handleItemNameChange = (event) => {
@@ -133,6 +125,11 @@ function SellerPage({ userEmail }) {
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    const additem = document.getElementById("sellerbtn")
+   
+    additem.innerHTML = 'Item added Successfully!'
+    additem.style.color = '#37FD12'
+
     // Create a FormData object to send the image and other data
     const formData = new FormData();
     formData.append("itemName", itemName);
@@ -140,18 +137,21 @@ function SellerPage({ userEmail }) {
     formData.append("itemPrice", itemPrice);
     formData.append("file", file);
 
+ 
+
     // Send the form data to your server-side API
     axios
       .post("http://localhost:3000/sellerpage", formData)
       .then
       // (result) => console.log(result)
       // Handle successful submission
-
       // console.log('Item added successfully!');
       ()
       .catch(error);
     console.error("Error:", error);
   };
+  
+  
 
   useEffect(() => {
     axios
@@ -165,13 +165,45 @@ function SellerPage({ userEmail }) {
         setDescription(res.data[0].itemDescription);
 
         setRes(res.data);
+
       })
       .catch((err) => console.log(err));
   }, []);
 
+
   // console.log(ordersArray);
   // console.log(orderData)
-  const reverseArray = res.reverse();
+
+// deleting the items from database by seller
+  const deleteData = async (id) => {
+    // console.log(id)
+    try {
+      await axios.delete(`http://localhost:3000/delete/${id}`, { params: { id } });
+      // fetchData(); // Update the data after deletion
+        console.log("data deleted susccessfully")
+        window.location.reload()
+
+    } catch (error) {
+      console.error('Error deleting data:', error);
+    }
+  };
+
+
+
+function handleShipOrder(orderData, orderId) {
+  console.log(orderData);
+  console.log(orderId);
+  console.log(orderData.length);
+  for (let i = 0; i < orderData.length; i++) {
+    console.log(orderData[i]);
+    console.log(orderData[i]._id);
+    if (orderData[i]._id === orderId) {
+      console.log("yes");
+    }
+  }
+}
+
+ 
 
   return (
     <>
@@ -195,10 +227,10 @@ function SellerPage({ userEmail }) {
               Shipping
             </li>
             <li className="sidepanellist" onClick={handleOrders}>
-              {" "}
+            
               Orders
             </li>
-            <li className="sidepanellist">Shipped Orders</li>
+            <li className="sidepanellist"  onClick={SeeShippedOrders}>Shipped Orders</li>
             <li className="sidepanellist">Completed Order</li>
             <li className="sidepanellist">Support</li>
             <li className="sidepanellist">Customer Feedback</li>
@@ -253,13 +285,14 @@ function SellerPage({ userEmail }) {
                   required
                 />
               </div>
-              <button className="sellerbtn" type="submit">
+              <button  className="sellerbtn" type="submit">
                 Add Item
               </button>
+              <p id="sellerbtn"></p>
             </form>
             <br />
 
-            <div className="showItems">
+            <div className="showItems" >
               <table>
                 <tr>
                   <th>Product</th>
@@ -269,11 +302,11 @@ function SellerPage({ userEmail }) {
                 </tr>
               </table>
 
-              {reverseArray.map((item) => {
+              {res.map((item) => {
                 return (
                   <>
-                    <table>
-                      <tr>
+                    <table >
+                      <tr >
                         <td key={item._id}>
                           {
                             <img
@@ -287,7 +320,7 @@ function SellerPage({ userEmail }) {
                         <td key={item._id}>{item.itemPrice}</td>
                         <td key={item._id}>{item.itemDescription}</td>
                         <td key={item._id}>
-                          <button style={{ color: "red" }}>REMOVE</button>
+                          <button style={{ color: "red" }} onClick={() => deleteData(item._id)}>Delete</button>
                         </td>
                       </tr>
                     </table>
@@ -304,6 +337,7 @@ function SellerPage({ userEmail }) {
           </div>
         )}
 
+{/* --------------------orders-------------------- */}
         {isOrder && (
           
           <div className="mainorderdata">
@@ -315,14 +349,19 @@ function SellerPage({ userEmail }) {
               <p>Total: {orderData[0].totalpay}</p>
             </div>
 
-            <ul className="">
+            <ul className="orderdataUldiv">
               <h3>Ordered Items:</h3>
 
               <div>
                 {orderData.map((order, orderIndex) => (
                   <ul key={orderIndex}>
-                  
+                    <div className="shippingBtn">
+                     
+
                     <h4>Order {orderIndex + 1}</h4>
+                    <button type="button" id="shippingBtn" data-order-id={order._id} onClick={()=>handleShipOrder(orderData,order._id)}>Ship</button>
+                  
+                    </div>
                     {order.selectedItems.map((item, itemIndex) => (
                       <li key={`${orderIndex}-${itemIndex}`}>
                         <div className="orderdatalist">
@@ -344,6 +383,61 @@ function SellerPage({ userEmail }) {
             </ul>
           </div>
         )}
+
+
+
+
+        {isShipped  && (
+          // <h1>Shipped</h1>
+          <div className="mainorderdata">
+           
+            {/* <div className="orderdataCustomer">
+              <h2>Order Details</h2>
+              <p>Order ID: {orderData[0]._id}</p>
+              <p>Name: {orderData[0].name}</p>
+              <p>Total: {orderData[0].totalpay}</p>
+            </div> */}
+
+            <ul className="orderdataUldiv">
+              <h3>Shipped Items:</h3>
+
+              <div>
+                {orderData.map((order, orderIndex) => (
+                  <ul key={orderIndex}>
+                    <div className="shippingBtn">
+                     
+                    {/* <button type="button" id="shippingBtn" data-order-id={order._id} onClick={()=>handleShipOrder(orderData,order._id)}>Ship</button> */}
+
+                    <h4>Order {orderIndex + 1}</h4>
+                  
+                    </div>
+                    {order.selectedItems.map((item, itemIndex) => (
+                      <li key={`${orderIndex}-${itemIndex}`}>
+                        <div className="orderdatalist">
+                          {/* <h4>Item {itemIndex + 1}</h4> */}
+                          <img
+                            className="orderdataimg"
+                            src={`http://localhost:3000/Images/` + item.image}
+                            alt={item.itemName}
+                          />
+                          <p> {item.itemName}</p>
+                          <p>Rs. {item.itemPrice}</p>
+                          <p> {item.itemDescription}</p>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                ))}
+              </div>
+            </ul>
+          </div>
+        )}
+
+
+
+
+
+
       </div>
     </>
   );

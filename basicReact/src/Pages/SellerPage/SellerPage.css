@@ -1,45 +1,53 @@
 .adminPage{
-    margin-top: 100px;
-    border: 1px solid black;
+    /* margin-top: 100px; */
+    margin: 100px auto;
+    width: 80vw;
+    border: 1px solid rgb(194, 190, 190);
+    /* box-shadow: 0px 0px 4px 1px; */
+
+
     display: flex;
     flex-direction: row;
+    border-radius: 10px;
+    
 }
 
 
 .sellerdiv{
-    /* position: relative; */
-    /* top: 50%;
-    left: 40%; */
-    /* align-items: center; */
-   width: 100%;
-    border: 1px solid black;
+  
+   width: 70vw;
+    /* border: 1px solid red; */
    
     padding: 10px;
-    background-color: rgb(6, 77, 101);
+    /* background-color: rgb(6, 77, 101); */
     /* background-color: rgb(12, 9, 11); */
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 .sellerdiv>h2{
-    color: white;
+    color: black;
 }
 
 .seller-form{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+   display: flex;
+   flex-direction: column;
+    /* justify-content: center; */
+    /* align-items: center; */
     column-gap: 10px;
-    background-color: #dfe3e9;
+    /* background-color: #dfe3e9; */
     color: black;
-    border: 1px solid black;
+    /* border: 1px solid black; */
+    box-shadow: 0px 0px 4px 1px;
     align-items: center;
-    width: fit-content;
+    /* width: fit-content; */
+    
     padding: 25px;
     padding-right: 30px;
     border-radius: 10px;
-    width: fit-content;
+    /* width: fit-content; */
     font-size: 2vmin;
+    width: 40vw;
 
   
 }
@@ -56,8 +64,12 @@
     
     
 }
+.form-fields>label{
+    font-weight: 700;
+}
 .form-fields>input{
     /* background-color: black; */
+    width: 20vw;
     color: black;
     /* width: 10vw; */
     border: 1px solid black;
@@ -65,18 +77,25 @@
 .form-fields>textarea{
     color: black;
     width: 20vw;
-    height: 30px;
+    height: 60px;
+    outline: 1px solid black;
+    padding: 5px;
 }
 .sellerbtn{
-    margin-left: 0;
+    
+    /* margin-left: 0; */
+    margin-top: 10px;
     background-color: #FCC300;
     color: black;
     font-size: 2vmin;
-    width: 5vmin;
-    height: 7vmin;
+    width: 10vmin;
+    height: 5vmin;
     border-radius: 5px;
     border: 1px solid black;
     
+}
+.sellerbtn:hover{
+    background-color: green;
 }
 
 
@@ -95,7 +114,7 @@
 .showItems{
 
     padding: 10px;
-    width: 60vw;
+    width:50vw;
    
     display: flex;
     flex-direction: column;
@@ -135,19 +154,31 @@ table>tr>td{
 
 /*-----------sidepannel---------------*/
 .sidepanel{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
   width: 33vmin;
     background-color: #3B3F46;
+    border-start-start-radius: 10px;
+    border-bottom-left-radius: 10px;
     color: white;
     /* width: fit-content; */
-    padding: 15px;
+    /* padding: 15px; */
+    border: 1px solid red;
 
     
 }
 .sidepanellist{
+    margin: 5px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 2vmin;
+    /* width: 25vmin; */
     line-height: 8vh;
     /* color:yellow; */
+    border: 1px solid red;
     
 }
 .sidepanellist:hover{
@@ -164,7 +195,7 @@ table>tr>td{
 }
 .orderdataCustomer{
     margin: 10px auto;
-    width: 50vw;
+    width: 40vw;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -178,15 +209,28 @@ table>tr>td{
 }
 .orderdatalist{
     margin: 10px auto;
-    width: 50vw;
+    width: 40vw;
     display: flex;
     justify-content: space-around;
     align-items: center;
     border: 1px solid rgba(175, 175, 175, 0.268);
+    
     font-family: 'Courier New', Courier, monospace;
     border-radius: 5px;
 
     
+}
+.orderdataUldiv{
+    border: 1px solid rgba(175, 175, 175, 0.268);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 5px;
+
+
+    overflow-y: scroll;
+    height: 380px
 }
 .orderdatalist>p{
     font-size: 2.5vmin;
@@ -199,7 +243,26 @@ table>tr>td{
     aspect-ratio: 2/2;
 }
 
-
+/*---------------------shippingBtn---------------*/
+.shippingBtn{
+    display: flex;
+    justify-content: space-between;
+    font-size: 2vmin;
+}
+.shippingBtn>button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(14, 190, 14);
+    color: white;
+    padding: 3px;
+    border-radius: 5px;
+    width: 6vmin;
+    height: 4vmin;
+}
+.shippingBtn>h4{
+    font-size: 4vmin;
+}
 
   
 
