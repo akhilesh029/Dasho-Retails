@@ -1,0 +1,66 @@
+
+.welcomeChildiv{
+    margin-top: 100px;
+    /* border: 1PX solid red; */
+    background-size: 100% 100%; 
+    height: 650px;
+    background-image: url('https://img.freepik.com/premium-photo/shopping-cart-yellow-box-blue-background_1174990-35779.jpg?w=900');
+}
+/*----------------rightpanel------------*/
+.rightpannel{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* border: 1px solid red; */
+    width: 100%;
+    background-image: url('https://img.freepik.com/premium-photo/shopping-cart-yellow-box-blue-background_1174990-35779.jpg?w=900');
+     background-size: 100% 100%; 
+    background-repeat: no-repeat; 
+}
+.welcome{
+   text-align: center;
+   font-size: 8vmin;
+   color: white;
+}
+.rightpannel>ul>li{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: rgb(rgb(44, 189, 36), rgb(227, 217, 225), blue);
+  
+}
+.welcomeText{
+    color:#FCC300;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: center;
+    line-height: 8px;
+    font-size: 3vmin;
+    
+}
+
+.welcomeChildiv{
+    padding: 10px;
+    /* background-color: white; */
+    /* border:2px solid rgb(23, 200, 20); */
+    border-radius: 5px;
+   
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.profilepicture{
+    width: 180px;
+    height: 170px;
+    border-radius: 50%;
+    border: 1px solid black;
+    
+}
+.letsgo{
+    color: blue;
+    
+    padding: 3px;
+    border-radius: 5px;
+    background-color: #FCC300;
+}

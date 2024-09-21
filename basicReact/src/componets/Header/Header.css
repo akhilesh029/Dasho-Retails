@@ -98,7 +98,7 @@ form>button{
 }
 
 form>button:hover{
-    background-color: rgba(8, 134, 21, 0.847);
+    /* background-color: rgba(8, 134, 21, 0.847); */
     color: white;
 }
 div>p{
@@ -137,7 +137,7 @@ div>p{
     /* border: none; */
 }
 #header>button:hover{
-    background-color: rgba(8, 134, 21, 0.847);
+    /* background-color: rgba(8, 134, 21, 0.847); */
     color: white;
 }
 

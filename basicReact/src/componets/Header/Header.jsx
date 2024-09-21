@@ -3,7 +3,14 @@ import { assets } from '../../assets/assets'
 import Dropdown from '../Dropdown/Dropdown'
 import Firebase from "../Firebase/FirebaseAuth";
 
+import { useNavigate } from 'react-router-dom'
+
 function Header(){
+//---------------navigate to showonhome------------
+  const navigate = useNavigate()
+  // const handleCartItem=()=>{
+  //   navigate('/showonhome', { replace: true, state:  "yes"  });
+  // }
 
 
   const signInAccount = ()=>{
@@ -24,15 +31,27 @@ function Header(){
             <button type='submit'>Search</button>
         </form>
       </div>
-     
+
       <nav>
-        <ul class="menu">
-            <li className="menu-item"><a href="#">My Items</a></li>
+        <ul className="menu">
+            <li className="menu-item"><a href="" >Cart Items</a></li>
             <li className="menu-item"><a href="#">About</a></li>
             <li className="menu-item"><a href="#">Contact</a></li>
             <li className="menu-item dropdown">
-                     <Firebase />
+
+             <Firebase />
+              
             </li>            
+
+                <a href="#">Sign In</a>
+                <ul class="dropdown-menu">
+                    <li><a href="#" onClick={signInAccount} >As a Seller</a></li>
+                    <li><a href="#">As a Customer</a></li>
+                </ul>
+            </li>
+            <li className="menu-item"><a href="#">Contact</a></li>
+            <li className="menu-item"><a href="#">Card</a></li>
+
         </ul>
     </nav>
 
