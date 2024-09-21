@@ -1,6 +1,7 @@
 import './Header.css'
 import { assets } from '../../assets/assets'
 import Dropdown from '../Dropdown/Dropdown'
+import Firebase from "../Firebase/FirebaseAuth";
 
 import { useNavigate } from 'react-router-dom'
 
@@ -35,7 +36,13 @@ function Header(){
         <ul className="menu">
             <li className="menu-item"><a href="" >Cart Items</a></li>
             <li className="menu-item"><a href="#">About</a></li>
+            <li className="menu-item"><a href="#">Contact</a></li>
             <li className="menu-item dropdown">
+
+             <Firebase />
+              
+            </li>            
+
                 <a href="#">Sign In</a>
                 <ul class="dropdown-menu">
                     <li><a href="#" onClick={signInAccount} >As a Seller</a></li>
@@ -44,6 +51,7 @@ function Header(){
             </li>
             <li className="menu-item"><a href="#">Contact</a></li>
             <li className="menu-item"><a href="#">Card</a></li>
+
         </ul>
     </nav>
 

@@ -1,21 +1,27 @@
 .categories{
     top: 0;
     position: fixed;
-    /* position: inherit; */
-    width: 98%;
+    /* position: inher
+    it; */
+    width: 100%;
     height: 75px;
-    margin-top: 83px;
+
+    margin-top: 80px;
+
     margin-bottom: 20px;
     display: flex;
     flex-direction: row;
-  
     justify-content: space-between;
     align-items: center;
     list-style-type: none;
     border: 1px solid rgb(247, 243, 243);
     background-color: white;
     padding: 10px;
+    z-index:20;
+     /* position: relative; */     
+     /* z-index:1100; */
 }
+
 .ctgtype>a{
     color: rgb(14, 6, 163);
     text-decoration: none;
@@ -27,17 +33,15 @@
     column-gap: 10px;  
 }
 
-
+/* 
 a>img{
-   
     width: 55px; 
-    
-  
     border-radius: 50%;
     box-shadow: 0px 0px 5px 2px rgb(183, 173, 173);
     border: 1px solid white;
     border-radius: 50% ;
-}
+} */
+
 a >span{
     margin-top: 10px;  
     text-align: center;
