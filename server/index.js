@@ -11,7 +11,7 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
-mongoose.connect("mongodb://localhost:27017/seller");
+// mongoose.connect("mongodb://localhost:27017/seller");
 
 
 app.post("/sellerlogin", (req,res)=>{
@@ -45,11 +45,11 @@ app.get("/user", (req,res)=>{
 
 
 
-// app.post('/register', (req, res)=>{
-//     SellerModel.create(req.body)
-//     .then(seller=>res.json(seller))
-//     .catch(err=> res.json(err))
-// })
+app.post('/register', (req, res)=>{
+    SellerModel.create(req.body)
+    .then(seller=>res.json(seller))
+    .catch(err=> res.json(err))
+})
 
 app.listen(3000, ()=>{
     console.log("server is running! ")
