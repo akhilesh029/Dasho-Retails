@@ -1,8 +1,6 @@
-.categories{
+/* .categories{
     top: 0;
     position: fixed;
-    /* position: inher
-    it; */
     width: 100%;
     height: 75px;
     margin-top: 80px;
@@ -16,8 +14,7 @@
     background-color: white;
     padding: 10px;
     z-index:20;
-     /* position: relative; */     
-     /* z-index:1100; */
+
 }
 
 .ctgtype>a{
@@ -31,19 +28,9 @@
     column-gap: 10px;  
 }
 
-/* 
-a>img{
-    width: 55px; 
-    border-radius: 50%;
-    box-shadow: 0px 0px 5px 2px rgb(183, 173, 173);
-    border: 1px solid white;
-    border-radius: 50% ;
-} */
-
 a >span{
     margin-top: 10px;  
     text-align: center;
-    /* color: rgb(93, 68, 68); */
     font-size: 14px;   
 }
 
@@ -76,3 +63,81 @@ a >span{
         align-items: center;
       }
 }
+
+
+
+.navbar_list{
+    color: black;
+    font-size: 15px;
+    list-style: none;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+.navbar_list a{
+    text-decoration: none;
+    color: #000;
+} */
+
+
+/* Base styles */
+.categories {
+    top: 0;
+    position: fixed;
+    width: 100%;
+    height: 60px;
+    margin-top: 90px;
+    background-color: #f8f9fa; /* Light background for the navbar */
+    padding: 20px 10px;
+    z-index: 20;
+    align-items: center;
+
+  }
+  
+  .navbar_list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-around; /* Evenly distribute items across the screen */
+  }
+  
+  .navbar_list li {
+    margin: 0 15px;
+  }
+  
+  .navbar_list li a {
+    text-decoration: none;
+    color: #333; /* Darker text color for contrast */
+    font-size: 16px;
+    padding: 8px 16px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .navbar_list li a:hover {
+    background-color: #007bff; /* Blue background on hover */
+    color: white;
+    border-radius: 4px;
+  }
+  
+  /* Responsive Design */
+  @media screen and (max-width: 768px) {
+    .navbar_list {
+      flex-direction: column; /* Stack items vertically on small screens */
+      align-items: center;
+    }
+  
+    .navbar_list li {
+      margin-bottom: 10px;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .navbar_list li a {
+      font-size: 14px; /* Smaller font size on very small screens */
+      padding: 6px 12px;
+    }
+  }
+  
