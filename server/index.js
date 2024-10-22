@@ -3,6 +3,7 @@ const mongoose = require("mongoose")
 const cors = require("cors")
 const multer = require('multer')
 const path = require('path')
+require('dotenv').config();
 // const upload = multer({dest: 'uploads/'})
 const mongodb  = require('mongodb');
 
@@ -22,9 +23,25 @@ app.use(cors())
 
 app.use(express.static('public'));
 
-// mongoose.connect("mongodb://localhost:27017/sellerpage");
-mongoose.connect("mongodb://localhost:27017/seller");
+// mongoURL for local connection
+// const mongoURL = process.env.MONGODB_URL_LOCAL ;
 
+// mongoose.connect("mongodb://localhost:27017/sellerpage");
+// mongoose.connect("mongodb://localhost:27017/seller");
+
+// to connect mongodb atlas
+//mongoURL for global connection
+const mongoURL = process.env.MONGODB_URL;
+// const DB = 'mongodb+srv://akhilesheka0100:mpss205152@cluster0.ihgex.mongodb.net/'
+const DB = 'mongodb+srv://akhilesheka0100:mpss205152@cluster0.ihgex.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+mongoose.connect(mongoURL, {
+    useNewUrlParser: true,
+    // useCreateIndex: true,
+    useUnifiedTopology: true,
+    // useFindAndModify: false
+}).then(()=>{
+    console.log('connection successfullll')
+}).catch((err)=> console.log('no connectionnnn'))
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -143,7 +160,8 @@ console.log(req.body)
 
 //------------------using collection on the basis of seller name---------
 
+const PORT =  process.env.PORT || 3000
 
-app.listen(3000, () => {
-    console.log("server is running! ")
+app.listen(PORT, () => {
+    console.log(`server is running! on  ${PORT}`)
 })

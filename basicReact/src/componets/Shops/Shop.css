@@ -13,17 +13,19 @@
 
 
   .shop-container {
-    width: 100vw;
+    /* width: 100vw; */
     margin: auto;
-    height: 20vh;
-    margin-top: 10vh;
+    height: 25vh;
+    /* height: 20vh; */
+    margin-top: 15vh;
     margin-bottom: 3vh;
     /* border: 2px solid black; */
     font-family: "Inter", sans-serif;
     display:flex;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
+    /* min-height: 100vh; */
+    min-height: 90vh;
     background:linear-gradient(#ECEFFE,#CED6FB);
   }
 
@@ -40,7 +42,8 @@
 
 /* Style for individual cards */
 .slider-card {
-  height: 60vh;
+  /* height: 60vh; */
+ 
   background-color: #f7f7f7;
   border-radius: 10px;
   padding: 20px;

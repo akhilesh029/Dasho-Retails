@@ -1,24 +1,15 @@
 
 .welcomeChildiv{
-    margin-top: 100px;
-    /* border: 1PX solid red; */
+    margin:0 auto ;
     background-size: 100% 100%; 
     height: 650px;
+    /* border: 1px solid red; */
     background-image: url('https://img.freepik.com/premium-photo/shopping-cart-yellow-box-blue-background_1174990-35779.jpg?w=900');
 }
 /*----------------rightpanel------------*/
-.rightpannel{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    /* border: 1px solid red; */
-    width: 100%;
-    background-image: url('https://img.freepik.com/premium-photo/shopping-cart-yellow-box-blue-background_1174990-35779.jpg?w=900');
-     background-size: 100% 100%; 
-    background-repeat: no-repeat; 
-}
+
 .welcome{
+    
    text-align: center;
    font-size: 8vmin;
    color: white;
@@ -42,8 +33,6 @@
 
 .welcomeChildiv{
     padding: 10px;
-    /* background-color: white; */
-    /* border:2px solid rgb(23, 200, 20); */
     border-radius: 5px;
    
     display: flex;
@@ -58,9 +47,14 @@
     
 }
 .letsgo{
-    color: blue;
+    color: white;
     
-    padding: 3px;
-    border-radius: 5px;
-    background-color: #FCC300;
+    padding: 4px;
+    border-radius: 50px;
+    border: 1px solid white;
+    /* background-color: #FCC300; */
+}
+.letsgo:hover{
+    color: purple;
+    background-color: white;
 }

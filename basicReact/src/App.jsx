@@ -1,67 +1,59 @@
+
+
 import React from 'react';
-import './app.css'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import { Route, Routes } from 'react-router-dom'
-import Home from './Pages/Home/Home';
-import Profile from './Pages/Profile/Profile';
-import Navbar from './componets/Navbar/Navbar';
-import Header from './componets/Header/Header';
+import Home from './Pages/Home/Home'
 
-
-import Clothes from './Pages/Clothes/Clothes'
-import Header from './componets/Header/Header';
-import Home from './Pages/Clothes/Home/Home';
-// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './componets/Navbar/Navbar';
-import Features from './componets/Features/Features';
-import Maindiv from './componets/MainDiv/MainDiv';
-
-import Clothesdetails from './Pages/Clothes/Clothesdetails/Clothesdetails';
-import FeaturedPro from './componets/FeaturedProducts/FeaturedPro';
-import Cosmetics from './Pages/Clothes/Cosmetics/Cosmetics';
-import Pharmaceuticals from './Pages/Pharmaceutical/Pharmaceutical';
-import SellerCreateAccount from './Pages/CreateAccOfSeller/CreateAccOfSeller';
-import Dropdown from './componets/Dropdown/Dropdown';
 import ShowOnHOme from './componets/ShowOnHome/ShowOnHOme';
+import Clothes from './Pages/Clothes/Clothes';
+import Header from './componets/Header/Header';
+import Navbar from './componets/Navbar/Navbar';
+import Footer from './componets/Footer/Footer';
+import FirebaseAuth from './componets/Firebase/FirebaseAuth';
+import SellerLogin from './Pages/SellerLogin/SellerLogin';
+import WelcomePage from './Pages/WelcomePage/WelcomePage';
+import SellerPage from './Pages/SellerPage/SellerPage';
+import SellerCreateAccount from './Pages/CreateAccOfSeller/CreateAccOfSeller';
+import BuyItems from './Pages/BuyItems/BuyItems';
 
 
 
-function App(){
+function App() {
   return (
-
-    <div className='app'>
-       <Header />
-       <Navbar />
-       <Routes>
-           < Route path='/' element={<Home />} />
-           < Route path='/profile' element={<Profile />}/>
-       </Routes>
-    </div> 
-
     <>
     
+   <BrowserRouter>
+   <div className='headerrrr'>
 
-      <Header />
-     {/* <Home /> */}
-     <Navbar />
-     {/* <Dropdown /> */}
-     <Maindiv />
-     <FeaturedPro />
-     <ShowOnHOme />
-     {/* <Features/>  */}
+   <Header />
+   <Navbar />
+   </div>
+   <div className="renderpages">
 
-     {/* <SellerCreateAccount /> */}
-     {/* <Cosmetics />
-     <Pharmaceuticals /> 
-      <Clothes /> */}
-     
-    
+
+      <Routes  >
+          <Route path='/' element ={<Home />} />
+          <Route path='/clothes'  element={<Clothes />} />
+          <Route path='/showonhome' element = {<ShowOnHOme />} />
+          <Route path='/firebaseAuth' element = {<FirebaseAuth />}/>
+          <Route path='/sellerlogin' element = {<SellerLogin />}/>
+          <Route path='/createselleracc' element = {<SellerCreateAccount />}/>
+          <Route path='/welcome' element = {<WelcomePage />}/>
+          <Route path='/sellerpage' element = {<SellerPage />}/>
+          <Route path='/buyitems' element = {<BuyItems />}/>
+
+          
       
+      </Routes>
+   </div>
+<Footer />
+    </BrowserRouter>
+    
     </>
-
-  )
+  );
 }
 
-export default App
+export default App;
 
  

@@ -157,33 +157,42 @@ table>tr>td{
     display: flex;
     flex-direction: column;
     align-items: start;
-  width: 33vmin;
+    width: 38vmin;
+
     background-color: #3B3F46;
     border-start-start-radius: 10px;
     border-bottom-left-radius: 10px;
     color: white;
-    /* width: fit-content; */
-    /* padding: 15px; */
-    border: 1px solid red;
+   
+    /* border: 1px solid red; */
 
     
 }
 .sidepanellist{
-    margin: 5px;
+    margin: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: start;
     font-size: 2vmin;
     /* width: 25vmin; */
-    line-height: 8vh;
-    /* color:yellow; */
-    border: 1px solid red;
+    width: fit-content;
+    height: 4vmin;
+    padding: 5px;
+    border-radius: 10px;
+   
+    /* border: 1px solid red; */
     
 }
 .sidepanellist:hover{
    
-   color: #FCC300;
+   /* color: #FCC300; */
+   color: black;
+
+  
+   transform: scale(1.1);
+   transition-duration: 0.2s;
+   background-color: white;
 }
 
 /*----------------rightpanel------------*/

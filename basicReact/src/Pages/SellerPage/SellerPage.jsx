@@ -312,7 +312,7 @@ function handleShipOrder(orderData, orderId) {
                             <img
                               className="photo"
                               src={`http://localhost:3000/Images/` + item.image}
-                              alt=""
+                              alt="item image"
                             />
                           }
                         </td>

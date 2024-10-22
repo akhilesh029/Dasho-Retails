@@ -2,10 +2,12 @@
 .signup {
     position: relative;
     display: inline-block;
+    
   }
   
   /* Unordered list containing the user's display name */
   .signup > ul {
+  
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -17,6 +19,7 @@
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s;
+    
   }
   
   /* .signup > ul > li:hover {
@@ -33,6 +36,7 @@
   
   /* Dropdown menu styling */
   .dropdown-menu {
+    
     list-style-type: none;
     padding: 8px 0;
     margin: 0;
