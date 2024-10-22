@@ -16,6 +16,7 @@ import WelcomePage from './Pages/WelcomePage/WelcomePage';
 import SellerPage from './Pages/SellerPage/SellerPage';
 import SellerCreateAccount from './Pages/CreateAccOfSeller/CreateAccOfSeller';
 import BuyItems from './Pages/BuyItems/BuyItems';
+import PayMethod from './Pages/PayMethod/PayMethod';
 
 
 
@@ -42,6 +43,7 @@ function App() {
           <Route path='/welcome' element = {<WelcomePage />}/>
           <Route path='/sellerpage' element = {<SellerPage />}/>
           <Route path='/buyitems' element = {<BuyItems />}/>
+          <Route path='/pay' element = {<PayMethod />}/>
 
           
       

@@ -1,27 +1,30 @@
-import './Header.css'
-import { assets } from '../../assets/assets'
-import Dropdown from '../Dropdown/Dropdown'
+import "./Header.css";
+import { assets } from "../../assets/assets";
+import Dropdown from "../Dropdown/Dropdown";
 import Firebase from "../Firebase/FirebaseAuth";
 
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
+import ShowOnHOme from "../ShowOnHome/ShowOnHOme";
 
-function Header(){
-//---------------navigate to showonhome------------
-  const navigate = useNavigate()
+function Header() {
+  //---------------navigate to showonhome------------
+  const navigate = useNavigate();
   // const handleCartItem=()=>{
   //   navigate('/showonhome', { replace: true, state:  "yes"  });
   // }
 
-
-  const signInAccount = ()=>{
-    window.open('/sellerlogin', '_self')
-  }
+  const signInAccount = () => {
+    window.open("/sellerlogin", "_self");
+  };
+function reloadBtn(){
+  window.location.reload();
+}
 
   return (
     <>
       <div className="headerEle">
         <div id="header" className="logo">
-          <img src={assets.logo2} alt="" />
+          <img id="reloadButton" onClick={reloadBtn} src={assets.logo2} alt="logo" />
         </div>
         <div id="header" className="div2">
           <p>Shop</p>
@@ -32,32 +35,25 @@ function Header(){
           </form>
         </div>
 
-        <nav>
-          <ul className="menu">
-            <li className="menu-item"><a href="">Cart Items</a></li>
-            <li className="menu-item"><a href="#">About</a></li>
-            <li className="menu-item"><a href="/footer">Contact</a></li>
-            <li className="menu-item dropdown">
-
-             <Firebase />
- 
-            </li>            
-           {/* <li>
-             <a href="#">Sign In</a>
-             <ul class="dropdown-menu">
-                   <li><a href="#" onClick={signInAccount} >As a Seller</a></li>
-                   <li><a href="#">As a Customer</a></li>
-             </ul>
-         </li> */}
-            {/* <li className="menu-item"><a href="/showonhome">Contact</a></li> */}
-          </ul>
-        </nav>
+        <ul className="menu">
+          <li className="menu-item">
+            <a href="">Cart Items</a>
+          </li>
+          <li className="menu-item">
+            <a href="/footer">About</a>
+          </li>
+          <li className="menu-item">
+            <a href="">Contact</a>
+          </li>
+          <li className="menu-item dropdown">
+            <Firebase />
+          </li>
+        </ul>
 
         {/* <button className="headerbtn">Cart</button> */}
       </div>
     </>
   );
-
 }
 
-export default Header
+export default Header;

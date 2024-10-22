@@ -78,7 +78,7 @@ const ShowOnHOme = () => {
       orderplaced.innerHTML = "Order Placed!"
       orderplaced.style.color = "blue"
       setTimeout(() => {
-        navigate("/paymethod", { replace: true, state: {  } });
+        navigate("/pay", { replace: true, state: {  } });
         
       }, 2000);
       

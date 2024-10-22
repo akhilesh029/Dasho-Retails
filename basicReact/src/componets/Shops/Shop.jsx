@@ -166,7 +166,7 @@ const CardSlider = () => {
       <Swiper
         modules={[Navigation, Pagination, A11y]} // Use the required Swiper modules
         spaceBetween={25} // Space between slides
-        slidesPerView={3} // Number of cards to show at once
+        slidesPerView={4} // Number of cards to show at once
         navigation // Enable navigation buttons
         pagination={{ clickable: true }} // Enable pagination dots
         loop={true} // Enable looping
