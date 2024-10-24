@@ -33,7 +33,7 @@ app.use(express.static('public'));
 //mongoURL for global connection
 const mongoURL = process.env.MONGODB_URL;
 // const DB = 'mongodb+srv://akhilesheka0100:mpss205152@cluster0.ihgex.mongodb.net/'
-const DB = 'mongodb+srv://akhilesheka0100:mpss205152@cluster0.ihgex.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+// const DB = 'mongodb+srv://akhilesheka0100:mpss205152@cluster0.ihgex.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
 mongoose.connect(mongoURL, {
     useNewUrlParser: true,
     // useCreateIndex: true,
