@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './clothesdetails.css'
+// import './clothesdetails.css'
 import Header from '../../../componets/Header/Header'
 import { assets } from '../../../assets/assets'
 import { AppContext } from '../../../context/AppContext'
