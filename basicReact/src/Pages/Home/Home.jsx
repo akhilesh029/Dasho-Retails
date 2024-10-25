@@ -7,7 +7,7 @@ import Pharmaceuticals from '../Pharmaceutical/Pharmaceutical';
 import Clothes from '../Clothes/Clothes'
 import "./home.css"
 import Shop from '../../componets/Shops/Shop';
-import ShowOnHOme from '../../componets/ShowOnHome/ShowOnHOme';
+import ShowOnHOme from '../../componets/ShowOnHome/ShowOnHome';
 import Navbar from '../../componets/Navbar/Navbar';
 
 

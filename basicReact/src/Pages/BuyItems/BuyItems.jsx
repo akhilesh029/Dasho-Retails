@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import "./BuyItems.css";
-import ShowOnHOme from "../../componets/ShowOnHome/ShowOnHOme";
+import ShowOnHOme from "../../componets/ShowOnHome/ShowOnHome";
 // import "./ShowOnHOme.css";
 
 const BuyItems = (props) => {

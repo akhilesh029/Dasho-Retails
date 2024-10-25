@@ -39,8 +39,9 @@ import SellerPage from './Pages/SellerPage/SellerPage.jsx';
 import WelcomePage from './Pages/WelcomePage/WelcomePage.jsx';
 import BuyItems from './Pages/BuyItems/BuyItems.jsx';
 import CartPage from './Pages/CartPage/CartPage.jsx';
-import ShowOnHOme from './componets/ShowOnHome/ShowOnHOme.jsx';
+import ShowOnHOme from './componets/ShowOnHome/ShowOnHome.jsx';
 import PayMethod from './Pages/PayMethod/PayMethod.jsx';
+
 
 // const router = createBrowserRouter([
 //     {

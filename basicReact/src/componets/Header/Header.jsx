@@ -4,7 +4,7 @@ import Dropdown from "../Dropdown/Dropdown";
 import Firebase from "../Firebase/FirebaseAuth";
 
 import { useNavigate } from "react-router-dom";
-import ShowOnHOme from "../ShowOnHome/ShowOnHOme";
+import ShowOnHOme from "../ShowOnHome/ShowOnHome";
 
 function Header() {
   //---------------navigate to showonhome------------

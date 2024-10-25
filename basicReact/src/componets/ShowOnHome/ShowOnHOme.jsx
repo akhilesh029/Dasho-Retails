@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./ShowOnHome.css";
+import './ShowOnHome.css';
+
 import { useNavigate } from "react-router-dom";
 import Header from "../Header/Header";
 import { useLocation } from "react-router-dom";
