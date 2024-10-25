@@ -1,5 +1,5 @@
 import React from 'react'
-import Maindiv from '../../componets/MainDiv/MainDiv';
+// import Maindiv from '../../componets/MainDiv/MainDiv';
 import FeaturedPro from '../../componets/FeaturedProducts/FeaturedPro';
 import Features from '../../componets/Features/Features';
 import Cosmetics from '../Clothes/Cosmetics/Cosmetics';
@@ -17,7 +17,7 @@ const Home = () => {
   return (
     <div className='home'>
         <Shop />
-        <Maindiv />
+        {/* <Maindiv /> */}
         <FeaturedPro />
         {/* <Features /> */}
         <ShowOnHOme />

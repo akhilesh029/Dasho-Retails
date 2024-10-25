@@ -15,7 +15,7 @@ import App from './App.jsx';
 import './index.css'
 import Header from './componets/Header/Header.jsx'
 import Navbar from './componets/Navbar/Navbar.jsx'
-import MainDiv from './componets/MainDiv/MainDiv.jsx'
+// import MainDiv from './componets/MainDiv/MainDiv.jsx'
 import Features from './componets/Features/Features.jsx'
 import Clothes from './Pages/Clothes/Clothes.jsx'
 import Cosmetics from './Pages/Clothes/Cosmetics/Cosmetics.jsx';
