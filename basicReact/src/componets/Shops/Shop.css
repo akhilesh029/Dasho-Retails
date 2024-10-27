@@ -1,6 +1,7 @@
 
   .slider-container{
-    width: 100vw;
+    width: 100%;         /* Fill 100% of the parent container */
+  
   }
 
 
@@ -13,7 +14,7 @@
 
 
   .shop-container {
-    width: 100vw;
+    width: 98.5vw;
     margin: auto;
     height: 20vh;
     margin-top: 10vh;

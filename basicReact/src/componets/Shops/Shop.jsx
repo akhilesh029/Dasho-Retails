@@ -1,152 +1,5 @@
-// import React,{useState ,useEffect, useRef}from 'react'
-// import "./Shop.css"
-// import {shops} from "../../assets/assets"
-// import img from "../../assets/p1.jpeg"
-// import Swiper from 'swiper/bundle';
-// import 'swiper/css/bundle';
-
-
-// const Shop = () => {
-//   const [scrollIndex, setScrollIndex] = useState(0); // Track current scroll position
-//   const shopListRef = useRef(null);
-
-//   const handleScrollRight = () => {
-//     if (shopListRef.current) {
-//       const maxScroll = shopListRef.current.scrollWidth - shopListRef.current.clientWidth;
-//       const scrollAmount = shopListRef.current.clientWidth;
-
-//       // Calculate the next scroll position
-//       const newIndex = Math.min(scrollIndex + scrollAmount, maxScroll);
-
-//       shopListRef.current.scrollTo({
-//         left: newIndex,
-//         behavior: 'smooth', // Smooth scrolling effect
-//       });
-
-//       setScrollIndex(newIndex); // Update the scroll index
-//     }
-//   };
-
-//   const handleScrollLeft = () => {
-//     if (shopListRef.current) {
-//       const scrollAmount = shopListRef.current.clientWidth;
-
-//       // Calculate the previous scroll position
-//       const newIndex = Math.max(scrollIndex - scrollAmount, 0);
-
-//       shopListRef.current.scrollTo({
-//         left: newIndex,
-//         behavior: 'smooth', // Smooth scrolling effect
-//       });
-
-//       setScrollIndex(newIndex); // Update the scroll index
-//     }
-//   };
-
-//   return (
-//     <>  
-//     <h2 className='trending-shop'>Trending shops</h2>
-//     {/* <div className='shop-container' >
-//     <ShopItem shopListRef={shopListRef} handleScrollRight={handleScrollRight} handleScrollLeft={handleScrollLeft} />
-//     </div> */}
-     
-
-
-
-//     </>
-//   )
-// }
-
-// export default Shop
-
-// function ShopItem({ shopListRef, handleScrollRight, handleScrollLeft }) {
-
-//   return(
-//        <div className='containerr swiper'>
-//           <div className='card-wrapperr'>
-//              <ul className='card-list swiper-wrapper'>
-//                <li className='card-item  swiper-slide'>
-//                 <a href="#" className='card-link'>
-//                   <img src={img} alt="" className='card-image' />
-//                   <p className='badge'>Developer</p>
-//                   <h2 className='card-title'>This is shivam</h2>
-//                   <button className="card-button material-symbols-outlined">
-//                     arrow_forward
-// </button>
-//                 </a>
-//                </li>
-//                <li className='card-item  swiper-slide'>
-//                 <a href="#" className='card-link'>
-//                   <img src={img} alt="" className='card-image' />
-//                   <p className='badge'>Developer</p>
-//                   <h2 className='card-title'>This is s</h2>
-//                   <button className="card-button material-symbols-outlined">
-//                     arrow_forward
-// </button>
-//                 </a>
-//                </li>
-//                <li className='card-item swiper-slide'>
-//                 <a href="#" className='card-link'>
-//                   <img src={img} alt="" className='card-image' />
-//                   <p className='badge'>Developer</p>
-//                   <h2 className='card-title'>This is sh</h2>
-//                   <button className="card-button material-symbols-outlined">
-//                     arrow_forward
-// </button>
-//                 </a>
-//                </li>
-//                <li className='card-item  swiper-slide'>
-//                 <a href="#" className='card-link'>
-//                   <img src={img} alt="" className='card-image' />
-//                   <p className='badge'>Developer</p>
-//                   <h2 className='card-title'>This is shi</h2>
-//                   <button className="card-button material-symbols-outlined">
-//                     arrow_forward
-// </button>
-//                 </a>
-//                </li>
-//                <li className='card-item  swiper-slide'>
-//                 <a href="#" className='card-link'>
-//                   <img src={img} alt="" className='card-image' />
-//                   <p className='badge'>Developer</p>
-//                   <h2 className='card-title'>This is shiv</h2>
-//                   <button className="card-button material-symbols-outlined">
-//                     arrow_forward
-// </button>
-//                 </a>
-//                </li>
-//                <li className='card-item  swiper-slide'>
-//                 <a href="#" className='card-link'>
-//                   <img src={img} alt="" className='card-image' />
-//                   <p className='badge'>Developer</p>
-//                   <h2 className='card-title'>This is yash</h2>
-//                   <button className="card-button material-symbols-outlined">
-//                     arrow_forward
-// </button>
-//                 </a>
-//                </li>
-//                <li className='card-item  swiper-slide'>
-//                 <a href="#" className='card-link'>
-//                   <img src={img} alt="" className='card-image' />
-//                   <p className='badge'>Developer</p>
-//                   <h2 className='card-title'>This is nishu</h2>
-//                   <button className="card-button material-symbols-outlined">
-//                     arrow_forward
-// </button>
-//                 </a>
-//                </li>
-//              </ul>
-
-//              <div className="swiper-pagination"></div>
-//              <div className="lbtn swiper-button-prev" onClick={handleScrollLeft}> </div> 
-//              <div className="rbtn swiper-button-next" onClick={handleScrollRight}></div>
-//           </div>
-//        </div>
-
-//   )
-// }
-
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react'; // Import Swiper React components
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules'; // Import Swiper modules
 import 'swiper/css'; // Import Swiper styles
@@ -159,6 +12,15 @@ import {cards} from "../../assets/assets"
 
 
 const CardSlider = () => {
+  const navigate = useNavigate();
+
+  // Function to handle card click and navigate to dynamic route
+  const handleClick = (card) => {
+    const formattedShopName = card.shopName.toLowerCase().replace(/\s+/g, '-'); // Replace spaces with hyphens
+    navigate(`/shop/${formattedShopName}`);  // Navigate to a dynamic route based on the shop name
+   };
+
+
   return (
     <div className='shop-container' >
     <div className="slider-container">
@@ -184,7 +46,7 @@ const CardSlider = () => {
       >
         {cards.map((card, index) => (
           <SwiperSlide key={index}>
-            <div className="slider-card">
+            <div onClick={()=>handleClick(card)} className="slider-card">
               <h2 className="card-title">{card.shopName}</h2>
               <img src={img} alt="" className='card-image' />
               <div className='text-decoration'> 

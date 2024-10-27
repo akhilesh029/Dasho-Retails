@@ -2,11 +2,9 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import mongoose from 'mongoose';
 
-const UserPage = ({userData}) => {
+const UserPage = () => {
    
-  if (!userData) {
-    return <p>Please login first.</p>;
-  }
+  
 
    const [users, setUsers] = useState([])
    useEffect(()=>{
@@ -23,12 +21,12 @@ const UserPage = ({userData}) => {
       <h1>User</h1>
      <ul>
         {users.map(item => {
-          if(item.email == userData.email){
+          // if(item.name == "nitin"){
 
             return <li key={item._id}>{item.name}</li>
-          }
+          // }
               
-})}
+     })}
       </ul>
     </div>
   );
