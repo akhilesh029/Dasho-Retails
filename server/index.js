@@ -12,7 +12,7 @@ const SellerModel = require('./model/seller')
 const userModel = require('./model/users')
 const SellerPageModel = require('./model/sellerpage')
 const OrderModel = require('./model/orders')
-
+const AlluserdetailsModel = require('./model/userdetails')
 
 
 
@@ -61,12 +61,14 @@ app.post('/sellerpage', upload.single('file'), (req, res) => {
 
     // console.log(req.file)
     // console.log(req.file.filename)
+    // console.log(req.body.sellerEmail)
 
     SellerPageModel.create({
         image: req.file.filename,
         itemName: req.body.itemName,
         itemPrice: req.body.itemPrice,
         itemDescription: req.body.itemDescription,
+        sellerEmail: req.body.sellerEmail,
         // file: req.file.filename,  
 
     })
@@ -113,7 +115,8 @@ app.post("/sellerlogin", (req,res)=>{
 // user
 app.get("/user", (req, res) => {
     // const {email, password} = req.body;
-    userModel.find()
+    console.log("yes")
+    AlluserdetailsModel.find()
         .then(users => res.json(users))
         .catch(err => res.json(err))
 })
@@ -144,6 +147,35 @@ app.delete('/delete/:id', async (req, res) => {
     }
      catch (err) {
       res.status(500).json({ error: 'Error deleting data' });
+    }
+  });
+
+
+  // Handle POST request for form submission
+  app.post('/savedetails', upload.single('gstCertificate'), async (req, res) => {
+    const { email, businessName, ownerName, contactNumber, businessContactNumber, gstNumber, hasGst } = req.body;
+    const gstCertificatePath = req.file ? req.file.path : null;
+  console.log(req.body)
+//   console.log(req.body.email)
+//   console.log(req.body.businessName)
+  console.log(gstCertificatePath)
+    try {
+      const userDetail = new AlluserdetailsModel({
+        email,
+        businessName,
+        ownerName,
+        contactNumber,
+        businessContactNumber,
+        gstNumber,
+        hasGst,
+        gstCertificate: gstCertificatePath,
+      });
+  
+      await userDetail.save();
+      res.json({ message: 'User details saved successfully' });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Error saving user details' });
     }
   });
 
