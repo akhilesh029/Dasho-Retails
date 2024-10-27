@@ -18,10 +18,13 @@ function SellerPage({ userEmail }) {
   //-------------getting data from login page-----
   const location = useLocation();
   // console.log(location.state.email)
-  const m = location.state.userEmail;
-  // console.log(userEmail)
+  // const m = location.state.userEmail;
+  const m = location.state;
+  
   // console.log(m);
-  // console.log(m.email);
+  console.log("akil")
+  console.log(m.userEmail);
+  console.log(m);
   //-----------------------------------------
   const [showContent, setShowContent] = useState(true);
   const [showShipping, setShowShipping] = useState(false);
@@ -88,6 +91,7 @@ function SellerPage({ userEmail }) {
   const [itemDescription, setItemDescription] = useState("");
   const [itemPrice, setItemPrice] = useState("");
   const [file, setFile] = useState();
+  const [sellerEmail, setSellerEmail] = useState(m.userEmail);
 
   const [image, setImage] = useState();
   const [name, setName] = useState();
@@ -112,6 +116,7 @@ function SellerPage({ userEmail }) {
   const handleItemImageChange = (event) => {
     setFile(event.target.files[0]);
   };
+  
 
   // request to userdata from database
   useEffect(() => {
@@ -136,6 +141,7 @@ function SellerPage({ userEmail }) {
     formData.append("itemDescription", itemDescription);
     formData.append("itemPrice", itemPrice);
     formData.append("file", file);
+    formData.append("sellerEmail", sellerEmail);
 
  
 
@@ -213,10 +219,10 @@ function handleShipOrder(orderData, orderId) {
         <div className="sidepanel">
           <ul className="adminSetting">
             {users.map((item) => {
-              if (item.email == m.email)
+              if (item.email == m.userEmail)
                 return (
                   <>
-                    <h1 key={item._id}>Welcome @{item.name}</h1>
+                    <h1 key={item._id}>Welcome @{item.ownerName}</h1>
                   </>
                 );
             })}
@@ -303,29 +309,32 @@ function handleShipOrder(orderData, orderId) {
               </table>
 
               {res.map((item) => {
-                return (
-                  <>
-                    <table >
-                      <tr >
-                        <td key={item._id}>
-                          {
-                            <img
-                              className="photo"
-                              src={`http://localhost:3000/Images/` + item.image}
-                              alt="item image"
-                            />
-                          }
-                        </td>
-                        <td key={item._id}>{item.itemName}</td>
-                        <td key={item._id}>{item.itemPrice}</td>
-                        <td key={item._id}>{item.itemDescription}</td>
-                        <td key={item._id}>
-                          <button style={{ color: "red" }} onClick={() => deleteData(item._id)}>Delete</button>
-                        </td>
-                      </tr>
-                    </table>
-                  </>
-                );
+               if(item.sellerEmail==m.userEmail){
+
+                 return (
+                   <>
+                     <table >
+                       <tr >
+                         <td key={item._id}>
+                           {
+                             <img
+                               className="photo"
+                               src={`http://localhost:3000/Images/` + item.image}
+                               alt="item image"
+                             />
+                           }
+                         </td>
+                         <td key={item._id}>{item.itemName}</td>
+                         <td key={item._id}>{item.itemPrice}</td>
+                         <td key={item._id}>{item.itemDescription}</td>
+                         <td key={item._id}>
+                           <button style={{ color: "red" }} onClick={() => deleteData(item._id)}>Delete</button>
+                         </td>
+                       </tr>
+                     </table>
+                   </>
+                 );
+               }
               })}
             </div>
           </div>

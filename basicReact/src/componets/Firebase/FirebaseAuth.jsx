@@ -6,6 +6,7 @@ import { getAuth, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signO
 import { useNavigate } from 'react-router-dom';
 import "./firebase.css";
  import SellerLogin from '../../Pages/SellerLogin/SellerLogin';
+ import BusinessForm from '../../Pages/BusinessForm/BusinessForm';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCxCsr0TFWAgTcgDq2X-DjHCNtKyI7OMOA",
@@ -26,12 +27,16 @@ const FirebaseAuth = () => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [showOptions, setShowOptions] = useState(false);
   const dropdownRef = useRef(null);
+  const [email, setEmail] = useState(null)
+  const [users, setUsers] = useState(null);
+
   
+ 
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log(user)
+        // console.log(user)
         setIsLoggedIn(true);
         setUser(user);
      
@@ -58,8 +63,37 @@ const FirebaseAuth = () => {
   const navigate = useNavigate();
 
   const handleProfileClick = () => {
-    // navigate('/profile');  // Use navigate instead of history.push
-    navigate('/sellerlogin')
+    // console.log(user.email);
+    const email = user.email;
+
+    // request to userdata from database
+   
+      axios
+        .get("http://localhost:3000/user")
+        .then((users) => setUsers(users.data))
+        .catch((err) => console.log(err));
+        // console.log(users)
+        console.log(users.length)
+           const userEmail = user.email
+           console.log(userEmail)
+        
+       
+if(users.length ===0){
+  navigate("/businessform", { replace: false, state: { email } });
+}
+else{
+
+  for (let i = 0; i < users.length; i++) {
+    console.log(users[i].email)
+    const userEmail = user.email
+    if (users[i].email == user.email) {
+      navigate("/sellerpage", { replace: false, state: { userEmail } });
+      break;
+    } else {
+      navigate("/businessform", { replace: false, state: { email } });
+    }
+  }
+}
 
   };
 

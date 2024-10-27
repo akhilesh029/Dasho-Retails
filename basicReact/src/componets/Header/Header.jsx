@@ -5,6 +5,7 @@ import Firebase from "../Firebase/FirebaseAuth";
 
 import { useNavigate } from "react-router-dom";
 import ShowOnHOme from "../ShowOnHome/ShowOnHome";
+import Distributors from "../../Pages/Distributors/Distributors";
 
 function Header() {
   //---------------navigate to showonhome------------
@@ -40,7 +41,7 @@ function reloadBtn(){
             <a href="">Cart Items</a>
           </li>
           <li className="menu-item">
-            <a href="/footer">About</a>
+            <a href="/distributors">Distribution</a>
           </li>
           <li className="menu-item">
             <a href="">Contact</a>

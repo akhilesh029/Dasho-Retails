@@ -5,7 +5,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Home from './Pages/Home/Home'
 
-import ShowOnHOme from './componets/ShowOnHome/ShowOnHome';
+// import ShowOnHOme from './componets/ShowOnHome/ShowOnHome';
+import ShowOnHOme from './componets/ShowOnHome/ShowOnHOme';
 import Clothes from './Pages/Clothes/Clothes';
 import Header from './componets/Header/Header';
 import Navbar from './componets/Navbar/Navbar';
@@ -17,6 +18,10 @@ import SellerPage from './Pages/SellerPage/SellerPage';
 import SellerCreateAccount from './Pages/CreateAccOfSeller/CreateAccOfSeller';
 import BuyItems from './Pages/BuyItems/BuyItems';
 import PayMethod from './Pages/PayMethod/PayMethod';
+import Form from './Pages/detailsVerification/detailsVerification';
+import BusinessForm from './Pages/BusinessForm/BusinessForm';
+import DistributionForm from './Pages/DistributionForm/DistributionForm';
+import Distributors from './Pages/Distributors/Distributors';
 
 
 
@@ -44,6 +49,12 @@ function App() {
           <Route path='/sellerpage' element = {<SellerPage />}/>
           <Route path='/buyitems' element = {<BuyItems />}/>
           <Route path='/pay' element = {<PayMethod />}/>
+          <Route path='/form' element = {<Form />}/>
+          <Route path='/businessform' element = {<BusinessForm />}/>
+          <Route path='/distributionform' element = {<DistributionForm />}/>
+          <Route path='/distributors' element = {<Distributors />}/>
+
+
 
           
       

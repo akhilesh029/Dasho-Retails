@@ -1,0 +1,58 @@
+/* Form container */
+.business-form {
+   margin: 0 auto;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 10px;
+    width: 25vw;
+    border: 1px solid black;
+  }
+  
+  /* Input fields */
+  #businessName,
+  #ownerName,
+  #contactNumber,
+  #businessContactNumber,
+  #gstNumber,
+  #gstCertificate {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  /* Labels */
+  label {
+    font-weight: bold;
+  }
+  
+  /* Checkbox and label */
+  #gstCheckbox {
+    display: flex;
+    flex-direction: row;
+    font-weight: 600;
+    font-size: 15px;
+    gap: 10px;
+    /* align-items: center; */
+  }
+  
+  /* Submit button */
+  #submitButton {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Disabled input fields */
+  #gstNumber:disabled,
+  #gstCertificate:disabled {
+    background-color: #f2f2f2;
+    cursor: not-allowed;
+  }

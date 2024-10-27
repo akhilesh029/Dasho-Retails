@@ -13,9 +13,9 @@ const WelcomePage = (props) => {
 
     const location = useLocation();
     // console.log(location.state.email)
-    const userEmail = location.state
+    const userEmail = location.state.email
     console.log(userEmail)
-    console.log(userEmail.email)
+   
 
     const navigate = useNavigate()
     const handleClick=()=>{
@@ -28,8 +28,6 @@ const WelcomePage = (props) => {
    useEffect(()=>{
     axios.get('http://localhost:3000/user')
     .then(users => setUsers(users.data))
-   
-    
     .catch(err => console.log(err))
    },[])
 
@@ -42,7 +40,7 @@ const WelcomePage = (props) => {
 
       <ul>
         {users.map((item) => {
-          if (item.email == userEmail.email) {
+          if (item.email == userEmail) {
             return (
               <>
               <Header />
@@ -51,7 +49,7 @@ const WelcomePage = (props) => {
                   <img className="profilepicture" src={assets.polo} alt="" />
                   <h1 className="welcome">Welcome </h1>
                   <p className="welcomeText">
-                    Hi <b>{item.name}</b> , welcome to <b>DASHO</b>!{" "}
+                    Hi <b>{item.ownerName}</b> , welcome to <b>DASHO</b>!{" "}
                   </p>
                   <p className="welcomeText">
                     We're thrilled to have you join our plateform.
