@@ -5,15 +5,17 @@ import { initializeApp } from 'firebase/app';
 import { getAuth, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import "./firebase.css";
+ import SellerLogin from '../../Pages/SellerLogin/SellerLogin';
+ import BusinessForm from '../../Pages/BusinessForm/BusinessForm';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAZA9_pJTeOEIU-91aXS7_-jOZFgd3FpcI",
-  authDomain: "shivamdemo-ef5f5.firebaseapp.com",
-  projectId: "shivamdemo-ef5f5",
-  storageBucket: "shivamdemo-ef5f5.appspot.com",
-  messagingSenderId: "349581977873",
-  appId: "1:349581977873:web:6ba4e917a9867e37b244b0",
-  measurementId: "G-B8T1H4WCF9"
+  apiKey: "AIzaSyCxCsr0TFWAgTcgDq2X-DjHCNtKyI7OMOA",
+  authDomain: "desho-f66d9.firebaseapp.com",
+  projectId: "desho-f66d9",
+  storageBucket: "desho-f66d9.appspot.com",
+  messagingSenderId: "351084185508",
+  appId: "1:351084185508:web:e05c2b8430d43d8dc2a331",
+  measurementId: "G-G3CBTCH1PX"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -25,12 +27,19 @@ const FirebaseAuth = () => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [showOptions, setShowOptions] = useState(false);
   const dropdownRef = useRef(null);
+  const [email, setEmail] = useState(null)
+  const [users, setUsers] = useState(null);
+
+  
+ 
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
+        // console.log(user)
         setIsLoggedIn(true);
         setUser(user);
+     
       } else {
         setIsLoggedIn(false);
         setUser(null);
@@ -54,7 +63,36 @@ const FirebaseAuth = () => {
   const navigate = useNavigate();
 
   const handleProfileClick = () => {
-    navigate('/profile');  // Use navigate instead of history.push
+    // console.log(user.email);
+    const email = user.email;  
+    navigate("/businessform", { replace: false, state: { email } }); 
+//       axios
+//         .get("mongodb://localhost:27017/user")
+//         .then((users) => setUsers(users.data))
+//         .catch((err) => console.log(err));
+//         // console.log(users)
+//         console.log(users.length)
+//            const userEmail = user.email
+//            console.log(userEmail)
+        
+       
+// if(users.length ===0){
+//   navigate("/businessform", { replace: false, state: { email } });
+// }
+// else{
+
+//   for (let i = 0; i < users.length; i++) {
+//     console.log(users[i].email)
+//     const userEmail = user.email
+//     if (users[i].email == user.email) {
+//       navigate("/sellerpage", { replace: false, state: { userEmail } });
+//       break;
+//     } else {
+//       navigate("/businessform", { replace: false, state: { email } });
+//     }
+//   }
+// }
+
   };
 
 

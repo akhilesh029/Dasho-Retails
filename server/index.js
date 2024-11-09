@@ -3,6 +3,7 @@ const mongoose = require("mongoose")
 const cors = require("cors")
 const multer = require('multer')
 const path = require('path')
+require('dotenv').config();
 // const upload = multer({dest: 'uploads/'})
 const mongodb  = require('mongodb');
 
@@ -11,7 +12,7 @@ const SellerModel = require('./model/seller')
 const userModel = require('./model/users')
 const SellerPageModel = require('./model/sellerpage')
 const OrderModel = require('./model/orders')
-
+const AlluserdetailsModel = require('./model/userdetails')
 
 
 
@@ -25,11 +26,28 @@ app.use(cors())
 // =======
 app.use(express.static('public'));
 
+// mongoURL for local connection
+// const mongoURL = process.env.MONGODB_URL_LOCAL ;
+
 // mongoose.connect("mongodb://localhost:27017/sellerpage");
 // mongoose.connect("mongodb://localhost:27017/seller");
-// >>>>>>> f6d6d46d9d41f6f5d7c0188692e73bd660534f3f
+
+// to connect mongodb atlas
+//mongoURL for global connection
+const mongoURL = process.env.MONGODB_URL;
+// const DB = 'mongodb+srv://akhilesheka0100:mpss205152@cluster0.ihgex.mongodb.net/'
+// const DB = 'mongodb+srv://akhilesheka0100:mpss205152@cluster0.ihgex.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+mongoose.connect(mongoURL, {
+    useNewUrlParser: true,
+    // useCreateIndex: true,
+    useUnifiedTopology: true,
+    // useFindAndModify: false
+}).then(()=>{
+    console.log('mongodb connected')
+}).catch((err)=> console.log('no connectionnnn'))
 
 
+//================================================= Multer =======================================================
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'public/Images')
@@ -43,17 +61,15 @@ const upload = multer({
     storage: storage
 })
 
-// image + details upload
+//========================================================= image + details upload  ========================================
 app.post('/sellerpage', upload.single('file'), (req, res) => {
-
-    // console.log(req.file)
-    // console.log(req.file.filename)
 
     SellerPageModel.create({
         image: req.file.filename,
         itemName: req.body.itemName,
         itemPrice: req.body.itemPrice,
         itemDescription: req.body.itemDescription,
+        sellerEmail: req.body.sellerEmail,
         // file: req.file.filename,  
 
     })
@@ -61,6 +77,8 @@ app.post('/sellerpage', upload.single('file'), (req, res) => {
         .catch(err => res.json(err))
 
 });
+
+
 
 //-------for geting productitems-------
 app.get('/getImage', (req, res) => {
@@ -100,7 +118,8 @@ app.post("/sellerlogin", (req,res)=>{
 // user
 app.get("/user", (req, res) => {
     // const {email, password} = req.body;
-    userModel.find()
+    console.log("yes")
+    AlluserdetailsModel.find()
         .then(users => res.json(users))
         .catch(err => res.json(err))
 })
@@ -135,6 +154,35 @@ app.delete('/delete/:id', async (req, res) => {
   });
 
 
+  // Handle POST request for form submission
+  app.post('/savedetails', upload.single('gstCertificate'), async (req, res) => {
+    const { email, businessName, ownerName, contactNumber, businessContactNumber, gstNumber, hasGst } = req.body;
+    const gstCertificatePath = req.file ? req.file.path : null;
+  console.log(req.body)
+//   console.log(req.body.email)
+//   console.log(req.body.businessName)
+  console.log(gstCertificatePath)
+    try {
+      const userDetail = new AlluserdetailsModel({
+        email,
+        businessName,
+        ownerName,
+        contactNumber,
+        businessContactNumber,
+        gstNumber,
+        hasGst,
+        gstCertificate: gstCertificatePath,
+      });
+  
+      await userDetail.save();
+      res.json({ message: 'User details saved successfully' });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Error saving user details' });
+    }
+  });
+
+
 // app.post('/register', async (req, res)=>{
 // const {name, email, password}  = req.body;
 
@@ -144,13 +192,14 @@ app.post('/register', (req, res)=>{
     .catch(err=> res.json(err))
 })
 
-    SellerModel.create(req.body)
-      .then(seller=>res.json(seller))
-      .catch(err=> res.json(err))
+    // SellerModel.create(req.body)
+    //   .then(seller=>res.json(seller))
+    //   .catch(err=> res.json(err))
 
 //------------------using collection on the basis of seller name---------
 
+const PORT =  process.env.PORT || 3000
 
-app.listen(3000, () => {
-    console.log("server is running! ")
+app.listen(PORT, () => {
+    console.log(`server is running! on  ${PORT}`)
 })

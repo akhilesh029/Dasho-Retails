@@ -4,7 +4,9 @@ import axios from "axios";
 import "./SellerLogin.css";
 import Header from "../../componets/Header/Header";
 import { useNavigate } from "react-router-dom";
-import UserPage from "../UserPage/UserPage";
+// import UserPage from "../UserPage/UserPage";
+// import WelcomePage from "../WelcomePage/WelcomePage";
+
 
 // import SellerPage from '../SellerPage/SellerPage';
 
@@ -21,38 +23,6 @@ const SellerLogin = () => {
 
     event.preventDefault();
 
-    axios.post('http://localhost:3000/sellerlogin', {email,password})
-    .then(result=>{
-      setUserData(userData=>result.userData)
-      const userData = {email, password}
-      console.log(userData)
-      
-
-      // console.log(result)
-      // console.log(result.name)
-      // console.log(result.email)
-      if(result.data === "Success"){
-        // console.log(email)
-        console.log(userData.name)
-        // console.log(result)
-       
-        
-        loginSucc.innerHTML = "Login Succesfully!"
-        loginSucc.style.color = "#7CFC00"
-       
-          navigate('/user')
-          
-       
-      }
-      else{
-        loginSucc.innerHTML = "User not found!"
-        loginSucc.style.color = "#ff0000"
-      }
-    })
-    .catch(err=>console.log(err))
-}
-
-
     axios
       .post("http://localhost:3000/sellerlogin", { email, password })
       .then((result) => {
@@ -64,7 +34,7 @@ const SellerLogin = () => {
           loginSucc.innerHTML = "Login Succesfully!";
           loginSucc.style.color = "#7CFC00";
           setTimeout(() => {
-            navigate("/welcome", { replace: true, state: { email } });
+            navigate("/welcome", { replace: false, state: { email } });
           }, 1000);
         } else {
           loginSucc.innerHTML = "User not found!";
@@ -72,8 +42,8 @@ const SellerLogin = () => {
         }
       })
       .catch((err) => console.log(err));
-  
 
+    }
   return (
     <>
       <Header />

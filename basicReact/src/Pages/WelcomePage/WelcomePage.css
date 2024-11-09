@@ -1,66 +1,89 @@
+/* Global Styles */
+html, body {
+    height: 100%; /* Ensure the body takes the full height */
+    margin: 0; /* Remove default margin */
+    font-family: Arial, sans-serif; /* Set a global font */
+}
 
-.welcomeChildiv{
-    margin-top: 100px;
-    /* border: 1PX solid red; */
-    background-size: 100% 100%; 
-    height: 650px;
+/* Welcome Section Styles */
+.welcomeChildiv {
+    margin: 0 auto;
+    background-size: cover; /* Ensures background image covers the container */
+    height: auto; /* Allow height to be flexible */
+    min-height: 650px; /* Minimum height to maintain design */
     background-image: url('https://img.freepik.com/premium-photo/shopping-cart-yellow-box-blue-background_1174990-35779.jpg?w=900');
-}
-/*----------------rightpanel------------*/
-.rightpannel{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    /* border: 1px solid red; */
-    width: 100%;
-    background-image: url('https://img.freepik.com/premium-photo/shopping-cart-yellow-box-blue-background_1174990-35779.jpg?w=900');
-     background-size: 100% 100%; 
-    background-repeat: no-repeat; 
+    padding: 10px; /* Keep padding */
+    border-radius: 5px; /* Keep rounded corners */
+    color: white; /* Default text color for welcome text */
+    position: relative; /* Ensure positioning for pseudo-elements if needed */
 }
-.welcome{
-   text-align: center;
-   font-size: 8vmin;
-   color: white;
+
+/* Text Styles */
+.welcome {
+    text-align: center;
+    font-size: 8vmin; /* Responsive font size */
+    color: white; /* Text color */
 }
-.rightpannel>ul>li{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: rgb(rgb(44, 189, 36), rgb(227, 217, 225), blue);
-  
-}
-.welcomeText{
-    color:#FCC300;
+
+.welcomeText {
+    color: #FCC300; /* Text color for welcome message */
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     text-align: center;
-    line-height: 8px;
-    font-size: 3vmin;
-    
+    line-height: 1.5; /* Increase line height for better readability */
+    font-size: 3vmin; /* Responsive font size */
 }
 
-.welcomeChildiv{
-    padding: 10px;
-    /* background-color: white; */
-    /* border:2px solid rgb(23, 200, 20); */
-    border-radius: 5px;
-   
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+/* Profile Picture Styles */
+.profilepicture {
+    width: 180px; /* Width of profile picture */
+    height: 170px; /* Height of profile picture */
+    border-radius: 50%; /* Circular shape */
+    border: 1px solid black; /* Border for the profile picture */
 }
-.profilepicture{
-    width: 180px;
-    height: 170px;
-    border-radius: 50%;
-    border: 1px solid black;
-    
+
+/* Button Styles */
+.letsgo {
+    color: white; /* Text color for button */
+    padding: 10px 20px; /* Padding for button */
+    border-radius: 50px; /* Rounded corners */
+    border: 1px solid white; /* Border color */
+    background-color: transparent; /* Background color */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 1.2rem; /* Font size for button text */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transitions */
 }
-.letsgo{
-    color: blue;
-    
-    padding: 3px;
-    border-radius: 5px;
-    background-color: #FCC300;
+
+.letsgo:hover {
+    color: purple; /* Text color on hover */
+    background-color: white; /* Background color on hover */
 }
+
+/* Media Queries for Responsiveness */
+@media (max-width: 600px) {
+    .welcomeChildiv {
+        min-height: 400px; /* Adjust minimum height for mobile */
+    }
+
+    .welcome {
+        font-size: 6vmin; /* Adjust font size for mobile */
+    }
+
+    .welcomeText {
+        font-size: 4vmin; /* Adjust welcome message size for mobile */
+    }
+
+    .profilepicture {
+        width: 150px; /* Smaller profile picture on mobile */
+        height: 150px; /* Maintain aspect ratio */
+    }
+
+    .letsgo {
+        font-size: 1rem; /* Smaller button text on mobile */
+    }
+}
+
+/* Additional Styles if needed */
+/* Add any additional styles below */

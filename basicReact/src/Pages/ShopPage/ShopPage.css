@@ -1,95 +1,58 @@
-/* Shop.css */
-
-.shop-page {
-    padding: px;
-    max-width: 1600px;
+.shop-page{
+    width: 90%;
+    /* border: 2px solid black; */
     margin: 0 auto;
-    font-family: Arial, sans-serif;
-  }
-  
-  .shop-header {
-    text-align: center;
-    margin-bottom: 30px;
-  }
-  
-  .shop-image {
-    width: 100%;
     height: auto;
-    max-height: 300px;
-    object-fit: cover;
-  }
-  
-  .shop-title {
-    font-size: 2.5em;
-    margin: 10px 0;
-  }
-  
-  .shop-category,
-  .shop-items-available,
-  .shop-description {
-    font-size: 1.2em;
-    margin: 5px 0;
-  }
-  
-  .shop-items {
-    margin-top: 20px;
-  }
-  
-  .items-heading {
-    font-size: 2em;
-    margin-bottom: 20px;
-  }
-  
-  .items-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-  }
-  
-  .item-card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 15px;
-    text-align: center;
-    transition: box-shadow 0.3s;
-  }
-  
-  .item-card:hover {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  }
-  
-  .item-image {
-    width: 100%;
-    height: auto;
-    border-radius: 4px;
-  }
-  
-  .item-name {
-    font-size: 1.5em;
-    margin: 10px 0;
-  }
-  
-  .item-price {
-    color: green;
-    font-size: 1.2em;
-  }
-  
-  .item-description {
-    font-size: 1em;
-    color: #555;
-  }
-  
-  .add-to-cart {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 15px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .add-to-cart:hover {
-    background-color: #0056b3;
-  }
-  
+}
+
+.shop-image-container{
+   width: 90%;
+   margin: 0 auto;
+   height:auto;
+   background-color: rgb(244, 215, 161);
+   border-radius:28px;
+   display: flex;
+   flex-direction: row-reverse;
+   justify-content: space-around;
+}
+.shop-image{
+  width:30%;
+}
+.shop-heading{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   line-height: 1;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 0px 20px;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 20px;
+}
+.search-bar input{
+  border: none;
+  outline: none;
+}
+
+.search-icon {
+  color: #888;
+  font-size: 16px;
+  margin-right: 8px; /* Space between icon and input */
+}
+
+.search-input {
+  border: none;
+  outline: none;
+  flex: 1;
+  font-size: 16px;
+  padding: 5px;
+ 
+}

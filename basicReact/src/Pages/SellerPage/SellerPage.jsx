@@ -3,43 +3,66 @@ import axios from "axios";
 import "./SellerPage.css";
 import { useLocation } from "react-router-dom";
 import { assets } from "../../assets/assets";
-import Header from "../../componets/Header/Header";
+import { IoMdSettings } from "react-icons/io";
+import { Link } from 'react-router-dom';
 
-
-// import { resolve } from 'path/posix';
-
-// import 'path-browserify';
-// const path = require('path');
-
-// Now you can use path.posix.resolve
-// const resolvedPath = path.posix.resolve('/some/path', './relative/path');
 
 function SellerPage({ userEmail }) {
   //-------------getting data from login page-----
   const location = useLocation();
-  // console.log(location.state.email)
-  const m = location.state.userEmail;
-  // console.log(userEmail)
+  console.log("console location data: ",location)
+  // const m = location.state.userEmail;
+  const m = location.state;
+  
   // console.log(m);
-  // console.log(m.email);
+  console.log("akil")
+  console.log(m.userEmail);
+  console.log(m);
+
+
+  //
+
+
+
+
+
   //-----------------------------------------
   const [showContent, setShowContent] = useState(true);
   const [showShipping, setShowShipping] = useState(false);
   const [orders, setOrders] = useState([]);
   const [isOrder, setisOrder] = useState(false);
   const [isShipped, setShipped] = useState(false)
-
   const [ordersArray, setOrdersArray] = useState([]);
   const [orderData, setOrderData] = useState([]);
+  const [itemName, setItemName] = useState("");
+  const [itemDescription, setItemDescription] = useState("");
+  const [itemPrice, setItemPrice] = useState("");
+  const [file, setFile] = useState();
+  const [sellerEmail, setSellerEmail] = useState(m.userEmail);
+
+  const [image, setImage] = useState();
+  const [name, setName] = useState();
+  const [price, setPrice] = useState();
+  const [Description, setDescription] = useState();
+
+  const [res, setRes] = useState([]);
+  const [users, setUsers] = useState([]);
+
+
+  const [selectedItem, setSelectedItem] = useState("Dashboard");
+
+  
   
 
 
-  const handleClick = () => {
+  const handleClick = (itemName) => {
+    setSelectedItem(itemName),
     setShowContent(!showContent);
     setShowShipping(false);
     setisOrder(false);
     setShipped(false)
   };
+
   const handleShipping = () => {
     setShowShipping(!showShipping);
     setShowContent(false);
@@ -50,8 +73,6 @@ function SellerPage({ userEmail }) {
   
   
   const handleOrders = () => {
-    // ordersArray = [null];
-
     axios
       .get("http://localhost:3000/order")
       .then((orders) => {
@@ -73,29 +94,8 @@ function SellerPage({ userEmail }) {
         }
       
       })
-
       .catch((err) => console.log(err));
   };
-
-  const SeeShippedOrders = ()=>{
-    setShipped(true)
-    setisOrder(false)
-    setShowShipping(false);
-    setShowContent(false);
-  }
-
-  const [itemName, setItemName] = useState("");
-  const [itemDescription, setItemDescription] = useState("");
-  const [itemPrice, setItemPrice] = useState("");
-  const [file, setFile] = useState();
-
-  const [image, setImage] = useState();
-  const [name, setName] = useState();
-  const [price, setPrice] = useState();
-  const [Description, setDescription] = useState();
-
-  const [res, setRes] = useState([]);
-  const [users, setUsers] = useState([]);
 
   const handleItemNameChange = (event) => {
     setItemName(event.target.value);
@@ -113,8 +113,17 @@ function SellerPage({ userEmail }) {
     setFile(event.target.files[0]);
   };
 
+  const SeeShippedOrders = ()=>{
+    setShipped(true)
+    setisOrder(false)
+    setShowShipping(false);
+    setShowContent(false);
+  }
+
+  
+
   // request to userdata from database
-  useEffect(() => {
+useEffect(() => {
     axios
       .get("http://localhost:3000/user")
       .then((users) => setUsers(users.data))
@@ -136,6 +145,7 @@ function SellerPage({ userEmail }) {
     formData.append("itemDescription", itemDescription);
     formData.append("itemPrice", itemPrice);
     formData.append("file", file);
+    formData.append("sellerEmail", sellerEmail);
 
  
 
@@ -176,7 +186,6 @@ function SellerPage({ userEmail }) {
 
 // deleting the items from database by seller
   const deleteData = async (id) => {
-    // console.log(id)
     try {
       await axios.delete(`http://localhost:3000/delete/${id}`, { params: { id } });
       // fetchData(); // Update the data after deletion
@@ -207,44 +216,90 @@ function handleShipOrder(orderData, orderId) {
 
   return (
     <>
-      <Header />
-
       <div className="adminPage">
         <div className="sidepanel">
-          <ul className="adminSetting">
-            {users.map((item) => {
-              if (item.email == m.email)
-                return (
-                  <>
-                    <h1 key={item._id}>Welcome @{item.name}</h1>
-                  </>
-                );
-            })}
-            <li className="sidepanellist" onClick={handleClick}>
-              Dashboard
-            </li>
-            <li className="sidepanellist" onClick={handleShipping}>
-              Shipping
-            </li>
-            <li className="sidepanellist" onClick={handleOrders}>
-            
-              Orders
-            </li>
-            <li className="sidepanellist"  onClick={SeeShippedOrders}>Shipped Orders</li>
-            <li className="sidepanellist">Completed Order</li>
-            <li className="sidepanellist">Support</li>
-            <li className="sidepanellist">Customer Feedback</li>
-            <li className="sidepanellist">Revenue</li>
-          </ul>
+           <ul className="adminSetting">
+        <li><h1>Welcome to Desho</h1></li>
+        <li className={`sidepanellist ${selectedItem === "Dashboard" ? 'selected' : ''}`} onClick={() => handleClick("Dashboard")}>Dashboard</li>
+        <li className={`sidepanellist ${selectedItem === "Upload" ? 'selected' : ''}`} onClick={() => handleClick("Upload")}>Upload Item</li>
+        <li className={`sidepanellist ${selectedItem === "Products" ? 'selected' : ''}`} onClick={() => handleClick("Products")}>Products</li>
+        <li className={`sidepanellist ${selectedItem === "Shipping" ? 'selected' : ''}`} onClick={handleShipping}>Shipping</li>
+        <li className={`sidepanellist ${selectedItem === "Orders" ? 'selected' : ''}`} onClick={handleOrders}>Orders</li>
+        <li className={`sidepanellist ${selectedItem === "Shipped Orders" ? 'selected' : ''}`} onClick={SeeShippedOrders}>Shipped Orders</li>
+        <li className="sidepanellist">Completed Order</li>
+        <li className="sidepanellist">Support</li>
+        <li className="sidepanellist">Customer Feedback</li>
+        <li className="sidepanellist">Revenue</li>
+        <li className="visit-shop-list-item" style={{ cursor: 'pointer' }}>
+        <Link to="/shop" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'inherit' }}>
+           <IoMdSettings /> Visit Your Shop
+      </Link>
+    </li>
+      </ul>
         </div>
 
-        {showContent && (
-          <div className="sellerdiv">
-            <h2>Add Item</h2>
 
+{/* =============================================   DashBoard ========================================================= */}
+{ selectedItem === "Dashboard"  && (
+     <div className="dashboard">
+     <div className="section" id="sales-performance">
+       <div className="section-heading"><h2>Sales Performance</h2> </div>
+       <p><b>Total Sales: </b> $20,000</p>
+       <p><b>Number of Orders:</b> 150</p>
+       <p><b>Average Order Value (AOV): </b> $133.33</p>
+       <p><b>Sales Trends: <span>[Graph Placeholder]</span></b></p>
+     </div>
+
+     <div className="section" id="product-performance">
+     <div className="section-heading"><h2>Product Performance</h2> </div>
+       <p><b>Top Selling Products:</b> Product A, Product B, Product C</p>
+       <p><b> Product Views:</b> Product A - 200, Product B - 150, Product C - 100</p>
+     </div>
+
+     <div className="section" id="customer-insights">
+     <div className="section-heading"><h2>Customer Insights</h2> </div>
+       <p><b>Customer Demographics: </b> 60% Female, 40% Male</p>
+       <p><b>Repeat Customer Rate: </b> 25%</p>
+       <p><b>Customer Feedback Ratings: </b> 4.5/5</p>
+     </div>
+
+     <div className="section" id="financial-metrics">
+     <div className="section-heading"> <h2>Financial Metrics</h2></div>
+       <p><b>Revenue: </b> $20,000</p>
+       <p><b>Expenses: </b> $5,000</p>
+       <p><b>Payouts: </b>$15,000 (Completed)</p>
+     </div>
+
+     <div className="section" id="marketing-analytics">
+     <div className="section-heading"><h2>Marketing Analytics</h2></div>
+       
+       <p><b>Traffic Sources: </b>50% Direct, 30% Referral, 20% Ads</p>
+       <p><b>Conversion Rate: </b> 5%</p>
+     </div>
+
+     <div className="section" id="operational-metrics">
+     <div className="section-heading"><h2>Operational Metrics</h2></div>
+       <p><b>Order Fulfillment Rate: </b> 95%</p>
+       <p><b>Shipping Performance:</b> Average shipping time - 2 days</p>
+       <p><b>Support Tickets:</b> 20 open tickets</p>
+     </div>
+
+     <div className="section" id="promotional-performance">
+     <div className="section-heading">     <h2>Promotional Performance</h2>
+     </div>
+       <p><b>Promotion Results:</b> 30% increase in sales during the last campaign</p>
+       <p><b>Coupon Usage:</b> 25% of customers used coupons</p>
+     </div>
+   </div>
+)}
+        
+{/* ================================================ Add Item ========================================================= */}
+{selectedItem === "Upload" && (
+          <div className="sellerdiv">
             <form className="seller-form" onSubmit={handleSubmit}>
+            <h2>Upload your Product</h2>
               <div className="form-fields">
-                <label htmlFor="itemName">Item Name:</label>
+                <label htmlFor="itemName">Product Name:</label>
                 <input
                   type="text"
                   id="itemName"
@@ -254,7 +309,7 @@ function handleShipOrder(orderData, orderId) {
                 />
               </div>
               <div className="form-fields">
-                <label htmlFor="itemPrice">Item Price:</label>
+                <label htmlFor="itemPrice">Price:</label>
                 <input
                   type="number"
                   id="itemPrice"
@@ -286,59 +341,73 @@ function handleShipOrder(orderData, orderId) {
                 />
               </div>
               <button  className="sellerbtn" type="submit">
-                Add Item
+                Upload Item
               </button>
-              <p id="sellerbtn"></p>
             </form>
             <br />
 
-            <div className="showItems" >
-              <table>
-                <tr>
-                  <th>Product</th>
-                  <th>Name</th>
-                  <th>Price</th>
-                  <th>Description</th>
-                </tr>
-              </table>
 
-              {res.map((item) => {
-                return (
-                  <>
-                    <table >
-                      <tr >
-                        <td key={item._id}>
-                          {
-                            <img
-                              className="photo"
-                              src={`http://localhost:3000/Images/` + item.image}
-                              alt=""
-                            />
-                          }
-                        </td>
-                        <td key={item._id}>{item.itemName}</td>
-                        <td key={item._id}>{item.itemPrice}</td>
-                        <td key={item._id}>{item.itemDescription}</td>
-                        <td key={item._id}>
-                          <button style={{ color: "red" }} onClick={() => deleteData(item._id)}>Delete</button>
-                        </td>
-                      </tr>
-                    </table>
-                  </>
-                );
-              })}
-            </div>
+
           </div>
         )}
 
-        {showShipping && (
+{/* ================================================= Products Available ==================================================== */}
+{selectedItem === "Products" && (
+      <div className="showItems" >
+        <h1>Available Products</h1>
+        <table className="responsive-table">
+          <thead>
+          <tr>
+            <th>Image</th>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Action</th>
+          </tr>
+         </thead>
+         <tbody>
+        {res.map((item) => {
+            if (item.sellerEmail === m.userEmail) {
+                return (
+                    <tr key={item._id}>
+                        <td>
+                            <img
+                                className="photo"
+                                src={`http://localhost:3000/Images/` + item.image}
+                                alt="item"
+                            />
+                        </td>
+                        <td>{item.itemName}</td>
+                        <td>{item.itemPrice}</td>
+                        <td>{item.itemDescription}</td>
+                        <td>
+                            <button style={{ color: "red" }} onClick={() => deleteData(item._id)}>Delete</button>
+                        </td>
+                    </tr>
+                );
+            }
+            return null; // Return null if the condition is not met
+        })}
+    </tbody>
+</table>
+
+
+     
+    </div>
+
+
+)}
+
+
+
+{showShipping && (
           <div className="bottomPage">
             <h1>This is Shipping Section</h1>
           </div>
         )}
 
 {/* --------------------orders-------------------- */}
-        {isOrder && (
+{isOrder && (
           
           <div className="mainorderdata">
            
@@ -387,7 +456,7 @@ function handleShipOrder(orderData, orderId) {
 
 
 
-        {isShipped  && (
+{isShipped  && (
           // <h1>Shipped</h1>
           <div className="mainorderdata">
            
@@ -432,9 +501,6 @@ function handleShipOrder(orderData, orderId) {
             </ul>
           </div>
         )}
-
-
-
 
 
 

@@ -8,7 +8,6 @@ const mongoose = require('mongoose')
 //   });
 
 const OrderSchema = new mongoose.Schema({
-   
        selectedItems:Object,
        totalpay: Number,
        name:String,

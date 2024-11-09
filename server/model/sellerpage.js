@@ -7,6 +7,7 @@ const SellerpageSchema = new mongoose.Schema({
        itemPrice: Number,
             
        image: String,
+       sellerEmail: String,
        
         
     

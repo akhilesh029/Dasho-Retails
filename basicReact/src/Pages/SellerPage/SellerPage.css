@@ -1,11 +1,9 @@
 .adminPage{
     /* margin-top: 100px; */
-    margin: 100px auto;
-    width: 80vw;
-    border: 1px solid rgb(194, 190, 190);
+    /* margin: 100px auto; */
+    width: 93vw;
+    /* border: 1px solid rgb(194, 190, 190); */
     /* box-shadow: 0px 0px 4px 1px; */
-
-
     display: flex;
     flex-direction: row;
     border-radius: 10px;
@@ -17,10 +15,9 @@
   
    width: 70vw;
     /* border: 1px solid red; */
+    background-color: #f9f9f9; /* Light background color for the form */
    
     padding: 10px;
-    /* background-color: rgb(6, 77, 101); */
-    /* background-color: rgb(12, 9, 11); */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -29,74 +26,99 @@
     color: black;
 }
 
-.seller-form{
-   display: flex;
-   flex-direction: column;
-    /* justify-content: center; */
-    /* align-items: center; */
-    column-gap: 10px;
-    /* background-color: #dfe3e9; */
-    color: black;
-    /* border: 1px solid black; */
-    box-shadow: 0px 0px 4px 1px;
-    align-items: center;
-    /* width: fit-content; */
-    
-    padding: 25px;
-    padding-right: 30px;
-    border-radius: 10px;
-    /* width: fit-content; */
-    font-size: 2vmin;
-    width: 40vw;
 
-  
+/* ================================================= Upload items CSS ================================================ */
+.seller-form {
+    margin: 0 auto; /* Center the form horizontally */
+    padding: 20px; /* Padding around the form */
+    background-color: #f9f9f9; /* Light background color for the form */
+    border-radius: 8px; /* Rounded corners */
+    max-width: 500px; /* Limit the maximum width of the form */
+    width: 100%; /* Full width on smaller screens */
+    text-align: center; /* Center text inside the form */
 }
-#itemImage{
+
+/* Form Fields */
+.form-fields {
+    margin-bottom: 15px; 
+    display: flex;
+    flex-direction: column; /* Changed to column for better stacking */
+    align-items: stretch; /* Full width for input elements */
+}
+
+/* Labels */
+label {
+    font-weight: bold; /* Make labels bold */
+    margin-bottom: 5px; /* Space below label */
+    display: block; /* Make label a block element for better spacing */
+}
+
+/* Input Fields */
+input[type="text"],
+input[type="number"],
+textarea,
+input[type="file"] {
+    width: 100%; /* Full width input fields */
+    padding: 10px; /* Padding inside input fields */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 4px; /* Rounded corners */
+    box-sizing: border-box; /* Include padding and border in width */
+    font-size: 16px; /* Font size for input text */
+    color: #333; /* Text color */
+    transition: border-color 0.3s; /* Transition for border color on focus */
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+textarea:focus {
+    border-color: #007bff; /* Change border color on focus */
+    outline: none; /* Remove default outline */
+}
+
+/* Button Styles */
+.sellerbtn {
+    background-color: #007bff; /* Button background color */
+    color: white; /* Button text color */
+    border: none; /* Remove border */
+    padding: 10px 20px; /* Padding for button */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 16px; /* Font size for button text */
+    transition: background-color 0.3s, transform 0.2s; /* Smooth transitions for background color and scale */
+    margin-top: 10px; /* Space above the button */
+}
+
+.sellerbtn:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: scale(1.05); /* Slight scale effect on hover */
+}
+
+/* Feedback Text Styles */
+#sellerbtn {
+    margin-top: 10px; /* Space above paragraph */
+    font-size: 14px; /* Font size for feedback text */
+    color: #333;  /* Color for feedback text */
+    width: 100px;
+}
+
+/* Styles for Item Image */
+#itemImage {
     background-color: white;
     border-radius: 10px;
 }
 
+/* Additional Styles for Responsive Design */
+@media (max-width: 768px) {
+    .seller-form {
+        padding: 15px; /* Reduce padding on smaller screens */
+    }
 
-.form-fields{
-    display: flex;
-    flex-direction: column;
-    line-height: 30px;
-    
-    
+    .form-fields > input,
+    .form-fields > textarea {
+        width: 100%; /* Full width on smaller screens */
+    }
 }
-.form-fields>label{
-    font-weight: 700;
-}
-.form-fields>input{
-    /* background-color: black; */
-    width: 20vw;
-    color: black;
-    /* width: 10vw; */
-    border: 1px solid black;
-}
-.form-fields>textarea{
-    color: black;
-    width: 20vw;
-    height: 60px;
-    outline: 1px solid black;
-    padding: 5px;
-}
-.sellerbtn{
-    
-    /* margin-left: 0; */
-    margin-top: 10px;
-    background-color: #FCC300;
-    color: black;
-    font-size: 2vmin;
-    width: 10vmin;
-    height: 5vmin;
-    border-radius: 5px;
-    border: 1px solid black;
-    
-}
-.sellerbtn:hover{
-    background-color: green;
-}
+
 
 
 /*  itemlist-----------------*/
@@ -111,79 +133,130 @@
     transform: scale(1);
 }
 
-.showItems{
 
+/* =========================================== Products available ============================================================== */
+
+.showItems{
     padding: 10px;
-    width:50vw;
-   
+    width:60vw;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
-    border: 1px solid purple;
+    align-items: center;
     border-radius: 5px;
     background-color: white;
-
-    overflow-y: scroll;
-  height: 380px
-
-   
+    overflow-y: scroll;  
 }
 
-.showItems>table>tr>th{
-   /* text-align: center; */
+.responsive-table {
+    width: 100%; /* Full width */
+    border-collapse: collapse; /* Collapsed borders */
+    margin: 20px 0; /* Margin around the table */
+    font-size: 16px; /* Font size */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Shadow for depth */
 }
 
-table{
-    margin: 0.5vw;
-    border-radius: 5px;
-    
+.responsive-table thead tr {
+    background-color: #007bff; /* Header background color */
+    color: white; /* Header text color */
 }
 
-table>tr>td{
-    border: 1px solid rgb(223, 212, 212);
-    background-color: rgba(231, 226, 231, 0.142);
-    color: rgb(12, 15, 103);
-  
-    width: 50px;
-    text-align: center;
-    font-size: 1vw;
-   
+.responsive-table th, 
+.responsive-table td {
+    padding: 12px; /* Padding for cells */
+    text-align: left; /* Text alignment */
+}
+
+/* Table Row Styles */
+.responsive-table tbody tr {
+    border-bottom: 1px solid #ddd; /* Row separation */
+}
+
+/* Hover Effect on Rows */
+.responsive-table tbody tr:hover {
+    background-color: #f1f1f1; /* Highlight on hover */
+}
+
+/* Image Styles */
+.photo {
+    width: 50px; /* Set a specific width for images */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 5px; /* Optional: rounded corners for images */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .responsive-table {
+        font-size: 14px; /* Slightly smaller font on smaller screens */
+    }
+
+    .responsive-table thead {
+        display: none; /* Hide header on small screens */
+    }
+
+    .responsive-table tr {
+        display: block; /* Display rows as blocks */
+        margin-bottom: 15px; /* Space between rows */
+    }
+
+    .responsive-table td {
+        display: flex; /* Flex display for data cells */
+        justify-content: space-between; /* Space out cell items */
+        padding: 10px; /* Less padding on small screens */
+        border: 1px solid #ddd; /* Border for each cell */
+        border-radius: 5px; /* Rounded corners */
+        background-color: #f9f9f9; /* Background color for cells */
+    }
+
+    .responsive-table td:before {
+        content: attr(data-label); /* Label for the cell */
+        font-weight: bold; /* Bold labels */
+        margin-right: 10px; /* Space after the label */
+    }
 }
 
 
 
-/*-----------sidepannel---------------*/
+
+/*-----------=====================================sidepannel====================================================---------------*/
 .sidepanel{
     display: flex;
     flex-direction: column;
     align-items: start;
-  width: 33vmin;
+    width:500px ;
     background-color: #3B3F46;
     border-start-start-radius: 10px;
     border-bottom-left-radius: 10px;
     color: white;
-    /* width: fit-content; */
-    /* padding: 15px; */
-    border: 1px solid red;
+   
+    /* border: 1px solid red; */
 
     
 }
 .sidepanellist{
-    margin: 5px;
+    margin: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: start;
     font-size: 2vmin;
     /* width: 25vmin; */
-    line-height: 8vh;
-    /* color:yellow; */
-    border: 1px solid red;
+    width: fit-content;
+    height: 4vmin;
+    padding: 5px;
+    border-radius: 10px;
+   
+    /* border: 1px solid red; */
     
 }
 .sidepanellist:hover{
    
-   color: #FCC300;
+   /* color: #FCC300; */
+   color: black;
+
+  
+   transform: scale(1.1);
+   transition-duration: 0.2s;
+   background-color: white;
 }
 
 /*----------------rightpanel------------*/
@@ -264,7 +337,72 @@ table>tr>td{
     font-size: 4vmin;
 }
 
+
+.sidepanellist.selected {
+    background-color: #f0f0f0; /* Change to your desired color */
+    font-weight: bold;
+    color: black;
+    padding: 20px;
+  }
+
+
+  /* =============================================DashBoard =================================================== */
+  .dashboard {
+    display: flex; /* Use flexbox to arrange sections */
+    flex-wrap: wrap; /* Allow sections to wrap on smaller screens */
+    justify-content: space-between; /* Space between sections */
+    padding: 20px; /* Add padding around the dashboard */
+    width: 75%;
+}
+
+.section {
+    background-color: #f8f9fa; /* Light background for sections */
+    border-radius: 10px; /* Rounded corners */
+    /* padding: 20px; Internal padding */
+    margin: 10px; /* Space between sections */
+    flex: 1 1 calc(50% - 20px); /* Flex-grow, flex-shrink, and basis */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    transition: transform 0.3s, border 0.3s; /* Smooth hover effect and border transition */
+    border: 2px solid transparent; 
+    width: 500px ;
+    font-size: 12px;
+}
+
+/* Add hover effect */
+.section:hover {
+    /* transform: translateY(-3px); Lift effect on hover */
+    border: 2px solid blue;
+}
+.section-heading{
+    width: 100%;
+    height: auto;
+    background-color: #f0f0f0;
+    border-radius:10px 10px 0 0;
+}
+
+/* Heading styling */
+.section h2 {
+    color: #343a40; /* Darker color for headings */
+    margin-bottom: 15px; /* Space below headings */
+   text-align: center;
+}
+
+/* Paragraph styling */
+.section p {
+    color: #6c757d; /* Lighter color for paragraph text */
+    line-height: 1; /* Improved line height for readability */
+    font-size: 16px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .section {
+        flex: 1 1 100%; /* Full width for sections on small screens */
+    }
+}
+.visit-shop-list-item {
+    display: flex;
+    align-items: center;  /* Centers the items vertically */
+    gap: 8px;             /* Adds space between icon and text */
+  }
   
-
-
-

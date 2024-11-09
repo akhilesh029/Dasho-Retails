@@ -4,9 +4,10 @@ import {cards} from "../../assets/assets";
 import img from "../../assets/p1.jpeg";
 import "./ShopPage.css"
 import Header from '../../componets/Header/Header';
+import shopImage from '../../../public/Research paper-rafiki.svg'
+import { FaSearch } from "react-icons/fa";
 
 
-const colors = ['#FF5733', '#33FF57', '#3357FF', '#FF33A8', '#A833FF', '#FFBF33'];
 
 const ShopPage = (card) => {
     const { shopName } = useParams(); // Get the shop name from URL
@@ -20,37 +21,38 @@ const ShopPage = (card) => {
     }
 
 
-    const randomColor = colors[Math.floor(Math.random() * colors.length)];
   
     return (
         <div className="shop-page">
-        <div className="shop-header">
-          <img src={shopDetails.img || img} alt={shopDetails.shopName} className="shop-image" />
-          <h1 className="shop-title" style={{ color: randomColor }}>Welcome to {formattedShopName} Shop!</h1>
-          <p className="shop-category">Category: {shopDetails.category}</p>
-          <p className="shop-items-available">Items Available: {shopDetails.items_available}</p>
-          <p className="shop-description">Description: {shopDetails.description}</p>
-        </div>
-  
-        <div className="shop-items">
-          <h2 className="items-heading">Items for Sale</h2>
-          {shopDetails.items && shopDetails.items.length > 0 ? (
-            <div className="items-grid">
-              {shopDetails.items.map((item, index) => (
-                <div className="item-card" key={index}>
-                  <img src={item.img} alt={item.name} className="item-image" />
-                  <h3 className="item-name">{item.name}</h3>
-                  <p className="item-price">Price: ${item.price}</p>
-                  <p className="item-description">{item.description}</p>
-                  <button className="add-to-cart">Add to Cart</button>
+           <div className="shop-image-container">
+               <img src={shopImage} alt="" className='shop-image' />
+               <div className='shop-heading'>
+                   <h1><b> Store for Children</b> </h1>
+                   <p>Shoppig with joy</p>
+                   <div className="search-bar">
+      <FaSearch className="search-icon" />
+      <input
+        type="text"
+        placeholder="Search..."
+        className="search-input"
+      />
+    </div>
+               </div> 
+           </div>
+
+           <div className="item-category">
+                <div className="items">
+
                 </div>
-              ))}
-            </div>
-          ) : (
-            <p>No items available for sale.</p>
-          )}
+           </div>
+
+           <div className="popular-items">
+                <div className="popular-item">
+
+                </div>
+           </div>
+        
         </div>
-      </div>
     );
   };
 export default ShopPage;
