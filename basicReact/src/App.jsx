@@ -2,7 +2,12 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './Pages/Home/Home'
 
+
+import ShowOnHOme from './componets/ShowOnHome/ShowOnHome';
+// import ShowOnHme from './componets/ShowOnHome/ShowOnHOme';
+
 // import ShowOnHOme from './componets/ShowOnHome/ShowOnHOme';
+
 import Clothes from './Pages/Clothes/Clothes';
 import Header from './componets/Header/Header';
 import Navbar from './componets/Navbar/Navbar';
@@ -19,8 +24,12 @@ import Form from './Pages/detailsVerification/detailsVerification';
 import BusinessForm from './Pages/BusinessForm/BusinessForm';
 import DistributionForm from './Pages/DistributionForm/DistributionForm';
 import Distributors from './Pages/Distributors/Distributors';
+
+import PricingTable from './Pages/PremiumPlan/PremiumPlan';
+
 import ShopPage from './Pages/ShopPage/ShopPage';
 // import AllShop from './components/AllShop/AllShop';
+
 
 
 
@@ -52,7 +61,16 @@ function App() {
           <Route path='/businessform' element = {<BusinessForm />}/>
           <Route path='/distributionform' element = {<DistributionForm />}/>
           <Route path='/distributors' element = {<Distributors />}/>
+
+          <Route path='/pricingtable' element = {<PricingTable />}/>
+
+
+
+          
+      
+
           <Route path='/shop/:shopName' element = {<ShopPage />}/>
+
       </Routes>
    </div>
 <Footer />
@@ -60,7 +78,7 @@ function App() {
     
     </>
   );
-// >>>>>>> dc21f7df64b0d9c69fee6885ddfd08dcae84b9a9
+
 }
 
 export default App;

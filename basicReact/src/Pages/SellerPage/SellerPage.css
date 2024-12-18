@@ -77,13 +77,13 @@ textarea:focus {
 
 /* Button Styles */
 .sellerbtn {
-    background-color: #007bff; /* Button background color */
+    background-color: #184643; /* Button background color */
     color: white; /* Button text color */
     border: none; /* Remove border */
     padding: 10px 20px; /* Padding for button */
     border-radius: 5px; /* Rounded corners */
     cursor: pointer; /* Pointer cursor on hover */
-    font-size: 16px; /* Font size for button text */
+    font-size: 12px; /* Font size for button text */
     transition: background-color 0.3s, transform 0.2s; /* Smooth transitions for background color and scale */
     margin-top: 10px; /* Space above the button */
 }

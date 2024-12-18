@@ -1,18 +1,49 @@
 import React from 'react';
+import { useState ,useEffect} from 'react';
 import "./AllShop.css";
 import { useNavigate } from 'react-router-dom';
 import { shopsData } from '../../assets/shopdata';
 import shopImage from "../../assets/shopImage.jpg"
+import axios from 'axios';
+
 
 const AllShop = () => {
-  const navigate = useNavigate();
-  
-  const handleClick = (shop) => {
+
+
+  const [data, setData] = useState([])
+    
+  // const location = useLocation();
+  // console.log(location.state.email)
+  // const userEmail = location.state.email
+  // console.log(userEmail)
+ 
+
+  const navigate = useNavigate()
+
+
+   // request to userdata from database
+   const handleClick = (shop) => {
+    console.log(shop);
     const formattedShopName = shop.name.toLowerCase().replace(/\s+/g, '-'); // Replace spaces with hyphens
-     navigate(`/shop/${formattedShopName}`); // Navigate to a dynamic route based on the shop name
+    console.log(formattedShopName);
+  
+    // Fetch users from the backend
+    axios
+      .get('http://localhost:3000/user')
+      .then((response) => {
+        const data = response.data; // Extract user data from the response
+        console.log(data)
+        console.log(data[0].businessName); // Log the fetched users
+  
+        // Perform navigation after fetching users
+        navigate(`/shop/${formattedShopName}`, { state: { shop } }); // Pass users as state if needed
+      })
+      .catch((err) => console.log(err));
   };
+  
 
   return (
+    <> 
     <div className="container">
       <h1>All Shops</h1>
       <div className="shopGrid">
@@ -30,6 +61,11 @@ const AllShop = () => {
         ))}
       </div>
     </div>
+
+
+   
+
+</>
   );
 };
 

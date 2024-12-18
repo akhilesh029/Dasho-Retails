@@ -137,7 +137,7 @@ useEffect(() => {
     const additem = document.getElementById("sellerbtn")
    
     additem.innerHTML = 'Item added Successfully!'
-    additem.style.color = '#37FD12'
+    additem.style.color = 'blue'
 
     // Create a FormData object to send the image and other data
     const formData = new FormData();
@@ -156,7 +156,7 @@ useEffect(() => {
       // (result) => console.log(result)
       // Handle successful submission
       // console.log('Item added successfully!');
-      ()
+      (console.log("added"))
       .catch(error);
     console.error("Error:", error);
   };
@@ -341,9 +341,11 @@ function handleShipOrder(orderData, orderId) {
                 />
               </div>
               <button  className="sellerbtn" type="submit">
-                Upload Item
+                  Upload 
               </button>
+              
             </form>
+            <p id="sellerbtn"></p>
             <br />
 
 

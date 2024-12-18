@@ -1,0 +1,25 @@
+.pricing-table {
+    margin: 0 auto;
+    border-collapse: collapse;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    border: 1px solid black;
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+  
+  .offer {
+    font-size: 0.8em;
+    color: #888;
+  }
