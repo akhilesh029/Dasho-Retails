@@ -3,6 +3,8 @@ import axios from 'axios';
 import './BusinessForm.css';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import welcome from "../../assets/Finance app-cuate.svg";
+
 
 function BusinessForm() {
   const location = useLocation();
@@ -63,12 +65,12 @@ function BusinessForm() {
     <div className="business">
       <div className="welcome-seller-container">
         <div className="welcome-seller-img">
-          <img src="../../../public/Finance app-cuate.svg" alt="Welcome Illustration" />
+          <img src={welcome} alt="Welcome Illustration" />
         </div>
         <div>
           <div className="welcome-seller">Welcome to Desho</div>
           <div className="welcome-message">
-            We’re thrilled to have you join our seller community! At Desho, we empower sellers to grow their business by reaching a wider audience. Get ready to showcase your products, track your progress, and watch your sales grow. Let’s make something amazing together!
+            We're thrilled to have you join our seller community! At Desho, we empower sellers to grow their business by reaching a wider audience. Get ready to showcase your products, track your progress, and watch your sales grow. Let’s make something amazing together!
           </div>
         </div>
       </div>

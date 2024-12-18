@@ -5,6 +5,39 @@
     height: auto;
 }
 
+/* Container for the header */
+.shop-header {
+  display: flex;
+  justify-content: flex-end; /* Align website name to the right */
+  align-items: center;       /* Vertically center content */
+  padding: 20px;             /* Padding around the header */
+  color:rgb(38, 37, 37);              /* White text */
+  font-family: Arial, sans-serif;
+  margin-bottom: 30px;
+}
+
+.website-name {
+  font-size: 24px;           /* Font size for website name */
+  font-weight: bold;
+  margin: 0;                 /* Remove default margin */
+}
+
+.nav-links {
+  margin-left: auto;         /* Align navigation links to the left if needed */
+}
+
+@media (max-width: 768px) {
+  /* For smaller screens */
+  .header {
+    padding: 10px;           /* Less padding for smaller screens */
+  }
+
+  .website-name {
+    font-size: 20px;         /* Slightly smaller text for the website name */
+  }
+}
+
+
 .shop-image-container{
    width: 90%;
    margin: 0 auto;
@@ -55,4 +88,109 @@
   font-size: 16px;
   padding: 5px;
  
+}
+
+
+
+.product-category{
+  width: 100%;
+  min-height: 40vh;
+  margin-top: 50px;
+
+}
+.product-items{
+  display: flex;
+  justify-content:center;
+  align-items: center;
+}
+.product-item{
+  /* border: 1px solid blue; */
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 20px;
+}
+.product-item .item {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  border: 1px solid salmon;
+  margin-top: 66px;
+  overflow: hidden; /* Ensure that any overflowed part of the image is hidden */
+}
+
+.product-item .item img {
+  width: 100%;       /* Make the image take up the full width of the div */
+  height: 100%;      /* Make the image take up the full height of the div */
+  object-fit: cover; /* This ensures the image covers the entire div and maintains aspect ratio */
+}
+
+.product-items img{
+  width: 20%;
+}
+
+.available-items-container{
+   display: flex;
+   flex-direction: column;
+   gap: 20px;
+   min-height: 40vh;
+}
+
+.available-items{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px,1fr));
+    margin-top: 30px;
+    gap: 30px;
+    row-gap: 50px;
+}
+
+.available-item{
+  width: 100%;
+  margin: auto;
+  border-radius: 15px;
+  box-shadow: 0px 0px 10px #00000015;
+  transition: 0.3s;
+  animation: fadeIn 1s;
+  padding: 10px;
+}
+.available-item:hover{
+  scale:1.02;
+}
+.img-container{
+  position: relative;
+}
+
+
+.available-item-img{
+  width: 100%;
+  border-radius:15px 15px 0px 0px;
+}
+
+
+.food-item-info{
+  padding: 20px;
+}
+
+.item-name-rating{
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin-bottom:10px;
+}
+.item-name-rating p{
+  font-size: 20px;
+  font-weight: 500;
+}
+.item-name-rating img{
+  width: 70px;
+}
+.item-desc{
+  color: #676767;
+  font-size: 12px;
+
+}
+.item-price{
+  font-size: 20px;
+  font-weight: 500;
+  margin: 10px 0px;
 }

@@ -20,18 +20,22 @@ import BusinessForm from './Pages/BusinessForm/BusinessForm';
 import DistributionForm from './Pages/DistributionForm/DistributionForm';
 import Distributors from './Pages/Distributors/Distributors';
 import ShopPage from './Pages/ShopPage/ShopPage';
+// import AllShop from './components/AllShop/AllShop';
 
 
 
 function App() {
+  const isShopPage = location.pathname.startsWith('/shop/');
   return (
     <>
     
    <BrowserRouter>
-   <div className='headerrrr'>
-       <Header />
-   <Navbar />
-   </div>
+   {!isShopPage && (
+          <div className='headerrrr'>
+            <Header />
+            <Navbar />
+          </div>
+        )}
    <div className="renderpages">
       <Routes  >
           <Route path='/' element ={<Home />} />
@@ -49,7 +53,6 @@ function App() {
           <Route path='/distributionform' element = {<DistributionForm />}/>
           <Route path='/distributors' element = {<Distributors />}/>
           <Route path='/shop/:shopName' element = {<ShopPage />}/>
-
       </Routes>
    </div>
 <Footer />
