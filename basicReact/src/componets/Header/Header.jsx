@@ -2,7 +2,7 @@ import "./Header.css";
 import { assets } from "../../assets/assets";
 import Dropdown from "../Dropdown/Dropdown";
 import Firebase from "../Firebase/FirebaseAuth";
-
+import { Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import ShowOnHOme from "../ShowOnHome/ShowOnHome";
 import Distributors from "../../Pages/Distributors/Distributors";
@@ -17,15 +17,15 @@ function Header() {
   const signInAccount = () => {
     window.open("/sellerlogin", "_self");
   };
-function reloadBtn(){
-  window.location.reload();
+function HomeRoute(){
+    navigate("/");
 }
 
   return (
     <>
       <div className="headerEle">
         <div id="header" className="logo">
-          <img id="reloadButton" onClick={reloadBtn} src={assets.logo2} alt="logo" />
+          <img id="reloadButton" onClick={HomeRoute} src={assets.logo2} alt="logo" />
         </div>
         <div id="header" className="div2">
           <p>Shop</p>
