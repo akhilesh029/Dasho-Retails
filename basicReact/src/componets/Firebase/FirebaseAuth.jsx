@@ -106,6 +106,8 @@ else{
       .catch((error) => {
         console.error('Error logging out:', error);
       });
+      navigate("/" );
+
   };
 
   const toggleDropdown = () => {
