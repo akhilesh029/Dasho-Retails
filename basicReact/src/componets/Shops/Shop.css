@@ -1,6 +1,7 @@
 
   .slider-container{
-    width: 100vw;
+    width: 100%;         /* Fill 100% of the parent container */
+  
   }
 
 
@@ -87,7 +88,7 @@
 .card-category {
   font-size: 16px;
   margin-bottom: 10px;
-  color: #5372F0;
+  color: #537z2F0;
   padding: 8px 16px ;
   margin: 16px 0 18px;
   background: #DDE4FF;

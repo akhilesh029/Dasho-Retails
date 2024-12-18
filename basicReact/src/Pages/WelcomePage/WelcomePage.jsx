@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+  import React,{useState,useEffect} from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { assets } from "../../assets/assets";
@@ -22,8 +22,6 @@ const WelcomePage = (props) => {
         navigate('/sellerpage', {replace:true, state:{userEmail}})
     }
 
-
-
      // request to userdata from database
    useEffect(()=>{
     axios.get('http://localhost:3000/user')
@@ -33,43 +31,35 @@ const WelcomePage = (props) => {
 
 
   return (
-    <div>
-     
-{/* <SellerPage data ={userEmail} /> */}
 
+  <div className="welcome-container">
+  <ul>
+    {users.map((item) => {
+      if (item.email === userEmail) {
+        return (
+          <li key={item.email}> {/* Added key for list items */}
+            <div className="welcomeChildiv">
+              <img className="profilepicture" src={assets.polo} alt="" />
+              <h1 className="welcome">Welcome</h1>
+              <p className="welcomeText">
+                Hi <b>{item.ownerName}</b>, welcome to <b>DASHO</b>!
+              </p>
+              <p className="welcomeText">
+                We're thrilled to have you join our platform.
+              </p>
+              <p className="welcomeText">
+                Let's make some sales together.
+              </p>
+              <button className="letsgo" onClick={handleClick}>Let's Go</button>
+            </div>
+          </li>
+        );
+      }
+      return null; // Return null if the condition is not met
+    })}
+  </ul>
+</div>
 
-      <ul>
-        {users.map((item) => {
-          if (item.email == userEmail) {
-            return (
-              <>
-              <Header />
-                <div className="welcomeChildiv">
-                  {/* <img  src={assets.logo2} alt="" /> */}
-                  <img className="profilepicture" src={assets.polo} alt="" />
-                  <h1 className="welcome">Welcome </h1>
-                  <p className="welcomeText">
-                    Hi <b>{item.ownerName}</b> , welcome to <b>DASHO</b>!{" "}
-                  </p>
-                  <p className="welcomeText">
-                    We're thrilled to have you join our plateform.
-                  </p>
-                  <p className="welcomeText">
-                    {" "}
-                    Let's make some sales together.
-                  </p>
-                  <button className="letsgo" onClick={handleClick}>Lets Go</button>
-                  
-
-               
-                </div>
-              </>
-            );
-            // return <h1>{item.email}</h1>
-          }
-        })}
-      </ul>
-    </div>
   );
 };
 

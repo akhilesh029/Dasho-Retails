@@ -15,9 +15,6 @@ const ShowOnHOme = () => {
   // const para = location.state;
   // console.log(para);
 
- 
-  
-
   //------------------------addtoCart----------------------
   const [items, setItems] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);

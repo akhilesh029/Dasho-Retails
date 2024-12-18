@@ -1,58 +1,166 @@
-/* Form container */
+
+
+  /* ==============================  welcome ========================================*/
+  /* Container styles for both mobile and desktop */
+/* General Styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif; /* Set a global font */
+}
+
+/* Welcome Section Styles */
+.welcome-seller-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column; /* Default for mobile */
+  padding: 2rem;
+  background-color: #f5f8fa;
+  /* text-align: center; */
+  border-radius: 10px;
+  width: 91vw;
+  max-width: 91vw;
+  margin: 2rem auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.welcome-seller-img img {
+  width: 150px;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+.welcome-seller {
+  font-size: 1.6rem; /* Font size for the welcome title */
+  font-weight: bold;
+  color: #3a3a3a;
+  margin-bottom: 0.5rem;
+}
+
+.welcome-message {
+  font-size: 1rem;
+  color: #646464;
+  line-height: 1.5;
+  max-width: 500px;
+  margin-bottom: 1rem;
+}
+
+/* Profile Link Styles */
+.profile-link {
+  font-size: 1rem;
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.profile-link:hover {
+  text-decoration: underline;
+}
+
+/* Desktop View Styles */
+@media (min-width: 768px) {
+  .welcome-seller-container {
+    flex-direction: row; /* Side-by-side layout on desktop */
+    text-align: left; /* Align text to the left */
+  }
+
+  .welcome-seller-img {
+    margin-right: 2rem; /* Spacing between image and text */
+  }
+
+  .welcome-seller-img img {
+    width: 200px; /* Slightly larger image on desktop */
+    margin-bottom: 0; /* No bottom margin for images in desktop view */
+  }
+}
+
+/* Business Form Styles */
+.business {
+  /* max-width: 800px; Maximum width for the form container */
+  margin: 0 auto; /* Center the container */
+  padding: 20px; /* Add padding around the container */
+}
+
 .business-form {
-   margin: 0 auto;
-    padding: 18px;
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    gap: 10px;
-    width: 25vw;
-    border: 1px solid black;
+  margin-top: 5vh;
+  display: flex; /* Use Flexbox for layout */
+  flex-direction: column; /* Stack form elements vertically */
+  gap: 15px; /* Space between form elements */
+  background-color:#F5F8FA; /* Light background color for the form */
+  border-radius: 8px; /* Rounded corners */
+  padding: 20px; /* Padding inside the form */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+label {
+  font-weight: bold; /* Make label text bold */
+  margin-bottom: 5px; /* Space below label */
+}
+
+input[type="text"],
+input[type="number"],
+input[type="file"] {
+  width: 100%; /* Full width input fields */
+  padding: 10px; /* Padding inside input fields */
+  border: 1px solid #ccc; /* Light border */
+  border-radius: 4px; /* Rounded corners */
+  box-sizing: border-box; /* Include padding and border in width */
+  font-size: 16px; /* Font size for input text */
+}
+
+input[type="checkbox"] {
+  margin-right: 5px; /* Space between checkbox and label */
+}
+
+button {
+  background-color: #007bff; /* Button background color */
+  color: white; /* Button text color */
+  border: none; /* Remove border */
+  padding: 10px 15px; /* Padding for button */
+  border-radius: 4px; /* Rounded corners for button */
+  cursor: pointer; /* Pointer cursor on hover */
+  font-size: 16px; /* Font size for button text */
+}
+
+button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 600px) {
+  .business {
+    padding: 10px; /* Reduce padding on smaller screens */
   }
-  
-  /* Input fields */
-  #businessName,
-  #ownerName,
-  #contactNumber,
-  #businessContactNumber,
-  #gstNumber,
-  #gstCertificate {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+
+  .business-form {
+    padding: 15px; /* Adjust form padding */
   }
-  
-  /* Labels */
-  label {
-    font-weight: bold;
+
+  .welcome-seller {
+    font-size: 20px; /* Adjust welcome title size */
   }
-  
-  /* Checkbox and label */
-  #gstCheckbox {
-    display: flex;
-    flex-direction: row;
-    font-weight: 600;
-    font-size: 15px;
-    gap: 10px;
-    /* align-items: center; */
+
+  .welcome-message {
+    font-size: 14px; /* Adjust welcome message size */
   }
-  
-  /* Submit button */
-  #submitButton {
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  /* Disabled input fields */
-  #gstNumber:disabled,
-  #gstCertificate:disabled {
-    background-color: #f2f2f2;
-    cursor: not-allowed;
-  }
+}
+
+.checkbox-container {
+  display: flex;            /* Flexbox to center elements */
+  align-items: center;     /* Vertically align items */
+  margin: 10px 0;         /* Add margin for spacing */
+}
+
+.checkbox-label {
+  display: flex;           /* Use flexbox for the label */
+  align-items: center;     /* Vertically center checkbox and text */
+  white-space: nowrap;     /* Prevent text from wrapping */
+}
+
+.checkbox-label input {
+  margin-right: 8px;      /* Space between checkbox and label text */
+  cursor: pointer;         /* Change cursor to pointer on hover */
+}
+.checkbox-label span{
+  color:black;
+}

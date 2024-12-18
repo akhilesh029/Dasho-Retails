@@ -21,6 +21,9 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
+// <<<<<<< HEAD
+// mongoose.connect("mongodb://localhost:27017/seller");
+// =======
 app.use(express.static('public'));
 
 // mongoURL for local connection
@@ -40,9 +43,11 @@ mongoose.connect(mongoURL, {
     useUnifiedTopology: true,
     // useFindAndModify: false
 }).then(()=>{
-    console.log('connection successfullll')
+    console.log('mongodb connected')
 }).catch((err)=> console.log('no connectionnnn'))
 
+
+//================================================= Multer =======================================================
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'public/Images')
@@ -56,12 +61,8 @@ const upload = multer({
     storage: storage
 })
 
-// image + details upload
+//========================================================= image + details upload  ========================================
 app.post('/sellerpage', upload.single('file'), (req, res) => {
-
-    // console.log(req.file)
-    // console.log(req.file.filename)
-    // console.log(req.body.sellerEmail)
 
     SellerPageModel.create({
         image: req.file.filename,
@@ -76,6 +77,8 @@ app.post('/sellerpage', upload.single('file'), (req, res) => {
         .catch(err => res.json(err))
 
 });
+
+
 
 //-------for geting productitems-------
 app.get('/getImage', (req, res) => {
@@ -180,15 +183,18 @@ app.delete('/delete/:id', async (req, res) => {
   });
 
 
-app.post('/register', async (req, res)=>{
-const {name, email, password}  = req.body;
+// app.post('/register', async (req, res)=>{
+// const {name, email, password}  = req.body;
 
-console.log(req.body)
-
+app.post('/register', (req, res)=>{
     SellerModel.create(req.body)
-      .then(seller=>res.json(seller))
-      .catch(err=> res.json(err))
+    .then(seller=>res.json(seller))
+    .catch(err=> res.json(err))
 })
+
+    // SellerModel.create(req.body)
+    //   .then(seller=>res.json(seller))
+    //   .catch(err=> res.json(err))
 
 //------------------using collection on the basis of seller name---------
 

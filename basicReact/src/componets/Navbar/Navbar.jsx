@@ -7,75 +7,25 @@ function Navbar(){
     return(
            <div className="categories">
             
-            <div className="dropdown">
+            {/* <div className="dropdown">
                <div className="dropdown">
                  <Dropdown />
                </div>
                <div className="dropdown">
                  <Categories />
                </div>
-            </div>
-                <li  className="ctgtype"> 
-                    <a href="/clothes">
-                        {/* <img src={assets.women} alt="" /> */}
-                        <span className='underline'>Clothes</span>
-                    </a>
-                </li>
-                
-                <li className="ctgtype">
-                    <a href="/cosmetics">
-                            {/* <img src={assets.men} alt="" /> */}
-                      
-                        <span>Cosmetics</span>
-                    </a>
-                </li>
-                <li className="ctgtype">
-                    <a href="/pharmaceuticals">
-                       
-                            {/* <img src={assets.women} alt="" /> */}
-                       
-                        <span>Pharmaceuticals</span>
-                    </a>
-                </li>
-                <li className="ctgtype">
-                    <a href="http">
-                       
-                            {/* <img src={assets.men} alt="" /> */}
-                        
-                        <span>Wooden Articles</span>
-                    </a>
-                </li>
-                <li className="ctgtype">
-                    <a href="http">
-                        
-                            {/* <img src={assets.women} alt="" /> */}
-                       
-                        <span>Pet Foods</span>
-                    </a>
-                </li>
-                <li className="ctgtype">
-                    <a href="http">
-                    
-                            {/* <img src={assets.men} alt="" /> */}
-                       
-                        <span>Electronics</span>
-                    </a>
-                </li>
-                <li className="ctgtype">
-                    <a href="http">
-                       
-                        {/* <img src={assets.women} alt="" /> */}
-                        <span>Mobile Accesories</span>
-                    </a>
-                </li>
-                <li className="ctgtype">
-                    <a href="http">
-                      
-                            {/* <img src={assets.men} alt="" /> */}
-                       
-                        <span>Home doctor</span>
-                    </a>
-                </li>
+            </div> */}
+                <ul className='navbar_list'>
+                    <li><a href="#">Clothes</a></li>
+                    <li><a href="#">Cosmetics</a></li>
+                    <li><a href="#">Pharmaceuticals</a></li>
+                    <li><a href="#">Pet Foods</a></li>
+                    <li><a href="#">Electronics</a></li>
+                    <li><a href="#">Books</a></li>
+                    <li><a href="#">Fitness</a></li>
+                    <li><a href="#">Toys</a></li>
+                    <li><a href="#">Mobile Accesories</a></li>
+                </ul>
           
            </div>
            

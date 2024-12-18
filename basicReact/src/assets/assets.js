@@ -93,7 +93,7 @@ export const assets = {
 
 // for the shop components.....
 export const cards = [
-    {
+    { 
       shopName: "Techie Gadgets",
       shopImage: p,
       category: "Electronics",

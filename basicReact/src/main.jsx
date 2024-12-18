@@ -1,7 +1,7 @@
 
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-
+import App from "./App.jsx"
 import './App.css'
 import {BrowserRouter,Routes} from 'react-router-dom'
 import StoreContextProvider from './context/AppContext.jsx'
@@ -9,9 +9,9 @@ import StoreContextProvider from './context/AppContext.jsx'
 
 
 
+
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import App from './App.jsx';
 import './index.css'
 import Header from './componets/Header/Header.jsx'
 import Navbar from './componets/Navbar/Navbar.jsx'
@@ -41,95 +41,9 @@ import BuyItems from './Pages/BuyItems/BuyItems.jsx';
 import CartPage from './Pages/CartPage/CartPage.jsx';
 import ShowOnHOme from './componets/ShowOnHome/ShowOnHome.jsx';
 import PayMethod from './Pages/PayMethod/PayMethod.jsx';
+import ShopPage from './Pages/ShopPage/ShopPage.jsx'
 
-
-// const router = createBrowserRouter([
-//     {
-      
-//         path: '/',
-//         element: <App />
-      
-//     },
-// //     {
-// //         path: '/home',
-// //         element: <Home />
-      
-// //     },
-// //     {
-// //         path: '/clothes',
-// //         element: <Clothes />
-      
-// //     },
-// //     {
-// //         path: '/clothesdetails',
-// //         element: <Clothesdetails />
-      
-// //     },
-  
-// //     {
-// //         path: '/cosmetics',
-// //         element: <Cosmetics />
-      
-// //     },
-// //     {
-// //       path: '/cosmeticsdetails',
-// //       element: <Cosmeticsdetails />
-    
-// //   },
-  
-// //     {
-// //         path: '/pharmaceuticals',
-// //         element: <Pharmaceuticals />
-      
-// //     },
-// //     {
-// //         path: '/pharmaceuticaldetails',
-// //         element: <Pharmaceuticaldetails />
-      
-// //     },
-// //     {
-// //         path: '/createselleracc',
-// //         element: <SellerCreateAccount />
-// //     },
-// //     {
-// //        path: '/sellerlogin' ,
-// //        element: <SellerLogin />
-      
-// //     },
-// //     {
-// //        path: '/user',
-// //        element: <UserPage />
-      
-// //     },
-// //     {
-// //         path: '/sellerpage',
-// //         element: <SellerPage />
-// //     },
-// //     {
-// //         path:'/welcome',
-// //         element: <WelcomePage />
-// //     },
-// //     {
-// //         path:'/buyitems',
-// //         element: <BuyItems />
-// //     },
-// //     {
-// //         path:'/cartpage',
-// //         element: <CartPage />
-// //     },
-// //     {
-// //         path:'/showonhome',
-// //         element: <ShowOnHOme />
-// //     },
-// //     {
-// //         path:'/paymethod',
-// //         element: <PayMethod />
-// //     }
-
-
-  
-// ]);
-
+ 
 
 
 createRoot(document.getElementById("root")).render(
