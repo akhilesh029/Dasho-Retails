@@ -7,6 +7,8 @@ require('dotenv').config();
 // const upload = multer({dest: 'uploads/'})
 const mongodb  = require('mongodb');
 
+const categoryRoutes = require('./routes/category');
+
 
 const SellerModel = require('./model/seller')
 const userModel = require('./model/users')
@@ -24,7 +26,9 @@ app.use(cors())
 // <<<<<<< HEAD
 // mongoose.connect("mongodb://localhost:27017/seller");
 // =======
-app.use(express.static('public'));
+// app.use(express.static('public'));
+app.use('/public', express.static(path.join(__dirname, 'public')));
+
 
 // mongoURL for local connection
 // const mongoURL = process.env.MONGODB_URL_LOCAL ;
@@ -60,6 +64,14 @@ const storage = multer.diskStorage({
 const upload = multer({
     storage: storage
 })
+
+
+//===================================================categoryRoute (shivam)==============================
+app.use('/api/categories', categoryRoutes);
+
+
+
+
 
 //========================================================= image + details upload  ========================================
 app.post('/sellerpage', upload.single('file'), (req, res) => {
