@@ -40,7 +40,7 @@ function App() {
     
    <BrowserRouter>
    {!isShopPage && (
-          <div className='headerrrr'>
+          <div>
             <Header />
             <Navbar />
           </div>

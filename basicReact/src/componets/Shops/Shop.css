@@ -1,50 +1,34 @@
-
-  .slider-container{
-    width: 100%;         /* Fill 100% of the parent container */
-  
-  }
-
-
-  .trending-shop{
-    position: absolute;
-    margin-top: -7vh;   
-    margin-left: 35%;
-  }
-  
-
-
-  .shop-container {
-    /* width: 100vw; */
-    margin: auto;
-    height: 25vh;
-    /* height: 20vh; */
-    margin-top: 15vh;
-    margin-bottom: 3vh;
-    /* border: 2px solid black; */
-    font-family: "Inter", sans-serif;
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    /* min-height: 100vh; */
-    min-height: 90vh;
-    background:linear-gradient(#ECEFFE,#CED6FB);
-  }
-
-
-/* slider */
-   /* Slider container */
+/* General Styles */
 .slider-container {
   width: 100%;
-  height: auto;
-  max-width: 1400px;
+  /* max-width: 1400px; */
   margin: 0 auto;
   padding: 20px;
 }
 
-/* Style for individual cards */
+/* Trending Shop */
+.trending-shop {
+  position: absolute;
+  margin-top: -77vh;
+  /* margin-left: 35%; */
+}
+
+/* Shop Container */
+.shop-container {
+  margin: auto;
+  height: 25vh;
+  margin-top: 15vh;
+  margin-bottom: 3vh;
+  font-family: "Inter", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 90vh;
+  background: linear-gradient(#ECEFFE, #CED6FB);
+}
+
+/* Slider Cards */
 .slider-card {
-  /* height: 60vh; */
- 
   background-color: #f7f7f7;
   border-radius: 10px;
   padding: 20px;
@@ -55,26 +39,18 @@
 }
 
 .card-image {
-  width: 100%; /* Ensure the image takes full width of its container */
-  height: auto; /* Maintain aspect ratio */
-  border-radius: 10px; /* Rounded corners */
-  object-fit: cover; /* Ensures the image covers the entire area, cropping if necessary */
-  margin-bottom: 15px; /* Add some space between the image and the rest of the content */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow for depth */
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin-top: 20px;
 }
+
 .slider-card:hover {
-  /* transform: scale(1.05); Enlarge card on hover */
   border: 2px solid #5372F0;
 }
-
-
-
-.text-decoration{
-  display: flex;
-  justify-content: space-around;
-}
-
 
 /* Card title */
 .card-title {
@@ -88,8 +64,8 @@
 .card-category {
   font-size: 16px;
   margin-bottom: 10px;
-  color: #537z2F0;
-  padding: 8px 16px ;
+  color: #5372F0;
+  padding: 8px 16px;
   margin: 16px 0 18px;
   background: #DDE4FF;
   width: fit-content;
@@ -111,14 +87,109 @@
   margin-bottom: 15px;
 }
 
-/* Swiper navigation buttons */
+/* Swiper Navigation Buttons */
 .swiper-button-next,
 .swiper-button-prev {
-  color:#5372F0;
-  
+  color: #5372F0;
 }
 
-/* Swiper pagination */
+/* Swiper Pagination */
 .swiper-pagination-bullet {
   background-color: #3498db;
 }
+
+/* Responsive Styles */
+
+/* Small Screen Devices (Mobile) */
+@media screen and (max-width: 600px) {
+  .slider-container {
+    padding: 10px;
+  }
+
+  .shop-container {
+    margin-top: 10vh;
+    height: auto; /* Adjust height for smaller screens */
+  }
+
+  .slider-card {
+    margin-bottom: 15px; /* Adjust margin for smaller devices */
+    padding: 15px; /* Adjust padding for smaller devices */
+  }
+
+  .card-title {
+    font-size: 18px; /* Smaller font size for mobile */
+  }
+
+  .card-category {
+    font-size: 14px;
+    padding: 6px 12px; /* Smaller padding */
+  }
+
+  .card-items,
+  .card-description {
+    font-size: 12px; /* Smaller font size for mobile */
+  }
+
+  .slider-card:hover {
+    transform: scale(1.05); /* Add a slight zoom effect on hover */
+  }
+}
+
+/* Medium Screen Devices (Tablets and Small Laptops) */
+@media screen and (min-width: 601px) and (max-width: 900px) {
+  .slider-container {
+    padding: 15px;
+  }
+
+  .shop-container {
+    margin-top: 12vh; /* Adjust top margin */
+    height: auto;
+  }
+
+  .slider-card {
+    padding: 18px;
+  }
+
+  .card-title {
+    font-size: 19px;
+  }
+
+  .card-category {
+    font-size: 15px;
+  }
+
+  .card-items,
+  .card-description {
+    font-size: 13px;
+  }
+}
+
+/* Large Screen Devices (Desktops and Larger Screens) */
+@media screen and (min-width: 901px) {
+  .slider-container {
+    padding: 20px;
+  }
+
+  .shop-container {
+    margin-top: 15vh;
+    height: 25vh; /* Larger height for desktops */
+  }
+
+  .slider-card {
+    padding: 20px;
+  }
+
+  .card-title {
+    font-size: 20px;
+  }
+
+  .card-category {
+    font-size: 16px;
+  }
+
+  .card-items,
+  .card-description {
+    font-size: 14px;
+  }
+}
+

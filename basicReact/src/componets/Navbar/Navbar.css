@@ -1,93 +1,3 @@
-/* .categories{
-    top: 0;
-    position: fixed;
-    width: 100%;
-    height: 75px;
-
-    margin-top: 80px;
-
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    list-style-type: none;
-    border: 1px solid rgb(247, 243, 243);
-    background-color: white;
-    padding: 10px;
-    z-index:20;
-
-}
-
-.ctgtype>a>span{
-    color:black;
-    text-decoration: none;
-  
-}
-.ctgtype>a{
-    color:black;
-    text-decoration: none;
-  
-}
-
-.dropdown{
-    display: flex;
-    flex-direction: row;
-    column-gap: 10px;  
-}
-
-a >span{
-    margin-top: 10px;  
-    text-align: center;
-    font-size: 14px;   
-}
-
-@media screen and (max-width:600px) {
-    .categories{
-        width: 540px;
-        padding: 8px;
-        position: inherit;
-        margin-top: 100px;
-        margin-bottom: 40px;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        justify-content: space-evenly;
-        list-style-type: none;
-        
-    }
-    a{
-        width: 60px;
-        display: flex;
-        flex-direction: column;
-        text-decoration: none;
-        color: rgba(16, 1, 1, 0.704);
-    }
-    .categories {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        grid-gap: 40px;
-        justify-content: center;
-        align-items: center;
-      }
-}
-
-
-
-.navbar_list{
-    color: black;
-    font-size: 15px;
-    list-style: none;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 30px;
-}
-.navbar_list a{
-    text-decoration: none;
-    color: #000;
-} */
 
 
 /* Base styles */
@@ -101,6 +11,7 @@ a >span{
     padding: 20px 10px;
     z-index: 20;
     align-items: center;
+    left: 0;
 
   }
   
@@ -133,7 +44,7 @@ a >span{
   /* Responsive Design */
   @media screen and (max-width: 768px) {
     .navbar_list {
-      flex-direction: column; /* Stack items vertically on small screens */
+      /* flex-direction: column; Stack items vertically on small screens */
       align-items: center;
     }
   
