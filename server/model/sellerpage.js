@@ -4,8 +4,7 @@ const SellerpageSchema = new mongoose.Schema({
    
        itemName: String,
        itemDescription:String,
-       itemPrice: Number,
-            
+       itemPrice: Number,    
        image: String,
        sellerEmail: String,
        

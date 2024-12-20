@@ -13,51 +13,60 @@ function BusinessForm() {
   const navigate = useNavigate();
 
   // Form state
-  const [businessName, setBusinessName] = useState('');
-  const [ownerName, setOwnerName] = useState('');
-  const [contactNumber, setContactNumber] = useState('');
-  const [businessContactNumber, setBusinessContactNumber] = useState('');
-  const [gstNumber, setGstNumber] = useState('');
+  const [businessName, setBusinessName] = useState("");
+  const [ownerName, setOwnerName] = useState("");
+  const [contactNumber, setContactNumber] = useState("");
+  const [businessContactNumber, setBusinessContactNumber] = useState("");
+  const [gstNumber, setGstNumber] = useState("");
   const [gstCertificate, setGstCertificate] = useState(null);
   const [hasGst, setHasGst] = useState(false);
+  const [shopCategory, setShopCategory] = useState(""); // Added state for shop category
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent the default form submission behavior
-    
+
+    // Validation: Ensure a category is selected
+    if (!shopCategory) {
+      alert("Please select a shop category.");
+      return;
+    }
+
     const formData = new FormData();
-    formData.append('email', email);
-    formData.append('businessName', businessName);
-    formData.append('ownerName', ownerName);
-    formData.append('contactNumber', contactNumber);
-    formData.append('businessContactNumber', businessContactNumber);
-    formData.append('gstNumber', gstNumber);
-    formData.append('hasGst', hasGst);
+    formData.append("email", email);
+    formData.append("businessName", businessName);
+    formData.append("ownerName", ownerName);
+    formData.append("contactNumber", contactNumber);
+    formData.append("businessContactNumber", businessContactNumber);
+    formData.append("gstNumber", gstNumber);
+    formData.append("hasGst", hasGst);
+    formData.append("shopCategory", shopCategory); // Include shop category in form data
 
     if (gstCertificate) {
-      formData.append('gstCertificate', gstCertificate);
+      formData.append("gstCertificate", gstCertificate);
     }
 
     try {
       const response = await axios.post("http://localhost:3000/savedetails", formData, {
         headers: {
-          'Content-Type': 'multipart/form-data',
+          "Content-Type": "multipart/form-data",
         },
       });
 
-      console.log('Form data submitted successfully:', response.data);
-      
+      console.log("Form data submitted successfully:", response.data);
+
       // Reset the form fields
-      setBusinessName('');
-      setOwnerName('');
-      setContactNumber('');
-      setBusinessContactNumber('');
-      setGstNumber('');
+      setBusinessName("");
+      setOwnerName("");
+      setContactNumber("");
+      setBusinessContactNumber("");
+      setGstNumber("");
       setGstCertificate(null);
       setHasGst(false);
-      
-      navigate('/welcome', { replace: true, state: { email } });
+      setShopCategory(""); // Reset shop category
+
+      navigate("/welcome", { replace: true, state: { email } });
     } catch (error) {
-      console.error('Error submitting form data:', error);
+      console.error("Error submitting form data:", error);
     }
   };
 
@@ -75,93 +84,100 @@ function BusinessForm() {
         </div>
       </div>
 
-      <h1>Fill the Bussiness Details</h1>
       <form onSubmit={handleSubmit} className="business-form">
-        <div>
-          <label htmlFor="businessName">Business Name:</label>
-          <input
-            type="text"
-            id="businessName"
-            value={businessName}
-            onChange={(e) => setBusinessName(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="ownerName">Owner Name:</label>
-          <input
-            type="text"
-            id="ownerName"
-            value={ownerName}
-            onChange={(e) => setOwnerName(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="contactNumber">Contact Number:</label>
-          <input
-            type="number"
-            id="contactNumber"
-            value={contactNumber}
-            onChange={(e) => setContactNumber(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="businessContactNumber">Business Contact Number:</label>
-          <input
-            type="number"
-            id="businessContactNumber"
-            value={businessContactNumber}
-            onChange={(e) => setBusinessContactNumber(e.target.value)}
-            required
-          />
-        </div>
-        <div className="checkbox-container">
-      <label className="checkbox-label">
-        <input
-          type="checkbox"
-          onChange={(e) => setHasGst(e.target.checked)}
-        />
-        <span>I have GST</span>   
-      </label>
-    </div>
+      <h1>Fill the Bussiness Details</h1>
+  <div>
+    <label htmlFor="businessName">Business Name:</label>
+    <input
+      type="text"
+      id="businessName"
+      value={businessName}
+      onChange={(e) => setBusinessName(e.target.value)}
+      required
+    />
+  </div>
+  <div>
+    <label htmlFor="ownerName">Owner Name:</label>
+    <input
+      type="text"
+      id="ownerName"
+      value={ownerName}
+      onChange={(e) => setOwnerName(e.target.value)}
+      required
+    />
+  </div>
+  <div>
+    <label htmlFor="contactNumber">Contact Number:</label>
+    <input
+      type="number"
+      id="contactNumber"
+      value={contactNumber}
+      onChange={(e) => setContactNumber(e.target.value)}
+      required
+    />
+  </div>
+  <div>
+    <label htmlFor="businessContactNumber">Business Contact Number:</label>
+    <input
+      type="number"
+      id="businessContactNumber"
+      value={businessContactNumber}
+      onChange={(e) => setBusinessContactNumber(e.target.value)}
+      required
+    />
+  </div>
+  <div className="checkbox-container">
+    <label className="checkbox-label">
+      <input
+        type="checkbox"
+        onChange={(e) => setHasGst(e.target.checked)}
+      />
+      <span>I have GST</span>
+    </label>
+  </div>
+  <div>
+    <label htmlFor="gstNumber">GST Number:</label>
+    <input
+      type="text"
+      id="gstNumber"
+      value={gstNumber}
+      onChange={(e) => setGstNumber(e.target.value)}
+      disabled={!hasGst} // Disable if hasGst is false
+    />
+  </div>
+  <div>
+    <label htmlFor="gstCertificate">GST Certificate:</label>
+    <input
+      type="file"
+      id="gstCertificate"
+      accept=".pdf"
+      onChange={(e) => setGstCertificate(e.target.files[0])}
+      disabled={!hasGst} // Disable if hasGst is false
+    />
+  </div>
 
+  {/* Dropdown for Shop Category */}
+  <div>
+    <label htmlFor="shopCategory">Shop Category:</label>
+    <select
+      id="shopCategory"
+      value={shopCategory}
+      onChange={(e) => setShopCategory(e.target.value)}
+      required
+    >
+      <option value="">--Select a Category--</option>
+      <option value="electronics">Electronics</option>
+      <option value="gym">Gym</option>
+      <option value="medical">Medical</option>
+      <option value="sports">Sports</option>
+      <option value="clothes">Clothes</option>
+      <option value="general">General</option>
+    </select>
+  </div>
 
-        <div>
-          <label htmlFor="gstNumber">GST Number:</label>
-          <input
-            type="text"
-            id="gstNumber"
-            value={gstNumber}
-            onChange={(e) => setGstNumber(e.target.value)}
-            disabled={!hasGst} // Disable if hasGst is false
-          />
-        </div>
-        <div>
-          <label htmlFor="gstCertificate">GST Certificate:</label>
-          <input
-            type="file"
-            id="gstCertificate"
-            accept=".pdf"
-            onChange={(e) => setGstCertificate(e.target.files[0])}
-            disabled={!hasGst} // Disable if hasGst is false
-          />
-          {/* <p className="checkbox-label" id='gstCheckbox'>
-           <label >
-             <input
-                type="checkbox"
-                onChange={(e) => setHasGst(e.target.checked)}
-             />
-             <p>I have GST</p>   
-           </label>
-          </p> */}
-       
+  <button id="submitButton" type="submit">Submit</button>
+</form>
 
-        </div>
-
-        <button id='submitButton' type="submit">Submit</button>
-      </form>
     </div>
   );
 }

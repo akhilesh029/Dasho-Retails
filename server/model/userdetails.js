@@ -9,6 +9,7 @@ const userdetailsSchema = new mongoose.Schema({
     gstNumber:String,
     hasGst: Boolean,
     gstCertificate: String,
+    shopCategory: String,
    
     
 })

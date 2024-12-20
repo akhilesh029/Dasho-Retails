@@ -129,7 +129,7 @@ const ShowOnHOme = () => {
       .then((res) => {
         setItems(res.data);
         setRes(res.data);
-        // console.log(res.data._id);
+        
       })
       .catch((err) => console.log(err));
   }, []);
@@ -150,7 +150,7 @@ const ShowOnHOme = () => {
               <div className="showonHome">
                 <img
                   className="homephoto"
-                  src={`http://localhost:3000/Images/` + item.image}
+                  src={`http://localhost:3000/public/Images/` + item.image}
                   alt=""
                 />
                 <h1 key={item._id}>{item.itemName}</h1>

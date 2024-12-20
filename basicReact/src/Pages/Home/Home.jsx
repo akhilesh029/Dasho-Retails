@@ -19,9 +19,6 @@ const Home = () => {
   return (
     <div className='home'>
         <Shop />
-        {/* <Maindiv /> */}
-        {/* <FeaturedPro /> */}
-        {/* <Features /> */}
         <ShopCategory />
         <AllShop />
         <ShowOnHOme />
