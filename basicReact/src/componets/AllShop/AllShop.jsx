@@ -12,16 +12,7 @@ const AllShop = () => {
   const navigate = useNavigate();
 
   // Fetch users from the backend
-  axios
-    .get("http://localhost:3000/user")
-    .then((response) => {
-      const allshops = response.data; // Extract user data from the response
-      console.log(allshops);
-      console.log(allshops[0].businessName); // Log the fetched users
-
-
-    })
-    .catch((err) => console.log(err));
+ 
 
   // request to userdata from database
   const handleClick = (shop) => {
@@ -34,7 +25,7 @@ const AllShop = () => {
   };
 
   return (
-    <>
+ 
       <div className="container">
         <h1>All Shops</h1>
         <div className="shopGrid">
@@ -55,26 +46,8 @@ const AllShop = () => {
         </div>
       </div>
 
-      <div className="container">
-        <h1>All Shops</h1>
-        <div className="shopGrid">
-          {allshops.map((shop) => (
-            <div key={shop._id} className="shopCard">
-              <h2 className="shop-title">{shop.businessName}</h2>
-              <img src={shopImage} alt="" />
-              <div className="rating-category">
-                <p className="shop-card-category">{shop.category}</p>
-                <p>{shop.rating}⭐</p>
-              </div>
-
-              <button onClick={() => handleClick(shop)} className="viewButton">
-                View Shop
-              </button>
-            </div>
-          ))}
-        </div>
-      </div>
-    </>
+     
+   
   );
 };
 
