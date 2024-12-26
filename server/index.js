@@ -38,13 +38,13 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 
 // to connect mongodb atlas
 //mongoURL for global connection
-const mongoURL = process.env.MONGODB_URL;
+// const mongoURL = process.env.MONGODB_URL;
 // const DB = 'mongodb+srv://akhilesheka0100:mpss205152@cluster0.ihgex.mongodb.net/'
-// const DB = 'mongodb+srv://akhilesheka0100:mpss205152@cluster0.ihgex.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+const mongoURL = 'mongodb+srv://akhilesheka0100:mpss205152@cluster0.ihgex.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
 mongoose.connect(mongoURL, {
-    useNewUrlParser: true,
+    // useNewUrlParser: true,
     // useCreateIndex: true,
-    useUnifiedTopology: true,
+    // useUnifiedTopology: true,
     // useFindAndModify: false
 }).then(()=>{
     console.log('mongodb connected')
@@ -67,7 +67,7 @@ const upload = multer({
 
 
 //===================================================categoryRoute (shivam)==============================
-app.use('/api/categories', categoryRoutes);
+// app.use('/api/categories', categoryRoutes);
 
 
 
@@ -130,11 +130,23 @@ app.post("/sellerlogin", (req,res)=>{
 // user
 app.get("/user", (req, res) => {
     // const {email, password} = req.body;
-    console.log("yes")
     AlluserdetailsModel.find()
         .then(users => res.json(users))
         .catch(err => res.json(err))
 })
+
+// fetching shopcategory
+app.get("/api/shopcategory", (req, res) => {
+    // Querying shop categories from the model (assuming shopCategory is a field in the model)
+    AlluserdetailsModel.find({}, 'shopCategory') // Fetch only the shopCategory field
+        .then(shopcategories => {
+            // Extract unique shop categories (if needed)
+            const uniqueCategories = [...new Set(shopcategories.map(item => item.shopCategory))];
+            res.json(uniqueCategories);
+        })
+        .catch(err => res.status(500).json({ message: "Error fetching shop categories", error: err }));
+});
+
 
 app.post('/orders', (req, res)=>{
     OrderModel.create({
@@ -168,11 +180,9 @@ app.delete('/delete/:id', async (req, res) => {
 
   // Handle POST request for form submission
   app.post('/savedetails', upload.single('gstCertificate'), async (req, res) => {
-    const { email, businessName, ownerName, contactNumber, businessContactNumber, gstNumber, hasGst } = req.body;
+    const { email, businessName, ownerName, contactNumber, businessContactNumber, gstNumber, hasGst, shopCategory } = req.body;
     const gstCertificatePath = req.file ? req.file.path : null;
-  console.log(req.body)
-//   console.log(req.body.email)
-//   console.log(req.body.businessName)
+//   console.log(req.body)
   console.log(gstCertificatePath)
     try {
       const userDetail = new AlluserdetailsModel({
@@ -184,6 +194,7 @@ app.delete('/delete/:id', async (req, res) => {
         gstNumber,
         hasGst,
         gstCertificate: gstCertificatePath,
+        shopCategory,
       });
   
       await userDetail.save();
@@ -204,11 +215,7 @@ app.post('/register', (req, res)=>{
     .catch(err=> res.json(err))
 })
 
-    // SellerModel.create(req.body)
-    //   .then(seller=>res.json(seller))
-    //   .catch(err=> res.json(err))
 
-//------------------using collection on the basis of seller name---------
 
 const PORT =  process.env.PORT || 3000
 

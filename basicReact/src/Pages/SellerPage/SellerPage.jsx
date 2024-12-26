@@ -13,17 +13,8 @@ function SellerPage({ userEmail }) {
   console.log("console location data: ",location)
   // const m = location.state.userEmail;
   const m = location.state;
-  
-  // console.log(m);
-  console.log("akil")
   console.log(m.userEmail);
   console.log(m);
-
-
-  //
-
-
-
 
 
   //-----------------------------------------
@@ -130,16 +121,25 @@ useEffect(() => {
       //  console.log(users)
       .catch((err) => console.log(err));
   }, []);
+  
+  //-------------------------------------------------
 
+  // Handle form submission
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const additem = document.getElementById("sellerbtn")
-   
-    additem.innerHTML = 'Item added Successfully!'
-    additem.style.color = 'blue'
+    // Validation
+    if (!itemName || !itemDescription || !itemPrice || !file || !sellerEmail) {
+      alert("Please fill in all fields.");
+      return;
+    }
 
-    // Create a FormData object to send the image and other data
+    const additem = document.getElementById("sellerbtn");
+    additem.innerHTML = "Adding item...";
+    additem.style.color = "orange";
+    additem.disabled = true;
+
+    // Create FormData
     const formData = new FormData();
     formData.append("itemName", itemName);
     formData.append("itemDescription", itemDescription);
@@ -147,42 +147,56 @@ useEffect(() => {
     formData.append("file", file);
     formData.append("sellerEmail", sellerEmail);
 
- 
-
-    // Send the form data to your server-side API
+    // Send data to server
     axios
       .post("http://localhost:3000/sellerpage", formData)
-      .then
-      // (result) => console.log(result)
-      // Handle successful submission
-      // console.log('Item added successfully!');
-      (console.log("added"))
-      .catch(error);
-    console.error("Error:", error);
+      .then((response) => {
+        console.log("Response:", response.data);
+        alert("Item added successfully!");
+        additem.innerHTML = "Item added Successfully!";
+        additem.style.color = "blue";
+        additem.disabled = false;
+
+        // Optionally clear the form
+        setItemName("");
+        setItemDescription("");
+        setItemPrice("");
+        setFile(null);
+        setSellerEmail("");
+      })
+      .catch((error) => {
+        console.error("Error adding item:", error);
+        alert("Failed to add the item. Please try again.");
+        additem.innerHTML = "Add Item";
+        additem.style.color = "red";
+        additem.disabled = false;
+      });
   };
+
   
   
+
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axios
       .get("http://localhost:3000/getImage")
-
       .then((res) => {
-        // console.log(res);
         setImage(res.data[0].image);
         setName(res.data[0].itemName);
         setPrice(res.data[0].itemPrice);
         setDescription(res.data[0].itemDescription);
-
         setRes(res.data);
-
+        console.log(res.data)
+        setLoading(false); // Stop loading
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        setLoading(false); // Stop loading even if there's an error
+      });
   }, []);
+  
 
-
-  // console.log(ordersArray);
-  // console.log(orderData)
 
 // deleting the items from database by seller
   const deleteData = async (id) => {
@@ -375,7 +389,7 @@ function handleShipOrder(orderData, orderId) {
                         <td>
                             <img
                                 className="photo"
-                                src={`http://localhost:3000/Images/` + item.image}
+                                src={`http://localhost:3000/public/Images/` + item.image}
                                 alt="item"
                             />
                         </td>

@@ -59,8 +59,8 @@ function App() {
           <Route path='/pay' element = {<PayMethod />}/>
           <Route path='/form' element = {<Form />}/>
           <Route path='/businessform' element = {<BusinessForm />}/>
-          <Route path='/distributionform' element = {<DistributionForm />}/>
-          <Route path='/distributors' element = {<Distributors />}/>
+          {/* <Route path='/distributionform' element = {<DistributionForm />}/> */}
+          {/* <Route path='/distributors' element = {<Distributors />}/> */}
 
           <Route path='/pricingtable' element = {<PricingTable />}/>
 

@@ -11,14 +11,11 @@ const userdetailsSchema = new mongoose.Schema({
     gstNumber: String,
     hasGst: Boolean,
     gstCertificate: String,
-    uploadedProducts: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "sellerpage" // Reference to the SellerPageModel
-        }
-    ]
-});
+    shopCategory: String,
+   
+    
+})
 
-const AlluserdetailsModel = mongoose.model("alluserdetails", userdetailsSchema);
+const AlluserdetailsModel = mongoose.model("alluserdetails", userdetailsSchema)
 
-module.exports = AlluserdetailsModel;
+module.exports = AlluserdetailsModel
