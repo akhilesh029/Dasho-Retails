@@ -1,10 +1,11 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
 const SellerpageSchema = new mongoose.Schema({
    
        itemName: String,
        itemDescription:String,
-       itemPrice: Number,    
+       itemPrice: Number,
+            
        image: String,
        sellerEmail: String,
        
@@ -12,4 +13,6 @@ const SellerpageSchema = new mongoose.Schema({
     
 })
 
+const SellerPageModel = mongoose.model("sellerpage", SellerpageSchema)
 module.exports = SellerPageModel;
+
