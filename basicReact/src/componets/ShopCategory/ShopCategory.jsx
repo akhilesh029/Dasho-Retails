@@ -29,10 +29,10 @@ const ShopCategory = () => {
               categories.map((category) => (
                 <div className="item" key={category.id}>
                   <img 
-                    src={`http://localhost:3000/${category.image && category.image.startsWith('/') ? category.image.slice(1) : category.image}`} 
-                    alt={category.name} 
+                    src={`http://localhost:3000/${category.shopImage && category.shopImage.startsWith('/') ? category.shopImage.slice(1) : category.shopImage}`} 
+                    alt={category.shopCategory} 
                   />
-                  <p>{category.name}</p>  {/* Display category name below the image */}
+                  <p>{category.shopCategory}</p>  {/* Display category name below the image */}
                 </div>
               ))
             ) : (

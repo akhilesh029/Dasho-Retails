@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
+import axios from "axios";
+
 import { useParams } from 'react-router-dom';
 import img from "../../assets/p1.jpeg";
 import "./ShopPage.css";
@@ -10,45 +12,80 @@ import shirt from "../../assets/shirt.webp";
 import { AppContext } from "../../context/AppContext";
 
 const ShopPage = () => {
-  const { shops, loading, error } = useContext(AppContext);
-  const { shopName } = useParams();
-  // console.log(shopName)
+  const { shops, loading } = useContext(AppContext);
+  const { email } = useParams();
+  // console.log(email)
+
+  const [items, setItems] = useState([]); // State to store the product data
+  const [shopDetails, setShopDetails] = useState(null); // State to store shop details
+  const [error, setError] = useState([]); // State to store the product data
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Fetch products
+        const productsResponse = await axios.get(
+          `http://localhost:3000/sellers/${email}`
+        );
+        setItems(productsResponse.data);
+
+        // Fetch shop details
+        const shopResponse = await axios.get(
+          `http://localhost:3000/shops/${email}`
+        );
+        setShopDetails(shopResponse.data);
+      } catch (err) {
+        console.error("Error fetching data:", err);
+        setError("Failed to fetch data. Please try again later.");
+      }
+    };
+
+    fetchData();
+  }, [email]); // Dependency array includes 'email'
+
+  console.log(shopDetails);
   
-  console.log(shops);
-  // Guard clauses
-  if (loading) return <h1>Loading...</h1>;
-  if (error) return <h1>Something went wrong! Please try again later.</h1>;
-  if (!shops || shops.length === 0) return <h1>No shops available!</h1>;
-
-  const formattedShopName = shopName.replace(/-/g, " ");
-
-  // Find the shop details based on the shopName
-  const shopDetails = shops.find(
-    (shop) => shop.businessName.toLowerCase().replace(/\s+/g, "-") === shopName
-  );
-  // console.log(shopDetails)
-
-  if (!shopDetails) return <h1>Shop not found!</h1>;
+ 
+  
+  
+  
 
   return (
     <div className="shop-page">
-      <header className="shop-header">
-        <div className="logo-container">
-          <h1 className="website-name">{shopDetails.businessName}</h1>
-        </div>
-      </header>
+       <div>
+    {shopDetails ? (
+      <>
+        <header className="shop-header">
+          <div className="logo-container">
+            <h1 className="website-name">{shopDetails[0].businessName}</h1>
+          </div>
+        </header>
 
-      <div className="shop-image-container">
-        <img src={shopImage} alt="" className="shop-image" />
-        <div className="shop-heading">
-          <h1><b>Store for Children</b></h1>
-          <p>Shopping with joy</p>
-          <div className="search-bar">
-            <FaSearch className="search-icon" />
-            <input type="text" placeholder="Search..." className="search-input" />
+        <div className="shop-image-container">
+          <img
+            src={`http://localhost:3000/${shopDetails[0].shopImage}`}
+            alt={shopDetails[0].businessName}
+            className="shop-image"
+          />
+          <div className="shop-heading">
+            <h1><b>{shopDetails[0].shopCategory}</b></h1>
+            <p>{shopDetails[0].description}</p>
+            <div className="search-bar">
+              <FaSearch className="search-icon" />
+              <input
+                type="text"
+                placeholder={`Search in ${shopDetails[0].businessName}`}
+                className="search-input"
+              />
+            </div>
           </div>
         </div>
-      </div>
+      </>
+    ) : (
+      <p>Loading shop details...</p>
+    )}
+  </div>
+
 
       <div className="product-category">
         <h1>Available Products</h1>
@@ -68,19 +105,19 @@ const ShopPage = () => {
       <div className="available-items-container">
         <h1>Available Items</h1>
         <div className="available-items">
-          {shopDetails.products && shopDetails.products.length > 0 ? (
-            shopDetails.products.map((product, index) => (
+          {items && items.length > 0  ? (
+            items.map((product, index) => (
               <div className="available-item" key={index}>
                 <div className="img-container">
-                  <img className="available-item-img" src={shirt} alt={product.name} />
+                  <img className="available-item-img" src={`http://localhost:3000/` + product.itemImage} alt={product.name} />
                 </div>
                 <div className="item-info">
                   <div className="item-name-rating">
-                    <p>{product.name}</p>
+                    <p>{product.itemName}</p>
                     <p>⭐⭐⭐⭐</p>
                   </div>
-                  <p className="item-desc">{product.description}</p>
-                  <p className="item-price">Price: ₹{product.price}</p>
+                  <p className="item-desc">{product.itemDescription}</p>
+                  <p className="item-price">Price: ₹{product.itemPrice}</p>
                 </div>
               </div>
             ))

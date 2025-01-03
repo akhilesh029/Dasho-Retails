@@ -36,7 +36,7 @@ function App() {
     
    <BrowserRouter>
    {!isShopPage && (
-          <div>
+          <div className='fixedArea'>
             <Header />
             <Navbar />
           </div>
@@ -60,7 +60,7 @@ function App() {
           {/* <Route path='/distributors' element = {<Distributors />}/> */}
 
           <Route path='/pricingtable' element = {<PricingTable />}/>
-          <Route path='/shop/:shopName' element = {<ShopPage />}/>
+          <Route path='/shop/:email' element = {<ShopPage />}/>
       </Routes>
    </div>
 <Footer />

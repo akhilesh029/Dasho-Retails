@@ -10,9 +10,9 @@ const AllShop = () => {
   // const [error, setError] = useState("");
   const navigate = useNavigate();
   // Handle the click event for each shop card
-  const handleClick = (card) => {
-    const formattedShopName = card.businessName.toLowerCase().replace(/\s+/g, '-'); // Replace spaces with hyphens
-    navigate(`/shop/${formattedShopName}`);  // Navigate to a dynamic route based on the shop name
+  const handleClick = (email) => {
+    // console.log(email)
+    navigate(`/shop/${email}`);  // Navigate to a dynamic route based on the shop name
    };
 
   return (
@@ -31,7 +31,7 @@ const AllShop = () => {
                 <p className="shop-card-category">{shop.shopCategory}</p>
                   <p>{shop.rating}</p>
               </div>
-              <button onClick={() => handleClick(shop)} className="viewButton">
+              <button onClick={() => handleClick(shop.email)} className="viewButton">
                 View Shop
               </button>
             </div>

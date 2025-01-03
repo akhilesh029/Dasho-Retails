@@ -25,8 +25,6 @@ app.use(express.json())
 app.use(cors())
 
 
-// mongoose.connect("mongodb://localhost:27017/seller");
-
 // app.use(express.static('public'));
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
@@ -41,9 +39,7 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 //mongoURL for global connection
 // const mongoURL = process.env.MONGODB_URL;
 // const DB = 'mongodb+srv://akhilesheka0100:mpss205152@cluster0.ihgex.mongodb.net/'
-
 const mongoURL = 'mongodb+srv://akhilesheka0100:mpss205152@cluster0.ihgex.mongodb.net/dasho?retryWrites=true&w=majority&appName=Cluster0'
-
 
 mongoose.connect(mongoURL, {
 }).then(()=>{
@@ -64,7 +60,6 @@ const storage = multer.diskStorage({
 const upload = multer({
     storage: storage
 })
-
 
 
 
@@ -217,23 +212,53 @@ app.put("/reactivateProduct/:productId", async (req, res) => {
 });
 
 
+// API route to get products for a specific seller
+app.get('/sellers/:email', async (req, res) => {
+  const { email } = req.params;
 
-
-//========================================================= image + details upload  ========================================
-app.post('/sellerpage', upload.single('file'), (req, res) => {
-
-    SellerPageModel.create({
-        image: req.file.filename,
-        itemName: req.body.itemName,
-        itemPrice: req.body.itemPrice,
-        itemDescription: req.body.itemDescription,
-        sellerEmail: req.body.sellerEmail,
-        // file: req.file.filename,  
-
-    })
-        .then(Sellerpage => res.json(Sellerpage))
-        .catch(err => res.json(err))
+  try {
+    // Find all products for the seller
+    const products = await Product.find({ sellerEmail: email });
+    
+    // Return the products for the seller
+    res.json(products);
+  } catch (err) {
+    console.error('Error fetching products:', err);
+    res.status(500).json({ error: 'Failed to fetch products. Please try again later.' });
+  }
 });
+
+// API route to get particular shopDetails
+app.get('/shops/:email', async (req, res) => {
+  const { email } = req.params;
+
+  try {
+    // Find all products for the seller
+    const shopDetails = await BusinessformModel.find({ email: email });
+    
+    // Return the products for the seller
+    res.json(shopDetails);
+  } catch (err) {
+    console.error('Error fetching shopDetails:', err);
+    res.status(500).json({ error: 'Failed to fetch shopDetails. Please try again later.' });
+  }
+});
+
+
+
+// ----------------------fetching shopCategories----------------------
+app.get('/api/categories', (req, res) => {
+  BusinessformModel.find()
+      .then(shopcategory => res.json(shopcategory))
+      .catch(err => res.json(err))
+})
+
+// -------------fetching all shops-----------------------
+app.get('/api/shops', (req, res) => {
+  BusinessformModel.find()
+      .then(allshop => res.json(allshop))
+      .catch(err => res.json(err))
+})
 
 
 
@@ -269,7 +294,6 @@ app.get("/user", (req, res) => {
 // })
 
 // fetching shopcategory
-
 app.get("/api/shopcategory", (req, res) => {
     // Querying shop categories from the model (assuming shopCategory is a field in the model)
     BusinessformModel.find({}, 'shopCategory') // Fetch only the shopCategory field
@@ -280,8 +304,6 @@ app.get("/api/shopcategory", (req, res) => {
         })
         .catch(err => res.status(500).json({ message: "Error fetching shop categories", error: err }));
 });
-
-
 
 
 app.post('/orders', (req, res)=>{
@@ -320,7 +342,6 @@ app.post('/businessform', upload.fields([
     { name: 'shopImage', maxCount: 1 }
   ]), async (req, res) => {
     const { email, businessName, ownerName, contactNumber, businessContactNumber, gstNumber, hasGst, shopCategory } = req.body;
-
   
     // Get the file paths for gstCertificate and shopImage
     const gstCertificatePath = req.files && req.files['gstCertificate'] ? req.files['gstCertificate'][0].path : null;
@@ -329,7 +350,6 @@ app.post('/businessform', upload.fields([
     console.log("GST Certificate Path:", gstCertificatePath);
     console.log("Shop Image Path:", shopImagePath);
   
-
     try {
       const userDetail = new BusinessformModel({
         email,
@@ -352,21 +372,6 @@ app.post('/businessform', upload.fields([
     }
   });
   
-
-
-// ================================================= Fetch shops(shivam) ============================================================
-
-app.get("/api/shops", async (req, res) => {
-    try {
-        const shops = await AlluserdetailsModel.find();
-        console.log(shops);
-        res.status(200).json(shops);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: "Server error, unable to fetch Shops details" });
-    }
-});
-
 
 
 
