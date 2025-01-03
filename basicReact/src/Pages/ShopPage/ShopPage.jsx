@@ -52,6 +52,7 @@ const ShopPage = () => {
 
   return (
     <div className="shop-page">
+
        <div>
     {shopDetails ? (
       <>
@@ -78,6 +79,7 @@ const ShopPage = () => {
                 className="search-input"
               />
             </div>
+
           </div>
         </div>
       </>

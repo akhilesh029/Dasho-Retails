@@ -16,6 +16,7 @@
     top: 0px;
     left: 0;
     z-index: 1000;
+
   }
   
   /* Small Screen Devices */
@@ -60,7 +61,7 @@
   .logo_div img {
     width: 100%; /* Makes the image responsive to the container */
     max-width: 200px; /* Sets a maximum width to prevent the image from getting too large */
-    height: auto; /* Maintains the aspect ratio of the image */
+    height:12vh; /* Maintains the aspect ratio of the image */
     object-fit: contain; /* Ensures the image is not distorted */
     cursor: pointer; /* Changes cursor to indicate it's clickable */
   }
@@ -88,33 +89,25 @@
   
 
 
-  .main_search_bar
-
-
-
 
   /* Basic Menu Styles */
-.header_list {
-    width: 100%;
+/* .header_list {
     display: flex;
-    justify-content: flex-end; /* Align menu to the right */
+    justify-content: flex-end; 
     padding: 0 20px;
     box-sizing: border-box;
   }
-  
-  .menu {
+   */
+  .menu{
     list-style: none;
     display: flex;
     flex-direction: row; /* Arrange items horizontally */
     gap: 20px; /* Space between menu items */
-    margin: 0;
-    padding: 0;
+    margin: 10px;
+    padding: 10px;
+    align-items: center;
   }
   
-  .menu-item {
-    position: relative;
-    font-size: 1.1rem; /* Font size for menu items */
-  }
   
   .menu-item a {
     text-decoration: none;
