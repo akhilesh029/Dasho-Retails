@@ -32,16 +32,11 @@ const ShopPage = () => {
 
   return (
     <div className="shop-page">
-      <header className="shop-header">
-        <div className="logo-container">
-          <h1 className="website-name">{shopDetails.businessName}</h1>
-        </div>
-      </header>
 
       <div className="shop-image-container">
         <img src={shopImage} alt="" className="shop-image" />
         <div className="shop-heading">
-          <h1><b>Store for Children</b></h1>
+          <h1><b>{shopDetails.businessName}</b></h1>
           <p>Shopping with joy</p>
           <div className="search-bar">
             <FaSearch className="search-icon" />

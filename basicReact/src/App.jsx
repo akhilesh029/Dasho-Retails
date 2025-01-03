@@ -30,17 +30,16 @@ import ShopPage from './Pages/ShopPage/ShopPage';
 
 
 function App() {
-  const isShopPage = location.pathname.startsWith('/shop/');
+  // const isShopPage = location.pathname.startsWith('/shop/');
   return (
     <>
     
    <BrowserRouter>
-   {!isShopPage && (
-          <div>
-            <Header />
-            <Navbar />
-          </div>
-        )}
+  
+   <div>
+      <Header />
+      <Navbar />
+   </div>
    <div className="renderpages">
       <Routes  >
           <Route path='/' element ={<Home />} />

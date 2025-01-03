@@ -24,7 +24,6 @@ function HomeRoute(){
 }
 
   return (
-    <>
       <div className="header">
         {/* logo */}
         <div  className="logo_div">
@@ -43,16 +42,16 @@ function HomeRoute(){
 
   <div className="header_list">
        <ul className="menu">
-
-          <li className="menu-item dropdown">
+           <li>Cart</li>
+           <li>Contacts</li>
+           <li className="menu-item dropdown">
             <Firebase />
-          </li>
+           </li>
         </ul>
   </div>
        
         {/* <button className="headerbtn">Cart</button> */}
       </div>
-    </>
   );
 }
 
