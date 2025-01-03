@@ -1,53 +1,44 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import "./AllShop.css";
+import React, { useState, useEffect,useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { shopsData } from "../../assets/shopdata";
-import shopImage from "../../assets/shopImage.jpg";
 import axios from "axios";
+import "./AllShop.css";
+import shopImage from "../../assets/shopImage.jpg"; // Use a placeholder image or the actual shop image URL
+import { AppContext } from "../../context/AppContext";
 
 const AllShop = () => {
-  const [allshops, setAllshops] = useState([]);
-
+  const { shops, loading, error } = useContext(AppContext);
+  // const [error, setError] = useState("");
   const navigate = useNavigate();
-
-  // Fetch users from the backend
- 
-
-  // request to userdata from database
-  const handleClick = (shop) => {
-    console.log(shop);
-    const formattedShopName = shop.name.toLowerCase().replace(/\s+/g, "-"); // Replace spaces with hyphens
-    console.log(formattedShopName);
-
-          // Perform navigation after fetching users
-          navigate(`/shop/${formattedShopName}`, { state: { shop } }); // Pass users as state if needed
-  };
+  // Handle the click event for each shop card
+  const handleClick = (card) => {
+    const formattedShopName = card.businessName.toLowerCase().replace(/\s+/g, '-'); // Replace spaces with hyphens
+    navigate(`/shop/${formattedShopName}`);  // Navigate to a dynamic route based on the shop name
+   };
 
   return (
- 
-      <div className="container">
-        <h1>All Shops</h1>
-        <div className="shopGrid">
-          {shopsData.map((shop) => (
-            <div key={shop.id} className="shopCard">
-              <h2 className="shop-title">{shop.name}</h2>
-              <img src={shopImage} alt="" />
+    <div className="container">
+      <h1>All Shops</h1>
+      {error && <p className="error-message">{error}</p>} {/* Display error if exists */}
+      <div className="shopGrid">
+        {shops.length === 0 ? (
+          <p>No shops available.</p>
+        ) : (
+          shops.map((shop) => (
+            <div key={shop._id} className="shopCard">
+              <h2 className="shop-title">{shop.businessName}</h2>
+              <img src={shopImage} alt={shop.businessName} />
               <div className="rating-category">
-                <p className="shop-card-category">{shop.category}</p>
-                <p>{shop.rating}⭐</p>
+                <p className="shop-card-category">{shop.shopCategory}</p>
+                  <p>{shop.rating}</p>
               </div>
-
               <button onClick={() => handleClick(shop)} className="viewButton">
                 View Shop
               </button>
             </div>
-          ))}
-        </div>
+          ))
+        )}
       </div>
-
-     
-   
+    </div>
   );
 };
 

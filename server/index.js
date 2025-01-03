@@ -38,9 +38,10 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 
 // to connect mongodb atlas
 //mongoURL for global connection
-// const mongoURL = process.env.MONGODB_URL;
+const mongoURL = process.env.MONGODB_URL;
 // const DB = 'mongodb+srv://akhilesheka0100:mpss205152@cluster0.ihgex.mongodb.net/'
-const mongoURL = 'mongodb+srv://akhilesheka0100:mpss205152@cluster0.ihgex.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+// const mongoURL = 'mongodb+srv://akhilesheka0100:mpss205152@cluster0.ihgex.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+// const mongoURL = 'mongodb+srv://akhilesheka0100:mpss205152@cluster0.ihgex.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
 mongoose.connect(mongoURL, {
     // useNewUrlParser: true,
     // useCreateIndex: true,
@@ -67,7 +68,7 @@ const upload = multer({
 
 
 //===================================================categoryRoute (shivam)==============================
-// app.use('/api/categories', categoryRoutes);
+app.use('/api/categories', categoryRoutes);
 
 
 
@@ -87,7 +88,6 @@ app.post('/sellerpage', upload.single('file'), (req, res) => {
     })
         .then(Sellerpage => res.json(Sellerpage))
         .catch(err => res.json(err))
-
 });
 
 
@@ -136,16 +136,16 @@ app.get("/user", (req, res) => {
 })
 
 // fetching shopcategory
-app.get("/api/shopcategory", (req, res) => {
-    // Querying shop categories from the model (assuming shopCategory is a field in the model)
-    AlluserdetailsModel.find({}, 'shopCategory') // Fetch only the shopCategory field
-        .then(shopcategories => {
-            // Extract unique shop categories (if needed)
-            const uniqueCategories = [...new Set(shopcategories.map(item => item.shopCategory))];
-            res.json(uniqueCategories);
-        })
-        .catch(err => res.status(500).json({ message: "Error fetching shop categories", error: err }));
-});
+// app.get("/api/shopcategory", (req, res) => {
+//     // Querying shop categories from the model (assuming shopCategory is a field in the model)
+//     AlluserdetailsModel.find({}, 'shopCategory') // Fetch only the shopCategory field
+//         .then(shopcategories => {
+//             // Extract unique shop categories (if needed)
+//             const uniqueCategories = [...new Set(shopcategories.map(item => item.shopCategory))];
+//             res.json(uniqueCategories);
+//         })
+//         .catch(err => res.status(500).json({ message: "Error fetching shop categories", error: err }));
+// });
 
 
 app.post('/orders', (req, res)=>{
@@ -183,7 +183,7 @@ app.delete('/delete/:id', async (req, res) => {
     const { email, businessName, ownerName, contactNumber, businessContactNumber, gstNumber, hasGst, shopCategory } = req.body;
     const gstCertificatePath = req.file ? req.file.path : null;
 //   console.log(req.body)
-  console.log(gstCertificatePath)
+//   console.log(gstCertificatePath)
     try {
       const userDetail = new AlluserdetailsModel({
         email,
@@ -204,6 +204,21 @@ app.delete('/delete/:id', async (req, res) => {
       res.status(500).json({ error: 'Error saving user details' });
     }
   });
+
+// ================================================= Fetch shops(shivam) ============================================================
+
+app.get("/api/shops", async (req, res) => {
+    try {
+        const shops = await AlluserdetailsModel.find();
+        console.log(shops);
+        res.status(200).json(shops);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Server error, unable to fetch Shops details" });
+    }
+});
+
+
 
 
 // app.post('/register', async (req, res)=>{

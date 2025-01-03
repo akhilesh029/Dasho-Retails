@@ -9,15 +9,15 @@ const ShopCategory = () => {
 
   // Fetch categories on component mount
   useEffect(() => {
-    axios.get('http://localhost:3000/api/shopcategory')  // Replace with your API endpoint
-      .then((response) => {
-        setCategories(response.data);  // Store fetched data
-        console.log(response.data);  // Log the response data directly
-      })
-      .catch((err) => {
-        setError('Failed to fetch categories');
-      });
-  }, []);  // Empty dependency array ensures this runs once on mount
+    axios.get('http://localhost:3000/api/categories')
+        .then((response) => {
+            setCategories(response.data);
+            console.log(response.data);
+        })
+        .catch((err) => {
+            setError('Failed to load categories');
+        });
+}, []);  // Empty dependency array ensures this runs once on mount
 
   return (
     <div className='shopcategory'>

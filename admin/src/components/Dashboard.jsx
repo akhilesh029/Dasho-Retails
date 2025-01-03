@@ -24,6 +24,7 @@ const Dashboard = () => {
         axios.get('http://localhost:3000/api/categories')
             .then((response) => {
                 setCategories(response.data);
+                console.log(response.data);
             })
             .catch((err) => {
                 setError('Failed to load categories');
