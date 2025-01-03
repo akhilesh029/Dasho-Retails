@@ -3,18 +3,19 @@ const mongoose = require("mongoose")
 const cors = require("cors")
 const multer = require('multer')
 const path = require('path')
+// const moment = require("moment");
+const moment = require("moment-timezone");
+const cron = require('node-cron');  //it schedules job to check expiryDate of product
 require('dotenv').config();
 // const upload = multer({dest: 'uploads/'})
 const mongodb  = require('mongodb');
 
 const categoryRoutes = require('./routes/category');
 
-
-const SellerModel = require('./model/seller')
-const userModel = require('./model/users')
 const SellerPageModel = require('./model/sellerpage')
 const OrderModel = require('./model/orders')
-const AlluserdetailsModel = require('./model/userdetails')
+const BusinessformModel = require('./model/businessform')
+const Product = require('./model/product')
 
 
 
@@ -40,15 +41,12 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 //mongoURL for global connection
 // const mongoURL = process.env.MONGODB_URL;
 // const DB = 'mongodb+srv://akhilesheka0100:mpss205152@cluster0.ihgex.mongodb.net/'
-const mongoURL = 'mongodb+srv://akhilesheka0100:mpss205152@cluster0.ihgex.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+const mongoURL = 'mongodb+srv://akhilesheka0100:mpss205152@cluster0.ihgex.mongodb.net/dasho?retryWrites=true&w=majority&appName=Cluster0'
+
 mongoose.connect(mongoURL, {
-    // useNewUrlParser: true,
-    // useCreateIndex: true,
-    // useUnifiedTopology: true,
-    // useFindAndModify: false
 }).then(()=>{
     console.log('mongodb connected')
-}).catch((err)=> console.log('no connectionnnn'))
+}).catch((err)=> console.log('mongodb error'))
 
 
 //================================================= Multer =======================================================
@@ -66,9 +64,154 @@ const upload = multer({
 })
 
 
-//===================================================categoryRoute (shivam)==============================
-// app.use('/api/categories', categoryRoutes);
 
+
+//------------- upload product by seller with time limit------------------
+
+app.post("/uploadProduct", upload.single("file"), async (req, res) => {
+  const { itemName, itemPrice, itemDescription,sellerEmail,productCount, timeLimit, timeUnit } = req.body;
+  const itemImage = req.file ? req.file.path : null;
+
+  // Validate input
+  if (!itemName || !itemPrice || !itemDescription || !sellerEmail || !productCount || !timeLimit || !timeUnit) {
+    return res.status(400).json({ error: "All fields are required." });
+  }
+
+  if (!["hours", "days"].includes(timeUnit)) {
+    return res.status(400).json({ error: "Invalid time unit. Use 'hours' or 'days'." });
+  }
+
+  if (!itemImage) {
+    return res.status(400).json({ error: "Item image is required." });
+  }
+
+// Calculate expiry date using native Date
+
+let expiryDate;
+try {
+    // Calculate expiry date in IST
+    if (timeUnit === "hours") {
+        expiryDate = moment().tz('Asia/Kolkata').add(Number(timeLimit), "hours").format("YYYY-MM-DDTHH:mm:ssZ"); // ISO format with IST offset
+    } else if (timeUnit === "days") {
+        expiryDate = moment().tz('Asia/Kolkata').add(Number(timeLimit), "days").format("YYYY-MM-DDTHH:mm:ssZ"); // ISO format with IST offset
+    } else {
+        throw new Error("Invalid timeUnit provided. Use 'hours' or 'days'.");
+    }
+
+    // console.log('Expiry Date in IST:', expiryDate);
+} catch (error) {
+    console.error('Error calculating expiry date:', error.message);
+}
+
+
+  // Create a new product
+  const newProduct = new Product({
+    itemName,
+    itemPrice,
+    itemDescription,
+    itemImage,
+    sellerEmail,
+    productCount,
+    timeLimit: Number(timeLimit),
+    timeUnit,
+    expiryDate,
+    isActive: true, // Product is active initially
+  });
+
+  try {
+    await newProduct.save();
+    res.json({ message: "Product uploaded successfully", product: newProduct });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Error uploading product" });
+  }
+});
+
+//==========================================================================
+
+// Schedule a job to run every hour (you can adjust the frequency as needed)
+cron.schedule('*/2 * * * *', async () => {
+  try {
+    const currentDate = moment().tz('Asia/Kolkata').toDate(); // Get current time in IST
+
+    // Find products whose expiry date has passed and set isActive to false
+    const updatedProducts = await Product.updateMany(
+      { expiryDate: { $lt: currentDate }, isActive: true }, // Expired products
+      { $set: { isActive: false } } // Set isActive to false
+    );
+
+    console.log(`${updatedProducts.nModified} expired products deactivated`);
+  } catch (error) {
+    console.error('Error deactivating expired products:', error.message);
+  }
+});
+
+
+//====================================fetching Inactive products=====================
+app.get("/inactiveProducts/:sellerEmail", async (req, res) => {
+  const { sellerEmail } = req.params;
+
+  try {
+    // Fetch inactive products for the seller
+    const inactiveProducts = await Product.find({
+      sellerEmail,
+      isActive: false, // Only fetch inactive products
+    }).exec();
+
+    if (inactiveProducts.length === 0) {
+      return res.status(404).json({ message: "No inactive products found." });
+    }
+
+    res.json({ inactiveProducts });
+  } catch (error) {
+    console.error("Error fetching inactive products:", error.message);
+    res.status(500).json({ error: "Error fetching inactive products." });
+  }
+});
+
+//===============================API to Reactivate Products===========================
+app.put("/reactivateProduct/:productId", async (req, res) => {
+  const { productId } = req.params;
+  const { timeLimit, timeUnit } = req.body;
+
+  // Validate input
+  if (!timeLimit || !timeUnit || !["hours", "days"].includes(timeUnit)) {
+    return res.status(400).json({ error: "Invalid time limit or time unit." });
+  }
+
+  try {
+    // Calculate new expiry date
+    let newExpiryDate;
+    if (timeUnit === "hours") {
+      newExpiryDate = moment().tz("Asia/Kolkata").add(Number(timeLimit), "hours").format("YYYY-MM-DDTHH:mm:ssZ");
+    } else if (timeUnit === "days") {
+      newExpiryDate = moment().tz("Asia/Kolkata").add(Number(timeLimit), "days").format("YYYY-MM-DDTHH:mm:ssZ");
+    }
+
+    // Update the product's expiry date and isActive status
+    const updatedProduct = await Product.findByIdAndUpdate(
+      productId,
+      {
+        $set: {
+          expiryDate: newExpiryDate,
+          isActive: true, // Reactivate the product
+          timeLimit: Number(timeLimit), // Update timeLimit
+          timeUnit, // Update timeUnit
+        },
+      },
+      { new: true } // Return the updated product
+    );
+
+    if (!updatedProduct) {
+      return res.status(404).json({ error: "Product not found." });
+    }
+
+    res.json({ message: "Product reactivated successfully", product: updatedProduct });
+  } catch (error) {
+    console.error("Error reactivating product:", error.message);
+    res.status(500).json({ error: "Error reactivating product." });
+  }
+});
 
 
 
@@ -92,12 +235,14 @@ app.post('/sellerpage', upload.single('file'), (req, res) => {
 
 
 
-//-------for geting productitems-------
-app.get('/getImage', (req, res) => {
-    SellerPageModel.find()
+//-------for geting productitems and data-------
+app.get('/showproduct', (req, res) => {
+    Product.find()
         .then(sellerpage => res.json(sellerpage))
         .catch(err => res.json(err))
 })
+
+
 // -------------for getting orders---------------
 app.get('/order', (req, res) => {
     OrderModel.find()
@@ -106,39 +251,25 @@ app.get('/order', (req, res) => {
 })
 
 
-app.post("/sellerlogin", (req,res)=>{
-    const {email, password} = req.body;
-    SellerModel.findOne({email: email})
-    .then(user => {
-        if(user){
-            if(user.password === password){
-                //  res.json("Success")
-                res.send("Success")
-
-            }
-            else{
-                res.json("the password is incorrect")
-            }
-        }
-        else{
-            res.json("No record existed!")
-        }
-    })
-})
-
 
 // user
 app.get("/user", (req, res) => {
     // const {email, password} = req.body;
-    AlluserdetailsModel.find()
+    BusinessformModel.find()
         .then(users => res.json(users))
         .catch(err => res.json(err))
 })
+// app.get("/api/user", (req, res) => {
+//     // const {email, password} = req.body;
+//     BusinessformModel.find()
+//         .then(users => res.json(users))
+//         .catch(err => res.json(err))
+// })
 
 // fetching shopcategory
 app.get("/api/shopcategory", (req, res) => {
     // Querying shop categories from the model (assuming shopCategory is a field in the model)
-    AlluserdetailsModel.find({}, 'shopCategory') // Fetch only the shopCategory field
+    BusinessformModel.find({}, 'shopCategory') // Fetch only the shopCategory field
         .then(shopcategories => {
             // Extract unique shop categories (if needed)
             const uniqueCategories = [...new Set(shopcategories.map(item => item.shopCategory))];
@@ -163,7 +294,7 @@ app.post('/orders', (req, res)=>{
 app.delete('/delete/:id', async (req, res) => {
     const itemId = req.params.id;
     // console.log(itemId)
-    const result = await SellerPageModel.deleteOne({_id: new mongodb.ObjectId(itemId) });
+    const result = await Product.deleteOne({_id: new mongodb.ObjectId(itemId) });
    
     try {
       if (result.deletedCount === 1) {
@@ -178,14 +309,22 @@ app.delete('/delete/:id', async (req, res) => {
   });
 
 
-  // Handle POST request for form submission
-  app.post('/savedetails', upload.single('gstCertificate'), async (req, res) => {
+// Handle POST request for form submission
+app.post('/businessform', upload.fields([
+    { name: 'gstCertificate', maxCount: 1 },
+    { name: 'shopImage', maxCount: 1 }
+  ]), async (req, res) => {
     const { email, businessName, ownerName, contactNumber, businessContactNumber, gstNumber, hasGst, shopCategory } = req.body;
-    const gstCertificatePath = req.file ? req.file.path : null;
-//   console.log(req.body)
-  console.log(gstCertificatePath)
+  
+    // Get the file paths for gstCertificate and shopImage
+    const gstCertificatePath = req.files && req.files['gstCertificate'] ? req.files['gstCertificate'][0].path : null;
+    const shopImagePath = req.files && req.files['shopImage'] ? req.files['shopImage'][0].path : null;
+  
+    console.log("GST Certificate Path:", gstCertificatePath);
+    console.log("Shop Image Path:", shopImagePath);
+  
     try {
-      const userDetail = new AlluserdetailsModel({
+      const userDetail = new BusinessformModel({
         email,
         businessName,
         ownerName,
@@ -195,6 +334,7 @@ app.delete('/delete/:id', async (req, res) => {
         hasGst,
         gstCertificate: gstCertificatePath,
         shopCategory,
+        shopImage: shopImagePath, // Save the shop image path
       });
   
       await userDetail.save();
@@ -204,16 +344,11 @@ app.delete('/delete/:id', async (req, res) => {
       res.status(500).json({ error: 'Error saving user details' });
     }
   });
+  
 
 
-// app.post('/register', async (req, res)=>{
-// const {name, email, password}  = req.body;
 
-app.post('/register', (req, res)=>{
-    SellerModel.create(req.body)
-    .then(seller=>res.json(seller))
-    .catch(err=> res.json(err))
-})
+
 
 
 

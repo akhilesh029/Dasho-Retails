@@ -157,7 +157,7 @@ textarea:focus {
 
 .responsive-table thead tr {
     background-color: #007bff; /* Header background color */
-    color: white; /* Header text color */
+    color: black; /* Header text color */
 }
 
 .responsive-table th, 
@@ -406,3 +406,136 @@ textarea:focus {
     gap: 8px;             /* Adds space between icon and text */
   }
   
+
+
+  /* ======================CSS for inactive products==================================== */
+ /* General Container for Inactive Products */
+.inactive-products-container {
+    padding: 20px;
+    width: 80vw;
+    margin: 40px auto;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Title for Inactive Products */
+.inactive-products-title {
+    font-size: 2rem;
+    color: #343a40;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Table Layout for Inactive Products */
+.inactive-products-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.inactive-products-table th,
+.inactive-products-table td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.inactive-products-table th {
+    background-color: #007bff;
+    color: white;
+}
+
+.inactive-products-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.inactive-products-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Reactivate Button */
+.reactivate-button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+.reactivate-button:hover {
+    background-color: #218838;
+}
+
+/* Reactivate Form Section */
+.reactivate-form-container {
+    width: 100%;
+    max-width: 500px;
+    background-color: #f1f1f1;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.reactivate-form-container h2 {
+    font-size: 1.5rem;
+    color: #343a40;
+    margin-bottom: 20px;
+}
+
+.reactivate-form-container label {
+    font-size: 1rem;
+    color: #343a40;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.reactivate-form-container input,
+.reactivate-form-container select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+}
+
+.reactivate-form-container button {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+.reactivate-form-container button:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .inactive-products-container {
+        width: 90vw;
+        padding: 15px;
+    }
+
+    .inactive-products-table {
+        font-size: 14px;
+    }
+
+    .reactivate-form-container {
+        padding: 15px;
+    }
+
+    .reactivate-button {
+        width: 100%;
+        padding: 12px;
+    }
+}

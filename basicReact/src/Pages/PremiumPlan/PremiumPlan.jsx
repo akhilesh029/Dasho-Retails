@@ -32,7 +32,7 @@ function PricingTable() {
         // { name: 'Dedicated Account Manager', value: 'Yes' },
         // { name: 'Preferred Number Service', value: 'Yes' },
       ],
-      price: '3000'
+     
     },
     {
       name: 'Yearly Plan',

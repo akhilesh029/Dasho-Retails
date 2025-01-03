@@ -70,11 +70,12 @@ const FirebaseAuth = () => {
     // Request to get user data from the backend
     axios
       .get("http://localhost:3000/user")
+      // .get("api/user")
       .then((response) => {
         const users = response.data; // Extract the user data from the response
   
-        console.log(users.length); // Log the number of users
-        console.log(user.email);   // Log the current user's email
+        console.log(users); // Log the number of users
+        console.log(users.email);   // Log the current user's email
   
         if (users.length === 0) {
           // If no users are found, navigate to the business form
@@ -82,6 +83,7 @@ const FirebaseAuth = () => {
         } else {
           // Check if the current user's email matches any user in the list
           const userExists = users.some((userObj) => userObj.email === user.email);
+         
   
           if (userExists) {
             // If the user exists, navigate to the seller page

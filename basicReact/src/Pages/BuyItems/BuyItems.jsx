@@ -55,7 +55,7 @@ const BuyItems = (props) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/getImage")
+      .get("http://localhost:3000/showproduct")
 
       .then((res) => {
         setItems(res.data);
@@ -79,7 +79,7 @@ const BuyItems = (props) => {
                 <div className="bleftdiv">
                   <img
                     id="bimg"
-                    src={`http://localhost:3000/Images/` + item.image}
+                    src={`http://localhost:3000/` + item.itemImage}
                     alt=""
                   />
                 </div>
