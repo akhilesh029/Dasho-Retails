@@ -24,9 +24,9 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
-// <<<<<<< HEAD
+
 // mongoose.connect("mongodb://localhost:27017/seller");
-// =======
+
 // app.use(express.static('public'));
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
@@ -41,7 +41,9 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 //mongoURL for global connection
 // const mongoURL = process.env.MONGODB_URL;
 // const DB = 'mongodb+srv://akhilesheka0100:mpss205152@cluster0.ihgex.mongodb.net/'
+
 const mongoURL = 'mongodb+srv://akhilesheka0100:mpss205152@cluster0.ihgex.mongodb.net/dasho?retryWrites=true&w=majority&appName=Cluster0'
+
 
 mongoose.connect(mongoURL, {
 }).then(()=>{
@@ -62,6 +64,7 @@ const storage = multer.diskStorage({
 const upload = multer({
     storage: storage
 })
+
 
 
 
@@ -230,7 +233,6 @@ app.post('/sellerpage', upload.single('file'), (req, res) => {
     })
         .then(Sellerpage => res.json(Sellerpage))
         .catch(err => res.json(err))
-
 });
 
 
@@ -267,6 +269,7 @@ app.get("/user", (req, res) => {
 // })
 
 // fetching shopcategory
+
 app.get("/api/shopcategory", (req, res) => {
     // Querying shop categories from the model (assuming shopCategory is a field in the model)
     BusinessformModel.find({}, 'shopCategory') // Fetch only the shopCategory field
@@ -277,6 +280,8 @@ app.get("/api/shopcategory", (req, res) => {
         })
         .catch(err => res.status(500).json({ message: "Error fetching shop categories", error: err }));
 });
+
+
 
 
 app.post('/orders', (req, res)=>{
@@ -315,6 +320,7 @@ app.post('/businessform', upload.fields([
     { name: 'shopImage', maxCount: 1 }
   ]), async (req, res) => {
     const { email, businessName, ownerName, contactNumber, businessContactNumber, gstNumber, hasGst, shopCategory } = req.body;
+
   
     // Get the file paths for gstCertificate and shopImage
     const gstCertificatePath = req.files && req.files['gstCertificate'] ? req.files['gstCertificate'][0].path : null;
@@ -323,6 +329,7 @@ app.post('/businessform', upload.fields([
     console.log("GST Certificate Path:", gstCertificatePath);
     console.log("Shop Image Path:", shopImagePath);
   
+
     try {
       const userDetail = new BusinessformModel({
         email,
@@ -345,6 +352,21 @@ app.post('/businessform', upload.fields([
     }
   });
   
+
+
+// ================================================= Fetch shops(shivam) ============================================================
+
+app.get("/api/shops", async (req, res) => {
+    try {
+        const shops = await AlluserdetailsModel.find();
+        console.log(shops);
+        res.status(200).json(shops);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Server error, unable to fetch Shops details" });
+    }
+});
+
 
 
 

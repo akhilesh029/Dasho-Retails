@@ -24,13 +24,9 @@ import Form from './Pages/detailsVerification/detailsVerification';
 import BusinessForm from './Pages/BusinessForm/BusinessForm';
 import DistributionForm from './Pages/DistributionForm/DistributionForm';
 import Distributors from './Pages/Distributors/Distributors';
-
 import PricingTable from './Pages/PremiumPlan/PremiumPlan';
-
 import ShopPage from './Pages/ShopPage/ShopPage';
 // import AllShop from './components/AllShop/AllShop';
-
-
 
 
 function App() {
@@ -40,7 +36,7 @@ function App() {
     
    <BrowserRouter>
    {!isShopPage && (
-          <div className='headerrrr'>
+          <div>
             <Header />
             <Navbar />
           </div>
@@ -59,18 +55,12 @@ function App() {
           <Route path='/pay' element = {<PayMethod />}/>
           <Route path='/form' element = {<Form />}/>
           <Route path='/businessform' element = {<BusinessForm />}/>
+          {/* <Route path="/shop/:id" element={<ShopPage />} /> */}
           {/* <Route path='/distributionform' element = {<DistributionForm />}/> */}
           {/* <Route path='/distributors' element = {<Distributors />}/> */}
 
           <Route path='/pricingtable' element = {<PricingTable />}/>
-
-
-
-          
-      
-
           <Route path='/shop/:shopName' element = {<ShopPage />}/>
-
       </Routes>
    </div>
 <Footer />

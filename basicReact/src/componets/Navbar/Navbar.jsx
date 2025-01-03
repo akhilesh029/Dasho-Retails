@@ -6,15 +6,7 @@ import Categories from '../Categories/Categories'
 function Navbar(){
     return(
            <div className="categories">
-            
-            {/* <div className="dropdown">
-               <div className="dropdown">
-                 <Dropdown />
-               </div>
-               <div className="dropdown">
-                 <Categories />
-               </div>
-            </div> */}
+          
                 <ul className='navbar_list'>
                     <li><a href="#">Clothes</a></li>
                     <li><a href="#">Cosmetics</a></li>
@@ -24,7 +16,7 @@ function Navbar(){
                     <li><a href="#">Books</a></li>
                     <li><a href="#">Fitness</a></li>
                     <li><a href="#">Toys</a></li>
-                    <li><a href="#">Mobile Accesories</a></li>
+                    {/* <li><a href="#">Mobile Accesories</a></li> */}
                 </ul>
           
            </div>

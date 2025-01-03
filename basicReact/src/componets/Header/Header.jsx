@@ -6,6 +6,8 @@ import { Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import ShowOnHOme from "../ShowOnHome/ShowOnHome";
 import Distributors from "../../Pages/Distributors/Distributors";
+import { FaSearch } from "react-icons/fa";
+
 
 function Header() {
   //---------------navigate to showonhome------------
@@ -23,34 +25,31 @@ function HomeRoute(){
 
   return (
     <>
-      <div className="headerEle">
-        <div id="header" className="logo">
-          <img id="reloadButton" onClick={HomeRoute} src={assets.logo2} alt="logo" />
-        </div>
-        <div id="header" className="div2">
-          <p>Shop</p>
-          <div className="verticalLine"></div>
-          <form className="headerform" action="">
-            <input placeholder="What are you looking for?..." type="text" />
-            <button type="submit">Search</button>
-          </form>
+      <div className="header">
+        {/* logo */}
+        <div  className="logo_div">
+           <img id="reloadButton" onClick={HomeRoute} src={assets.logo2} alt="logo" />
         </div>
 
-        <ul className="menu">
-          <li className="menu-item">
-            <a href="">Cart Items</a>
-          </li>
-          <li className="menu-item">
-            <a href="/distributors">Distribution</a>
-          </li>
-          <li className="menu-item">
-            <a href="">Contact</a>
-          </li>
+        {/* Search Bar */}
+        <div className="search-bar main_search_bar">
+                     <FaSearch className="search-icon" />
+                    <input
+                     type="text"
+                     placeholder="Search..."
+                     className="search-input"
+                    />
+         </div>
+
+  <div className="header_list">
+       <ul className="menu">
+
           <li className="menu-item dropdown">
             <Firebase />
           </li>
         </ul>
-
+  </div>
+       
         {/* <button className="headerbtn">Cart</button> */}
       </div>
     </>
@@ -58,3 +57,5 @@ function HomeRoute(){
 }
 
 export default Header;
+
+// #FFC300;
