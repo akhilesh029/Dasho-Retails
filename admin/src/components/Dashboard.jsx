@@ -21,15 +21,23 @@ const Dashboard = () => {
 
     // Fetch categories when the component mounts
     useEffect(() => {
+        fetchCategories();
+    }, []);
+
+    const fetchCategories = () => {
         axios.get('http://localhost:3000/api/categories')
             .then((response) => {
-                setCategories(response.data);
-                console.log(response.data);
+                const validatedCategories = response.data.map((category) => ({
+                    ...category,
+                    image: category.image || 'default-image.jpg', // Fallback for missing images
+                }));
+                setCategories(validatedCategories);
+                setError('');
             })
             .catch((err) => {
                 setError('Failed to load categories');
             });
-    }, []);
+    };
 
     // Handle adding a new category
     const handleAddCategory = (e) => {
@@ -57,7 +65,7 @@ const Dashboard = () => {
                 setNewCategoryImage(null);
                 setSuccess('Category added successfully');
                 setError('');
-                setTimeout(() => setSuccess(''), 3000);  // Clear success message after 3 seconds
+                setTimeout(() => setSuccess(''), 3000); // Clear success message after 3 seconds
             })
             .catch((err) => {
                 setError('Failed to add category');
@@ -65,7 +73,7 @@ const Dashboard = () => {
             });
     };
 
-    // Handle deleting a category
+    // Handle deleting a category with double confirmation
     const handleDeleteConfirmation = (id) => {
         const firstConfirmation = window.confirm("Are you sure you want to delete this category?");
         if (firstConfirmation) {
@@ -75,12 +83,12 @@ const Dashboard = () => {
             }
         }
     };
-    
+
     const handleDeleteCategory = async (id) => {
         try {
             const response = await fetch(`http://localhost:3000/api/categories/remove/${id}`, { method: "DELETE" });
             const result = await response.json();
-    
+
             if (response.ok) {
                 alert(result.message);
                 fetchCategories(); // Refresh categories
@@ -90,17 +98,6 @@ const Dashboard = () => {
         } catch (error) {
             console.error("Error deleting category:", error);
         }
-    };
-
-    // Fetch all categories after deletion
-    const fetchCategories = () => {
-        axios.get('http://localhost:3000/api/categories')
-            .then((response) => {
-                setCategories(response.data);
-            })
-            .catch((err) => {
-                setError('Failed to load categories');
-            });
     };
 
     return (
@@ -130,14 +127,18 @@ const Dashboard = () => {
                                         <td>{category.name}</td>
                                         <td>
                                             <img
-                                                src={`http://localhost:3000/${category.image.startsWith('/') ? category.image.slice(1) : category.image}`}
-                                                alt={category.name}
+                                                src={`http://localhost:3000/${
+                                                    category.image && category.image.startsWith('/')
+                                                        ? category.image.slice(1)
+                                                        : category.image
+                                                }`}
+                                                alt={category.name || 'Category'}
                                                 className="table-category-image"
                                             />
                                         </td>
                                         <td>
-                                            <button 
-                                                onClick={() => handleDeleteConfirmation(category.id)} 
+                                            <button
+                                                onClick={() => handleDeleteConfirmation(category.id)}
                                                 className="btn-delete"
                                             >
                                                 Delete

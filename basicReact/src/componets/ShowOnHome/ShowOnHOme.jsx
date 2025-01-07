@@ -115,7 +115,7 @@ const ShowOnHOme = () => {
       .then((res) => {
         setItems(res.data);
         setRes(res.data);
-        
+        console.log("ShowOnHOme:",res.data)        
       })
       .catch((err) => console.log(err));
   }, []);

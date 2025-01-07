@@ -17,6 +17,8 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
+
+
 // =============================================== Add Category Route ============================================
 router.post("/add", upload.single("image"), async (req, res) => {
     const { name, description } = req.body;
@@ -46,8 +48,8 @@ router.post("/add", upload.single("image"), async (req, res) => {
     }
 });
 
-//==========================================================fetch all category ==================================
 
+//==========================================================fetch all category ==================================
 router.get("/", async (req, res) => {
     try {
         const categories = await Category.find();

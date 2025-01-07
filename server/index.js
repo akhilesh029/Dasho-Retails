@@ -26,22 +26,10 @@ app.use(cors())
 
 
 // app.use(express.static('public'));
-app.use('/public', express.static(path.join(__dirname, 'public')));
+app.use('/public/', express.static(path.join(__dirname, 'public')));
 
 
-// mongoURL for local connection
-// const mongoURL = process.env.MONGODB_URL_LOCAL ;
-
-// mongoose.connect("mongodb://localhost:27017/sellerpage");
-// mongoose.connect("mongodb://localhost:27017/seller");
-
-// to connect mongodb atlas
-//mongoURL for global connection
-// const mongoURL = process.env.MONGODB_URL;
-// const DB = 'mongodb+srv://akhilesheka0100:mpss205152@cluster0.ihgex.mongodb.net/'
-const mongoURL = 'mongodb+srv://akhilesheka0100:mpss205152@cluster0.ihgex.mongodb.net/dasho?retryWrites=true&w=majority&appName=Cluster0'
-
-mongoose.connect(mongoURL, {
+mongoose.connect(process.env.MONGODB_URL, {
 }).then(()=>{
     console.log('mongodb connected')
 }).catch((err)=> console.log('mongodb error'))
@@ -63,6 +51,7 @@ const upload = multer({
 
 
 
+// app.use("/api/categories",categoryRoutes)
 
 //------------- upload product by seller with time limit------------------
 
@@ -253,6 +242,7 @@ app.get('/api/categories', (req, res) => {
       .catch(err => res.json(err))
 })
 
+
 // -------------fetching all shops-----------------------
 app.get('/api/shops', (req, res) => {
   BusinessformModel.find()
@@ -292,6 +282,7 @@ app.get("/user", (req, res) => {
 //         .then(users => res.json(users))
 //         .catch(err => res.json(err))
 // })
+
 
 // fetching shopcategory
 app.get("/api/shopcategory", (req, res) => {
