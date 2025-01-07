@@ -28,8 +28,13 @@ function SellerPage({ userEmail }) {
   const [itemName, setItemName] = useState("");
   const [itemDescription, setItemDescription] = useState("");
   const [itemPrice, setItemPrice] = useState("");
-  const [file, setFile] = useState();
+  const [file, setFile] = useState(null);
   const [sellerEmail, setSellerEmail] = useState(m.userEmail);
+  const [timeLimit, setTimeLimit] = useState(""); // State for time limit
+  const [timeUnit, setTimeUnit] = useState("");   // State for time unit (hours or days)
+  const [productCount, setProductCount] = useState(""); // State for product count
+  
+
 
   const [image, setImage] = useState();
   const [name, setName] = useState();
@@ -41,10 +46,6 @@ function SellerPage({ userEmail }) {
 
 
   const [selectedItem, setSelectedItem] = useState("Dashboard");
-
-  
-  
-
 
   const handleClick = (itemName) => {
     setSelectedItem(itemName),
@@ -88,21 +89,41 @@ function SellerPage({ userEmail }) {
       .catch((err) => console.log(err));
   };
 
-  const handleItemNameChange = (event) => {
-    setItemName(event.target.value);
-  };
+// -------------------------------------------------------
+const handleItemNameChange = (event) => {
+  setItemName(event.target.value);
+};
 
-  const handleItemDescriptionChange = (event) => {
-    setItemDescription(event.target.value);
-  };
+const handleItemDescriptionChange = (event) => {
+  setItemDescription(event.target.value);
+};
 
-  const handleItemPriceChange = (event) => {
-    setItemPrice(event.target.value);
-  };
+const handleItemPriceChange = (event) => {
+  setItemPrice(event.target.value);
+};
 
-  const handleItemImageChange = (event) => {
-    setFile(event.target.files[0]);
-  };
+const handleItemImageChange = (event) => {
+  setFile(event.target.files[0]);
+};
+
+// Handler for time limit
+const handleTimeLimitChange = (event) => {
+  setTimeLimit(event.target.value);
+};
+
+// Handler for time unit (hours or days)
+const handleTimeUnitChange = (event) => {
+  setTimeUnit(event.target.value);
+};
+
+// New handler for product count
+const handleProductCountChange = (event) => {
+  setProductCount(event.target.value);
+};
+
+
+
+  // ===========================================================
 
   const SeeShippedOrders = ()=>{
     setShipped(true)
@@ -125,53 +146,70 @@ useEffect(() => {
   //-------------------------------------------------
 
   // Handle form submission
-  const handleSubmit = (event) => {
-    event.preventDefault();
+// Handle form submission
+const handleSubmit = (event) => {
+  event.preventDefault();
 
-    // Validation
-    if (!itemName || !itemDescription || !itemPrice || !file || !sellerEmail) {
-      alert("Please fill in all fields.");
-      return;
-    }
+  // Validation
+  if (
+    !itemName ||
+    !itemDescription ||
+    !itemPrice ||
+    !file ||
+    !sellerEmail ||
+    !timeLimit ||
+    !timeUnit ||
+    !productCount
+  ) {
+    alert("Please fill in all fields.");
+    return;
+  }
 
-    const additem = document.getElementById("sellerbtn");
-    additem.innerHTML = "Adding item...";
-    additem.style.color = "orange";
-    additem.disabled = true;
+  const additem = document.getElementById("sellerbtn");
+  additem.innerHTML = "Adding item...";
+  additem.style.color = "orange";
+  additem.disabled = true;
 
-    // Create FormData
-    const formData = new FormData();
-    formData.append("itemName", itemName);
-    formData.append("itemDescription", itemDescription);
-    formData.append("itemPrice", itemPrice);
-    formData.append("file", file);
-    formData.append("sellerEmail", sellerEmail);
+  // Create FormData
+  const formData = new FormData();
+  formData.append("itemName", itemName);
+  formData.append("itemDescription", itemDescription);
+  formData.append("itemPrice", itemPrice);
+  formData.append("file", file);
+  formData.append("sellerEmail", sellerEmail);
+  formData.append("timeLimit", timeLimit); // Add time limit
+  formData.append("timeUnit", timeUnit);   // Add time unit (hours or days)
+  formData.append("productCount", productCount); // Add product count
 
-    // Send data to server
-    axios
-      .post("http://localhost:3000/sellerpage", formData)
-      .then((response) => {
-        console.log("Response:", response.data);
-        alert("Item added successfully!");
-        additem.innerHTML = "Item added Successfully!";
-        additem.style.color = "blue";
-        additem.disabled = false;
+  // Send data to server
+  axios
+    .post("http://localhost:3000/uploadProduct", formData)
+    .then((response) => {
+      console.log("Response:", response.data);
+      alert("Item(s) added successfully!");
+      additem.innerHTML = "Item(s) added Successfully!";
+      additem.style.color = "blue";
+      additem.disabled = false;
 
-        // Optionally clear the form
-        setItemName("");
-        setItemDescription("");
-        setItemPrice("");
-        setFile(null);
-        setSellerEmail("");
-      })
-      .catch((error) => {
-        console.error("Error adding item:", error);
-        alert("Failed to add the item. Please try again.");
-        additem.innerHTML = "Add Item";
-        additem.style.color = "red";
-        additem.disabled = false;
-      });
-  };
+      // Optionally clear the form
+      setItemName("");
+      setItemDescription("");
+      setItemPrice("");
+      setFile(null);
+      setSellerEmail("");
+      setTimeLimit(""); // Clear time limit
+      setTimeUnit("");  // Clear time unit
+      setProductCount(""); // Clear product count
+    })
+    .catch((error) => {
+      console.error("Error adding item:", error);
+      alert("Failed to add the item(s). Please try again.");
+      additem.innerHTML = "Add Item";
+      additem.style.color = "red";
+      additem.disabled = false;
+    });
+};
+
 
   
   
@@ -180,12 +218,9 @@ useEffect(() => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/getImage")
+      .get("http://localhost:3000/showproduct")
       .then((res) => {
-        setImage(res.data[0].image);
-        setName(res.data[0].itemName);
-        setPrice(res.data[0].itemPrice);
-        setDescription(res.data[0].itemDescription);
+      
         setRes(res.data);
         console.log(res.data)
         setLoading(false); // Stop loading
@@ -226,6 +261,62 @@ function handleShipOrder(orderData, orderId) {
   }
 }
 
+
+
+// ==============================Inactive_products=================================
+
+const [inactiveProducts, setInactiveProducts] = useState([]);
+// const [loading, setLoading] = useState(true);
+const [error, setError] = useState(null);
+const [reactivateProduct, setReactivateProduct] = useState({ productId: "", timeLimit: "", timeUnit: "hours" });
+
+
+const showInactiveProducts=()=>{
+
+    // Fetch inactive products for the seller
+    const fetchInactiveProducts = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3000/inactiveProducts/${m.userEmail}`);
+        setInactiveProducts(response.data.inactiveProducts);
+        setLoading(false);
+      } catch (err) {
+        setError(err.response?.data?.message || "Error fetching products.");
+        setLoading(false);
+      }
+    };
+
+    fetchInactiveProducts();
+  }
+// ===============================Reactivating Products==================================
+  const handleReactivate = async (e) => {
+    e.preventDefault();
+
+    if (!reactivateProduct.productId || !reactivateProduct.timeLimit || !reactivateProduct.timeUnit) {
+      alert("Please fill in all fields to reactivate the product.");
+      return;
+    }
+
+    try {
+      const response = await axios.put(`http://localhost:3000/reactivateProduct/${reactivateProduct.productId}`, {
+        timeLimit: reactivateProduct.timeLimit,
+        timeUnit: reactivateProduct.timeUnit,
+      });
+
+      alert(response.data.message);
+      setInactiveProducts((prev) =>
+        prev.filter((product) => product._id !== reactivateProduct.productId)
+      );
+      setReactivateProduct({ productId: "", timeLimit: "", timeUnit: "hours" });
+    } catch (err) {
+      alert(err.response?.data?.error || "Error reactivating product.");
+    }
+  }
+
+  if (loading) return <div>Loading inactive products...</div>;
+  if (error) return <div>Error: {error}</div>;
+
+
+
  
 
   return (
@@ -237,18 +328,17 @@ function handleShipOrder(orderData, orderId) {
         <li className={`sidepanellist ${selectedItem === "Dashboard" ? 'selected' : ''}`} onClick={() => handleClick("Dashboard")}>Dashboard</li>
         <li className={`sidepanellist ${selectedItem === "Upload" ? 'selected' : ''}`} onClick={() => handleClick("Upload")}>Upload Item</li>
         <li className={`sidepanellist ${selectedItem === "Products" ? 'selected' : ''}`} onClick={() => handleClick("Products")}>Products</li>
-        <li className={`sidepanellist ${selectedItem === "Shipping" ? 'selected' : ''}`} onClick={handleShipping}>Shipping</li>
-        <li className={`sidepanellist ${selectedItem === "Orders" ? 'selected' : ''}`} onClick={handleOrders}>Orders</li>
-        <li className={`sidepanellist ${selectedItem === "Shipped Orders" ? 'selected' : ''}`} onClick={SeeShippedOrders}>Shipped Orders</li>
-        <li className="sidepanellist">Completed Order</li>
-        <li className="sidepanellist">Support</li>
-        <li className="sidepanellist">Customer Feedback</li>
-        <li className="sidepanellist">Revenue</li>
+        <li className={`sidepanellist ${selectedItem === "Inactive" ? 'selected' : ''}`} onClick={() => {handleClick("Inactive");showInactiveProducts()}}>Inactive Products</li>
+        <li className={`sidepanellist ${selectedItem === "Orders" ? 'selected' : ''}`} onClick={() => handleClick("Orders")}>Orders</li>
+        <li className={`sidepanellist ${selectedItem === "ShippedOrders" ? 'selected' : ''}`} onClick={() => handleClick("ShippedOrders")}>Shipped Orders</li>
+        <li className={`sidepanellist ${selectedItem === "CompletedOrders" ? 'selected' : ''}`} onClick={() => handleClick("CompletedOrders")}>Completed Orders</li>
+        <li className={`sidepanellist ${selectedItem === "Support" ? 'selected' : ''}`} onClick={() => handleClick("Support")}>Support</li>
+        <li className={`sidepanellist ${selectedItem === "Feedback" ? 'selected' : ''}`} onClick={() => handleClick("Feedback")}>Customer Feedback</li>
         <li className="visit-shop-list-item" style={{ cursor: 'pointer' }}>
         <Link to="/shop" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'inherit' }}>
            <IoMdSettings /> Visit Your Shop
-      </Link>
-    </li>
+       </Link>
+       </li>
       </ul>
         </div>
 
@@ -309,63 +399,99 @@ function handleShipOrder(orderData, orderId) {
         
 {/* ================================================ Add Item ========================================================= */}
 {selectedItem === "Upload" && (
-          <div className="sellerdiv">
-            <form className="seller-form" onSubmit={handleSubmit}>
-            <h2>Upload your Product</h2>
-              <div className="form-fields">
-                <label htmlFor="itemName">Product Name:</label>
-                <input
-                  type="text"
-                  id="itemName"
-                  value={itemName}
-                  onChange={handleItemNameChange}
-                  required
-                />
-              </div>
-              <div className="form-fields">
-                <label htmlFor="itemPrice">Price:</label>
-                <input
-                  type="number"
-                  id="itemPrice"
-                  value={itemPrice}
-                  onChange={handleItemPriceChange}
-                  required
-                />
-              </div>
+  <div className="sellerdiv">
+    <form className="seller-form" onSubmit={handleSubmit}>
+      <h2>Upload your Product</h2>
+      <div className="form-fields">
+        <label htmlFor="itemName">Product Name:</label>
+        <input
+          type="text"
+          id="itemName"
+          value={itemName}
+          onChange={handleItemNameChange}
+          required
+        />
+      </div>
+      <div className="form-fields">
+        <label htmlFor="itemPrice">Price:</label>
+        <input
+          type="number"
+          id="itemPrice"
+          value={itemPrice}
+          onChange={handleItemPriceChange}
+          required
+        />
+      </div>
 
-              <div className="form-fields">
-                <label htmlFor="itemDescription">Item Description:</label>
-                <textarea
-                  id="itemDescription"
-                  value={itemDescription}
-                  onChange={handleItemDescriptionChange}
-                  required
-                />
-              </div>
+      <div className="form-fields">
+        <label htmlFor="itemDescription">Item Description:</label>
+        <textarea
+          id="itemDescription"
+          value={itemDescription}
+          onChange={handleItemDescriptionChange}
+          required
+        />
+      </div>
 
-              <div className="form-fields imageInput">
-                <label htmlFor="file">Item Image:</label>
-                <input
-                  type="file"
-                  id="file"
-                  // accept="image/*"
-                  accept="image"
-                  onChange={handleItemImageChange}
-                  required
-                />
-              </div>
-              <button  className="sellerbtn" type="submit">
-                  Upload 
-              </button>
-              
-            </form>
-            <p id="sellerbtn"></p>
-            <br />
+      <div className="form-fields imageInput">
+        <label htmlFor="file">Item Image:</label>
+        <input
+          type="file"
+          id="file"
+          accept="image/*"
+          onChange={handleItemImageChange}
+          required
+        />
+      </div>
 
+       {/* Count Field */}
+       <div className="form-fields">
+        <label htmlFor="productCount">Number of Products:</label>
+        <input
+          type="number"
+          id="productCount"
+          value={productCount}
+          onChange={handleProductCountChange}
+          required
+        />
+      </div>
 
+      {/* Time Limit Fields */}
+      <div className="form-fields">
+        <label htmlFor="timeUnit">Time Unit:</label>
+        <select
+          id="timeUnit"
+          value={timeUnit}
+          onChange={handleTimeUnitChange}
+          required
+        >
+          <option value="">--Select Time Unit--</option>
+          <option value="hours">Hours</option>
+          <option value="days">Days</option>
+        </select>
+      </div>
+      <div className="form-fields">
+        <label htmlFor="timeLimit">Time Limit:</label>
+        <input
+          type="number"
+          id="timeLimit"
+          value={timeLimit}
+          onChange={handleTimeLimitChange}
+          required
+        />
+      </div>
 
-          </div>
-        )}
+     
+
+      <button className="sellerbtn" type="submit">
+        Upload
+      </button>
+    </form>
+    <p id="sellerbtn"></p>
+    <br />
+  </div>
+)}
+
 
 {/* ================================================= Products Available ==================================================== */}
 {selectedItem === "Products" && (
@@ -379,6 +505,7 @@ function handleShipOrder(orderData, orderId) {
             <th>Price</th>
             <th>Description</th>
             <th>Action</th>
+            <th>Active Status</th>
           </tr>
          </thead>
          <tbody>
@@ -389,7 +516,7 @@ function handleShipOrder(orderData, orderId) {
                         <td>
                             <img
                                 className="photo"
-                                src={`http://localhost:3000/public/Images/` + item.image}
+                                src={`http://localhost:3000/` + item.itemImage}
                                 alt="item"
                             />
                         </td>
@@ -398,6 +525,10 @@ function handleShipOrder(orderData, orderId) {
                         <td>{item.itemDescription}</td>
                         <td>
                             <button style={{ color: "red" }} onClick={() => deleteData(item._id)}>Delete</button>
+                        </td>
+                        <td>
+                           {item.isActive ? "Active" : "Inactive"}
+
                         </td>
                     </tr>
                 );
@@ -415,12 +546,142 @@ function handleShipOrder(orderData, orderId) {
 )}
 
 
+{/* =========================Inactive Products================================= */}
+{selectedItem === "Inactive" && (
+  <div className="inactive-products-container">
+    <h1 className="inactive-products-title">Inactive Products</h1>
+    {inactiveProducts.length === 0 ? (
+      <p className="no-products-message">No inactive products found.</p>
+    ) : (
+      <table className="inactive-products-table">
+        <thead>
+          <tr>
+            <th>Product Image</th>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Expiry Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {inactiveProducts.map((product) => (
+            <tr key={product._id} className="inactive-product-item">
+             <td>
+                            <img
+                                className="photo"
+                                src={`http://localhost:3000/` + product.itemImage}
+                                alt="productImage"
+                            />
+                        </td>              <td className="product-name">{product.itemName}</td>
+              <td className="product-price">₹{product.itemPrice}</td>
+              <td className="product-description">{product.itemDescription}</td>
+              <td className="product-expiry">
+                {new Date(product.expiryDate).toLocaleString()}
+              </td>
+              <td className="product-status">
+                {product.isActive ? "Active" : "Inactive"}
+              </td>
+              <td>
+                <button
+                  className="reactivate-button"
+                  onClick={() =>
+                    setReactivateProduct({
+                      ...reactivateProduct,
+                      productId: product._id,
+                    })
+                  }
+                >
+                  Reactivate
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    )}
 
-{showShipping && (
-          <div className="bottomPage">
-            <h1>This is Shipping Section</h1>
-          </div>
-        )}
+    {reactivateProduct.productId && (
+      <div className="reactivate-form-container">
+        <h2 className="reactivate-form-title">Reactivate Product</h2>
+        <form className="reactivate-form" onSubmit={handleReactivate}>
+          <label className="form-label">
+            Time Limit:
+            <input
+              className="form-input"
+              type="number"
+              value={reactivateProduct.timeLimit}
+              onChange={(e) =>
+                setReactivateProduct({
+                  ...reactivateProduct,
+                  timeLimit: e.target.value,
+                })
+              }
+              required
+            />
+          </label>
+          <label className="form-label">
+            Time Unit:
+            <select
+              className="form-select"
+              value={reactivateProduct.timeUnit}
+              onChange={(e) =>
+                setReactivateProduct({
+                  ...reactivateProduct,
+                  timeUnit: e.target.value,
+                })
+              }
+            >
+              <option value="hours">Hours</option>
+              <option value="days">Days</option>
+            </select>
+          </label>
+          <button className="form-submit-button" type="submit">
+            Reactivate
+          </button>
+        </form>
+      </div>
+    )}
+  </div>
+)}
+
+
+{/* =============================Orders==================================== */}
+{selectedItem === "Orders" && (
+  <div>
+   <h1>Orders</h1>
+  </div>
+)}
+
+{/* ==================================ShippedOrders============================== */}
+{selectedItem === "ShippedOrders" && (
+  <div>
+   <h1>ShippedOrders</h1>
+  </div>
+)}
+
+{/* ==============================CompletedOrders========================= */}
+{selectedItem === "CompletedOrders" && (
+  <div>
+   <h1>CompletedOrders</h1>
+  </div>
+)}
+
+{/* =============================Support====================================== */}
+{selectedItem === "Support" && (
+  <div>
+   <h1>Support</h1>
+  </div>
+)}
+
+{/* ==============================Feedback====================================== */}
+{selectedItem === "Feedback" && (
+  <div>
+   <h1>Feedback</h1>
+  </div>
+)}
+
 
 {/* --------------------orders-------------------- */}
 {isOrder && (
@@ -517,9 +778,6 @@ function handleShipOrder(orderData, orderId) {
             </ul>
           </div>
         )}
-
-
-
       </div>
     </>
   );

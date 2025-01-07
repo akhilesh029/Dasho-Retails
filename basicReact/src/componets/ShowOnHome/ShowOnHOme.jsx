@@ -85,19 +85,7 @@ const ShowOnHOme = () => {
 
     }
   )
-    // .then(data => {
-    //   // Handle the response from the backend
-    //   if (data.success) {
-    //     // Order was placed successfully, show a success message or redirect to a confirmation page
-    //     console.log('Order placed successfully:', data);
-    //     // Clear the cart
-    //     setSelectedItems([]);
-    //     setCartTotal(0);
-    //   } else {
-    //     // Handle errors or show an error message
-    //     console.error('Error placing order:', data.error);
-    //   }
-    // })
+  
     .catch(error => {
       // Handle network errors or other exceptions
       console.error('Error:', error);
@@ -123,9 +111,7 @@ const ShowOnHOme = () => {
   }
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3000/getImage")
-
+    axios.get("http://localhost:3000/showproduct")
       .then((res) => {
         setItems(res.data);
         setRes(res.data);
@@ -143,34 +129,44 @@ const ShowOnHOme = () => {
     <>
    
 <Header />
-      <div className="showonHomeMain">
-        {res.map((item) => {
-          return (
-            <>
-              <div className="showonHome">
-                <img
-                  className="homephoto"
-                  src={`http://localhost:3000/public/Images/` + item.image}
-                  alt=""
-                />
-                <h1 key={item._id}>{item.itemName}</h1>
-                <p key={item._id}>{item.itemDescription}</p>
-                <p className="price" key={item._id}>
-                  ₹ {item.itemPrice}
-                </p>
-                <div id="cartBuybtn">
-                  <button key={item._id} onClick={() => buyNow(item._id)}>
-                    Buy
-                  </button>
-                  <button id="cartAdded" onClick={() => handleAddItem(item)}>
-                     Cart
-                  </button>
-                </div>
-              </div>
-            </>
-          );
-        })}
-      </div>
+<div className="showonHomeMain">
+  {res.length > 0 ? (
+    res
+      .filter((item) => item.isActive) // Filter items where isActive is true
+      .map((item) => {
+        return (
+          <div className="showonHome" key={item._id}>
+            {item.itemImage && (
+              <img
+                className="homephoto"
+                src={`http://localhost:3000/` + item.itemImage}
+                alt={item.itemName || "Item image"}
+              />
+            )}
+            <h1>{item.itemName}</h1>
+            <p>{item.itemDescription || "No description available"}</p>
+            {item.itemPrice > 0 ? (
+              <p className="price">₹ {item.itemPrice}</p>
+            ) : (
+              <p className="price">Price not available</p>
+            )}
+            <div id="cartBuybtn">
+              <button onClick={() => buyNow(item._id)}>Buy</button>
+              <button id="cartAdded" onClick={() => handleAddItem(item)}>
+                Cart
+              </button>
+            </div>
+          </div>
+        );
+      })
+  ) : (
+    <p>No items to display</p>
+  )}
+</div>
+
+
+
+
       <button class="view-more-button">View More</button>
       <button class="view-cart-items" onClick={handleviewCartItems} >View Cart Items</button>
       {para &&
@@ -184,7 +180,7 @@ const ShowOnHOme = () => {
           <li key={item._id} className="cartItemList">
              <img
                   className="homephoto"
-                  src={`http://localhost:3000/Images/` + item.image}
+                  src={`http://localhost:3000/` + item.itemImage}
                   alt=""
                 />
                 <p>{item.itemName}</p>

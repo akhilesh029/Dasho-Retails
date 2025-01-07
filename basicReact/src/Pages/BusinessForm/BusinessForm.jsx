@@ -13,62 +13,72 @@ function BusinessForm() {
   const navigate = useNavigate();
 
   // Form state
-  const [businessName, setBusinessName] = useState("");
-  const [ownerName, setOwnerName] = useState("");
-  const [contactNumber, setContactNumber] = useState("");
-  const [businessContactNumber, setBusinessContactNumber] = useState("");
-  const [gstNumber, setGstNumber] = useState("");
-  const [gstCertificate, setGstCertificate] = useState(null);
-  const [hasGst, setHasGst] = useState(false);
-  const [shopCategory, setShopCategory] = useState(""); // Added state for shop category
+const [businessName, setBusinessName] = useState("");
+const [ownerName, setOwnerName] = useState("");
+const [contactNumber, setContactNumber] = useState("");
+const [businessContactNumber, setBusinessContactNumber] = useState("");
+const [gstNumber, setGstNumber] = useState("");
+const [gstCertificate, setGstCertificate] = useState(null);
+const [hasGst, setHasGst] = useState(false);
+const [shopCategory, setShopCategory] = useState(""); // Added state for shop category
+const [shopImage, setShopImage] = useState(null); // Added state for shop image
 
-  const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent the default form submission behavior
+const handleSubmit = async (e) => {
+  e.preventDefault(); // Prevent the default form submission behavior
 
-    // Validation: Ensure a category is selected
-    if (!shopCategory) {
-      alert("Please select a shop category.");
-      return;
-    }
+  // Validation: Ensure a category is selected
+  if (!shopCategory) {
+    alert("Please select a shop category.");
+    return;
+  }
 
-    const formData = new FormData();
-    formData.append("email", email);
-    formData.append("businessName", businessName);
-    formData.append("ownerName", ownerName);
-    formData.append("contactNumber", contactNumber);
-    formData.append("businessContactNumber", businessContactNumber);
-    formData.append("gstNumber", gstNumber);
-    formData.append("hasGst", hasGst);
-    formData.append("shopCategory", shopCategory); // Include shop category in form data
+  // Validation: Ensure a shop image is uploaded
+  if (!shopImage) {
+    alert("Please upload a shop image.");
+    return;
+  }
 
-    if (gstCertificate) {
-      formData.append("gstCertificate", gstCertificate);
-    }
+  const formData = new FormData();
+  formData.append("email", email);
+  formData.append("businessName", businessName);
+  formData.append("ownerName", ownerName);
+  formData.append("contactNumber", contactNumber);
+  formData.append("businessContactNumber", businessContactNumber);
+  formData.append("gstNumber", gstNumber);
+  formData.append("hasGst", hasGst);
+  formData.append("shopCategory", shopCategory); // Include shop category in form data
+  formData.append("shopImage", shopImage); // Include shop image in form data
 
-    try {
-      const response = await axios.post("http://localhost:3000/savedetails", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+  if (gstCertificate) {
+    formData.append("gstCertificate", gstCertificate);
+  }
 
-      console.log("Form data submitted successfully:", response.data);
+  try {
+    const response = await axios.post("http://localhost:3000/businessform", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
 
-      // Reset the form fields
-      setBusinessName("");
-      setOwnerName("");
-      setContactNumber("");
-      setBusinessContactNumber("");
-      setGstNumber("");
-      setGstCertificate(null);
-      setHasGst(false);
-      setShopCategory(""); // Reset shop category
+    console.log("Form data submitted successfully:", response.data);
 
-      navigate("/welcome", { replace: true, state: { email } });
-    } catch (error) {
-      console.error("Error submitting form data:", error);
-    }
-  };
+    // Reset the form fields
+    setBusinessName("");
+    setOwnerName("");
+    setContactNumber("");
+    setBusinessContactNumber("");
+    setGstNumber("");
+    setGstCertificate(null);
+    setHasGst(false);
+    setShopCategory(""); // Reset shop category
+    setShopImage(null); // Reset shop image
+
+    navigate("/welcome", { replace: true, state: { email } });
+  } catch (error) {
+    console.error("Error submitting form data:", error);
+  }
+};
+
 
   return (
     <div className="business">
@@ -84,8 +94,10 @@ function BusinessForm() {
         </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="business-form">
-      <h1>Fill the Bussiness Details</h1>
+{/* --------------------------------------------------------------------- */}
+<form onSubmit={handleSubmit} className="business-form">
+  <h1>Fill the Business Details</h1>
+
   <div>
     <label htmlFor="businessName">Business Name:</label>
     <input
@@ -175,8 +187,21 @@ function BusinessForm() {
     </select>
   </div>
 
+  {/* New Div for Shop Image */}
+  <div>
+    <label htmlFor="shopImage">Shop Image:</label>
+    <input
+      type="file"
+      id="shopImage"
+      accept="image/*"
+      onChange={(e) => setShopImage(e.target.files[0])}
+      required
+    />
+  </div>
+
   <button id="submitButton" type="submit">Submit</button>
 </form>
+
 
     </div>
   );
