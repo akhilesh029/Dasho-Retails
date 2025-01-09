@@ -11,9 +11,10 @@ const userdetailsSchema = new mongoose.Schema({
   gstCertificate: String,  // Path for GST Certificate
   shopCategory: String,
   shopImage: String,  // Path for Shop Image
+  isTrending: { type: Boolean, default: false }, // Tracks trending status
 });
 
 const BusinessformModel = mongoose.model("businessform", userdetailsSchema);
 
-// module.exports = AlluserdetailsModel;
+
 module.exports = BusinessformModel;

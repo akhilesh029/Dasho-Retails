@@ -26,7 +26,15 @@ const AllShop = () => {
           shops.map((shop) => (
             <div key={shop._id} className="shopCard">
               <h2 className="shop-title">{shop.businessName}</h2>
-              <img src={shopImage} alt={shop.businessName} />
+              <img
+                                    src={
+                                      shop.shopImage
+                                        ? `http://localhost:3000/${shop.shopImage}`
+                                        : placeholderImg
+                                    }
+                                    alt={shop.businessName}
+                                    className="card-image"
+                                  />
               <div className="rating-category">
                 <p className="shop-card-category">{shop.shopCategory}</p>
                   <p>{shop.rating}</p>

@@ -17,12 +17,16 @@ const OrderModel = require('./model/orders')
 const BusinessformModel = require('./model/businessform')
 const Product = require('./model/product')
 
+const trendinShopsRoutes = require('./routes/trendingshops'); 
+
 
 
 
 const app = express()
 app.use(express.json())
 app.use(cors())
+
+app.use('/api', trendinShopsRoutes);
 
 
 // app.use(express.static('public'));
@@ -250,12 +254,25 @@ app.get('/api/shops', (req, res) => {
       .catch(err => res.json(err))
 })
 
+//----------------fetching trending shops to on slider---------
+app.get('/api/shops/trending', (req, res) => {
+  BusinessformModel.find()
+      .then(allshop => res.json(allshop))
+      .catch(err => res.json(err))
+})
 
 
 //-------for geting productitems and data-------
 app.get('/showproduct', (req, res) => {
     Product.find()
         .then(sellerpage => res.json(sellerpage))
+        .catch(err => res.json(err))
+})
+
+//---------------fetching products for admin pannel--------------
+app.get('/api/products', (req, res) => {
+    Product.find()
+        .then(products => res.json(products))
         .catch(err => res.json(err))
 })
 

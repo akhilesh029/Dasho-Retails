@@ -22,19 +22,33 @@
 
 .card-body {
     padding: 20px;
+    display: flex;
+    flex-direction: row;
+    border: 1px solid black;
+    justify-content: center; /* Centers items horizontally */
+    gap: 150px;
 }
+.shop-image {
+    width: 100px; /* Adjust size as needed */
+    height: auto;
+    margin-top: 10px;
+    border-radius: 8px;
+}
+
+
 
 .shop-list {
     display: flex;
     flex-direction: column;
     gap: 20px;
+
 }
 
 .shop-item {
-    background-color: #f9f9f9;
+    background-color: white;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 0 10px black;
 }
 
 .shop-info {

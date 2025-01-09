@@ -44,11 +44,6 @@ const ShopPage = () => {
   }, [email]); // Dependency array includes 'email'
 
   console.log(shopDetails);
-  
- 
-  
-  
-  
 
   return (
     <div className="shop-page">

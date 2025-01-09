@@ -32,6 +32,7 @@ const Dashboard = () => {
                     image: category.image || 'default-image.jpg', // Fallback for missing images
                 }));
                 setCategories(validatedCategories);
+                console.log(validatedCategories)
                 setError('');
             })
             .catch((err) => {
@@ -124,15 +125,15 @@ const Dashboard = () => {
                                 {categories.map((category, index) => (
                                     <tr key={category.id}>
                                         <td>{index + 1}</td>
-                                        <td>{category.name}</td>
+                                        <td>{category.shopCategory}</td>
                                         <td>
                                             <img
                                                 src={`http://localhost:3000/${
-                                                    category.image && category.image.startsWith('/')
-                                                        ? category.image.slice(1)
-                                                        : category.image
+                                                    category.shopImage && category.shopImage.startsWith('/')
+                                                        ? category.shopImage.slice(1)
+                                                        : category.shopImage
                                                 }`}
-                                                alt={category.name || 'Category'}
+                                                alt={category.shopCategory || 'Category'}
                                                 className="table-category-image"
                                             />
                                         </td>

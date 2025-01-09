@@ -1,195 +1,154 @@
 /* General Styles */
-.slider-container {
-  width: 100%;
-  /* max-width: 1400px; */
-  margin: 0 auto;
-  padding: 20px;
-}
-
-/* Trending Shop */
-.trending-shop {
-  position: absolute;
-  margin-top: -77vh;
-  /* margin-left: 35%; */
-}
-
-/* Shop Container */
 .shop-container {
-  margin: auto;
-  height: 25vh;
-  margin-top: 15vh;
-  margin-bottom: 3vh;
-  font-family: "Inter", sans-serif;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 90vh;
-  background: linear-gradient(#ECEFFE, #CED6FB);
+  width: 100%;
+  padding: 2rem 0;
+  background-color: #f9f9f9;
 }
 
-/* Slider Cards */
-.slider-card {
-  background-color: #f7f7f7;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
+.slider-container {
+  max-width: 1200px;
+  margin: 0 auto;
   text-align: center;
-  border: 2px solid transparent;
+}
+
+.trending-shop {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+/* Slider Card Styles */
+.slider-card {
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.slider-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #444;
+  margin-bottom: 0.5rem;
 }
 
 .card-image {
   width: 100%;
-  height: auto;
-  border-radius: 10px;
+  height: 200px;
   object-fit: cover;
-  margin-bottom: 15px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.text-decoration {
+  margin-top: 1rem;
+}
+
+.card-category {
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.card-items {
+  font-size: 0.9rem;
+  color: #444;
+}
+
+.card-description {
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 0.5rem;
+}
+
+/* Swiper Navigation Buttons (Updated) */
+.swiper-button-next,
+.swiper-button-prev {
+  background-color: transparent;
+  color: #007bff;
+  font-size: 24px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: none;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+  border: 2px solid #007bff;
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  content: '';
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: solid #007bff;
+  border-width: 2px;
+  transform: rotate(45deg);
+  transition: transform 0.3s ease;
+}
+
+.swiper-button-next:after {
+  transform: rotate(45deg) translateY(-2px);
+}
+
+.swiper-button-prev:after {
+  transform: rotate(-135deg) translateY(-2px);
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background-color: #007bff;
+  color: white;
+  transform: scale(1.1);
+}
+
+.swiper-button-next:hover:after,
+.swiper-button-prev:hover:after {
+  border-color: white;
+}
+
+/* Pagination Bullets */
+.swiper-pagination-bullet {
+  background-color: #ddd;
+  opacity: 1;
+  transition: background-color 0.3s ease;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #adbfd1;
+}
+
+/* Custom "View All" Button */
+.view-all-container {
+  text-align: center;
   margin-top: 20px;
 }
 
-.slider-card:hover {
-  border: 2px solid #5372F0;
-}
-
-/* Card title */
-.card-title {
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 30px;
-  color: #333;
-}
-
-/* Card category */
-.card-category {
+.view-all-button {
+  padding: 12px 25px;
+  background-color: #ff5c5c;
+  color: white;
   font-size: 16px;
-  margin-bottom: 10px;
-  color: #5372F0;
-  padding: 8px 16px;
-  margin: 16px 0 18px;
-  background: #DDE4FF;
-  width: fit-content;
-  border-radius: 20px;
-  border: 1px solid #5372F0;
+  font-weight: bold;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Card items available */
-.card-items {
-  font-size: 14px;
-  color: #555;
-  margin-top: 25px;
+.view-all-button:hover {
+  background-color: #e14a4a;
 }
-
-/* Card description */
-.card-description {
-  font-size: 14px;
-  color: #777;
-  margin-bottom: 15px;
-}
-
-/* Swiper Navigation Buttons */
-.swiper-button-next,
-.swiper-button-prev {
-  color: #5372F0;
-}
-
-/* Swiper Pagination */
-.swiper-pagination-bullet {
-  background-color: #3498db;
-}
-
-/* Responsive Styles */
-
-/* Small Screen Devices (Mobile) */
-@media screen and (max-width: 600px) {
-  .slider-container {
-    padding: 10px;
-  }
-
-  .shop-container {
-    margin-top: 10vh;
-    height: auto; /* Adjust height for smaller screens */
-  }
-
-  .slider-card {
-    margin-bottom: 15px; /* Adjust margin for smaller devices */
-    padding: 15px; /* Adjust padding for smaller devices */
-  }
-
-  .card-title {
-    font-size: 18px; /* Smaller font size for mobile */
-  }
-
-  .card-category {
-    font-size: 14px;
-    padding: 6px 12px; /* Smaller padding */
-  }
-
-  .card-items,
-  .card-description {
-    font-size: 12px; /* Smaller font size for mobile */
-  }
-
-  .slider-card:hover {
-    transform: scale(1.05); /* Add a slight zoom effect on hover */
-  }
-}
-
-/* Medium Screen Devices (Tablets and Small Laptops) */
-@media screen and (min-width: 601px) and (max-width: 900px) {
-  .slider-container {
-    padding: 15px;
-  }
-
-  .shop-container {
-    margin-top: 12vh; /* Adjust top margin */
-    height: auto;
-  }
-
-  .slider-card {
-    padding: 18px;
-  }
-
-  .card-title {
-    font-size: 19px;
-  }
-
-  .card-category {
-    font-size: 15px;
-  }
-
-  .card-items,
-  .card-description {
-    font-size: 13px;
-  }
-}
-
-/* Large Screen Devices (Desktops and Larger Screens) */
-@media screen and (min-width: 901px) {
-  .slider-container {
-    padding: 20px;
-  }
-
-  .shop-container {
-    margin-top: 15vh;
-    height: 25vh; /* Larger height for desktops */
-  }
-
-  .slider-card {
-    padding: 20px;
-  }
-
-  .card-title {
-    font-size: 20px;
-  }
-
-  .card-category {
-    font-size: 16px;
-  }
-
-  .card-items,
-  .card-description {
-    font-size: 14px;
-  }
-}
-
