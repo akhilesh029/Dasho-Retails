@@ -151,9 +151,9 @@ const ShowOnHOme = () => {
               <p className="price">Price not available</p>
             )}
             <div id="cartBuybtn">
-              <button onClick={() => buyNow(item._id)}>Buy</button>
+              <button onClick={() => buyNow(item._id)}>Buy Now</button>
               <button id="cartAdded" onClick={() => handleAddItem(item)}>
-                Cart
+                Add to Cart
               </button>
             </div>
           </div>

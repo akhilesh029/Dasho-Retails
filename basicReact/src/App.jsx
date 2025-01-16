@@ -26,6 +26,8 @@ import DistributionForm from './Pages/DistributionForm/DistributionForm';
 import Distributors from './Pages/Distributors/Distributors';
 import PricingTable from './Pages/PremiumPlan/PremiumPlan';
 import ShopPage from './Pages/ShopPage/ShopPage';
+import CartPage from './Pages/CartPage/CartPage';
+import Placeorder from './Pages/Placeorder/Placeorder';
 // import AllShop from './components/AllShop/AllShop';
 
 
@@ -44,6 +46,8 @@ function App() {
    <div className="renderpages">
       <Routes  >
           <Route path='/' element ={<Home />} />
+          <Route path='/cart' element ={<CartPage />} />
+          <Route path='/order' element ={<Placeorder />} />
           <Route path='/clothes'  element={<Clothes />} />
           {/* <Route path='/showonhome' element = {<ShowOnHOme />} /> */}
           <Route path='/firebaseAuth' element = {<FirebaseAuth />}/>
