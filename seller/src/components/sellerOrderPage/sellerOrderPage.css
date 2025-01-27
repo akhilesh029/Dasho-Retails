@@ -1,0 +1,111 @@
+/* SellerOrderPage.css */
+.sellerOrderPage {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+  }
+  
+  h1 {
+    text-align: center;
+    color: #333;
+  }
+  
+  .orderList {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .orderItem {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    margin-bottom: 15px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .orderDetails {
+    margin-bottom: 20px;
+  }
+  
+  .orderDetails p {
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .orderItems {
+    margin-top: 10px;
+  }
+  
+  .orderItemDetails {
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .statusButtons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .statusButton {
+    padding: 8px 15px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #4caf50;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .statusButton:hover {
+    background-color: #45a049;
+  }
+  
+  .statusButton:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .statusButton + .statusButton {
+    background-color: #f44336;
+  }
+  
+  .statusButton + .statusButton:hover {
+    background-color: #e53935;
+  }
+  
+  .statusButton + .statusButton + .statusButton {
+    background-color: #ff9800;
+  }
+  
+  .statusButton + .statusButton + .statusButton:hover {
+    background-color: #fb8c00;
+  }
+  
+  .statusButton .fa-check {
+    color: #fff;
+  }
+  
+  .statusButton .fa-times {
+    color: #fff;
+  }
+  
+  .statusButton .fa-exclamation-triangle {
+    color: #fff;
+  }
+  
+  @media (max-width: 768px) {
+    .orderItem {
+      padding: 15px;
+    }
+  
+    .statusButtons {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+  

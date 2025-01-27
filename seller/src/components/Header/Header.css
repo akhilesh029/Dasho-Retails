@@ -1,0 +1,82 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    height: 50px;
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    margin-right: var(--spacing-lg);
+  }
+  
+  .logo img {
+    max-height: 40px;
+  }
+  
+  .search-bar {
+    position: relative;
+    width: 300px;
+    height: 40px; /* Set a fixed height for the search bar */
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    background-color: var(--secondary-color);
+  }
+  
+  .search-bar input {
+    padding: 0.75rem 1rem;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: inherit;
+    width: 100%;
+    border-radius: var(--border-radius) 0 0 var(--border-radius); 
+  }
+  
+  .search-bar button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0.75rem 1rem;
+    background-color: var(--accent-color);
+    color: inherit;
+    border: none;
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+    cursor: pointer;
+  }
+  
+  .login {
+    margin-left: var(--spacing-lg);
+  }
+  
+  .login a {
+    text-decoration: none;
+    color: inherit;
+    font-weight: bold;
+    padding: 0.75rem 1.5rem;
+    border: 1px solid var(--text-color);
+    border-radius: var(--border-radius);
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .login a:hover {
+    background-color: var(--text-color);
+    color: var(--primary-color);
+  }
+  
+  /* Global CSS Variables */
+  :root {
+    --primary-color: #2c3e50; 
+    --secondary-color: #34495e; 
+    --accent-color: #e74c3c; 
+    --text-color: #ecf0f1;
+    --border-radius: 5px;
+    --spacing-sm: 0.5rem;
+    --spacing-lg: 1.5rem; 
+  }
+

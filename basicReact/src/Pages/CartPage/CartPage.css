@@ -1,3 +1,116 @@
-.cart{
-    margin-top: 170px;
-}
+.cartPage {
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+    font-family: Arial, sans-serif;
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+  }
+  
+  .cartList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .cartItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .cartImage {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+  
+  .cartDetails {
+    flex: 1;
+    margin-left: 20px;
+  }
+  
+  .itemName {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .itemPrice {
+    font-size: 16px;
+    color: #555;
+    margin: 5px 0;
+  }
+  
+  .quantityControls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .quantityControls button {
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .quantityControls button:hover {
+    background-color: #0056b3;
+  }
+  
+  .removeButton {
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    color: #dc3545;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+  
+  .removeButton:hover {
+    color: #a71d2a;
+  }
+  
+  .cartSummary {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .cartSummary p {
+    font-size: 18px;
+    margin: 10px 0;
+  }
+  
+  .placeOrderButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #28a745;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .placeOrderButton:hover {
+    background-color: #218838;
+  }
+  

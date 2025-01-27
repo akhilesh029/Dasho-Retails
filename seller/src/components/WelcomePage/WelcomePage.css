@@ -1,0 +1,64 @@
+/* General styling for the Welcome Page */
+.welcome-container {
+    text-align: center;
+    padding: 50px;
+    background-color: #f7f7f7;
+    color: #333;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .welcome-header {
+    margin-bottom: 40px;
+  }
+  
+  .welcome-header h1 {
+    font-size: 3rem;
+    color: #4CAF50;
+  }
+  
+  .welcome-header p {
+    font-size: 1.2rem;
+    color: #555;
+  }
+  
+  /* Features section */
+  .features-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+  
+  .feature {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 250px;
+    text-align: center;
+  }
+  
+  .feature-icon {
+    font-size: 3rem;
+    color: #4CAF50;
+    margin-bottom: 10px;
+  }
+  
+  .feature h3 {
+    font-size: 1.5rem;
+    color: #333;
+  }
+  
+  .feature p {
+    color: #777;
+  }
+  
+ 
+  
+  .welcome-image {
+    width: 100%;
+    max-width: 600px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  

@@ -1,0 +1,370 @@
+/* General Styles */
+.adminPage {
+    display: flex;
+    min-height: 100vh;
+  }
+
+  #dashohome{
+    color: white;
+    background-color: white;
+  }
+  #dashohome:hover{
+    background-color: white;
+  }
+ 
+  /* Sidebar Styles */
+  .sidepanel {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    width: 250px;
+    display: flex;
+    align-items: start;
+  }
+  
+  .sidepanellist {
+    list-style: none;
+    margin: 10px 10px 20px 0;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: start;
+    gap : 10px;
+  }
+  
+  .sidepanellist:hover {
+    background-color: #444;
+  }
+  
+  .selected {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  /* Dashboard Styles */
+  .dashboard {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .dashboard .section {
+    margin-bottom: 30px;
+  }
+  
+  .dashboard .section-heading {
+    margin-bottom: 10px;
+  }
+  
+  /* Upload Item Styles */
+  .sellerdiv {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .seller-form {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  .form-fields {
+    margin-bottom: 15px;
+  }
+  
+  .form-fields label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .form-fields input,
+  .form-fields textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+ 
+  
+ 
+  
+  .sellerbtn {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  /* Products Styles */
+  .showItems {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .showItems table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .showItems th,
+  .showItems td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .showItems th {
+    background-color: #f2f2f2;
+  }
+  
+  .photo {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+  }
+  
+  /* Inactive Products Styles */
+  .inactive-products-container {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .inactive-products-title {
+    margin-bottom: 20px;
+  }
+  
+  .inactive-products-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .inactive-products-table th,
+  .inactive-products-table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .inactive-products-table th {
+    background-color: #f2f2f2;
+  }
+  
+  .inactive-product-item {
+    /* Add hover effect for better user experience */
+    transition: background-color 0.3s ease;
+  }
+  
+  .inactive-product-item:hover {
+    background-color: #f9f9f9;
+  }
+  
+  .reactivate-form-container {
+    margin-top: 20px;
+  }
+  
+  .reactivate-form-title {
+    margin-bottom: 10px;
+  }
+  
+  .reactivate-form {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .form-label {
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .form-input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  .form-select {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  .form-submit-button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+
+ /* SellerOrderPage.css */
+ .sellerOrderPage {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  width: 100%;
+}
+
+.dashboardTitle {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.loadingMessage,
+.noOrdersMessage {
+  font-size: 1.2rem;
+  color: #888;
+  text-align: center;
+}
+
+.ordersContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.orderList {
+  list-style: none;
+  padding: 0;
+}
+
+.orderItem {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  background-color: #f9f9f9;
+}
+
+.orderDetails {
+  margin-bottom: 10px;
+}
+
+.orderId {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.customerDetails p {
+  margin: 5px 0;
+}
+
+.orderItems {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.orderItemDetails {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 3px;
+  background-color: white;
+  width: 100%;
+  box-shadow: 0px 0px 1px 0.1px black;
+}
+
+.itemDetailsList {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: 10px;
+  
+  gap: 75px;
+  list-style: none;
+  
+  width: 70%;
+}
+
+.itemImage {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.itemName,
+.itemPrice,
+.itemQuantity,
+.itemStatus {
+  font-size: 0.9rem;
+  margin: 5px 0;
+}
+
+.itemStatus{
+  background-color: rgb(9, 9, 152);
+  color: white;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+
+.statusButtons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+ 
+  
+  margin-top: 10px;
+}
+
+.statusButton {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  
+}
+
+.statusButton:hover {
+  opacity: 0.9;
+}
+
+.shippedButton {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+.cancelledButton {
+  background-color: #f44336;
+  color: #fff;
+}
+
+.deliveredButton {
+  background-color: #ff9800;
+  color: #fff;
+}
+
+
+@media (max-width: 768px) {
+  .orderItem {
+    padding: 15px;
+  }
+
+  .statusButtons {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+  
+  /* Responsive Design (Optional) */
+  @media (max-width: 768px) {
+    /* Adjust styles for smaller screens */
+    .adminPage {
+      flex-direction: column;
+    }
+  
+    .sidepanel {
+      width: 100%;
+    }
+  }

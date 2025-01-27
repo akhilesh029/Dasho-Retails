@@ -1,0 +1,104 @@
+/* General container styling */
+.signup {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #ddd;
+}
+
+.signup ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.signup ul li {
+  position: relative;
+  display: inline-block;
+  margin: 0 10px;
+}
+
+.signup ul li p {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.signup ul li p:hover {
+  color: #007bff;
+}
+
+/* Dropdown menu styling */
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  z-index: 1000;
+  min-width: 150px;
+  display: none;
+}
+
+.signup ul li:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu li {
+  padding: 10px 15px;
+  cursor: pointer;
+  color: #333;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-menu li:hover {
+  background-color: #f1f1f1;
+}
+
+.profile-button {
+  border-bottom: 1px solid #ddd;
+}
+
+.logout-button {
+  color: #d9534f;
+}
+
+.logout-button:hover {
+  background-color: #f8d7da;
+}
+
+/* Sign Up button styling */
+button {
+  background-color: #007bff;
+  color: #fff;
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .signup {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .signup ul li {
+    margin: 5px 0;
+  }
+}

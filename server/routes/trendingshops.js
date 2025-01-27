@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const BusinessformModel = require('../model/businessform'); // Update with the correct path to the model
+const BusinessformModel = require('../models/businessform'); // Update with the correct path to the model
 
 // Add shop to trending
 router.post('/shops/:shopId/addTrending', async (req, res) => {

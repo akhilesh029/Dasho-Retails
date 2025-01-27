@@ -10,9 +10,8 @@ import {
   signOut,
 } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import "./firebase.css";
-import SellerLogin from "../../Pages/SellerLogin/SellerLogin";
-import BusinessForm from "../../Pages/BusinessForm/BusinessForm";
+import "./FirebaseAuth.css";
+import { FaSignInAlt } from "react-icons/fa"; // Import the Font Awesome icon
 
 const firebaseConfig = {
   apiKey: "AIzaSyCxCsr0TFWAgTcgDq2X-DjHCNtKyI7OMOA",
@@ -31,18 +30,14 @@ const FirebaseAuth = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
   const [dropdownVisible, setDropdownVisible] = useState(false);
-  const [showOptions, setShowOptions] = useState(false);
   const dropdownRef = useRef(null);
-  const [email, setEmail] = useState(null);
-  const [users, setUsers] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        // console.log(user)
         setIsLoggedIn(true);
         setUser(user);
-        console.log(user)
       } else {
         setIsLoggedIn(false);
         setUser(null);
@@ -50,60 +45,52 @@ const FirebaseAuth = () => {
     });
   }, []);
 
-  const handleLogin = (role) => {
+  const handleLogin = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
       .then((result) => {
-        console.log(`${role} logged in:`, result.user);
-        saveUserToMongoDB(result.user);
+        const user = result.user;
+        // Extract the ID token from the authenticated user
+        user.getIdToken().then((token)=>{
+          localStorage.setItem("authToken", token);
+          console.log("Token saved to localStorage:", token);
+          setUser(user);
+        });
       })
       .catch((error) => {
         console.error("Error logging in:", error);
       });
   };
 
-  const navigate = useNavigate();
-
-  const handleProfileClick = () => {
-    const email = user.email;
-  
-    // Request to get user data from the backend
+  const checkCustomerExistence = (email) => {
     axios
-      .get("http://localhost:3000/user")
-      // .get("api/user")
+      .get(`http://localhost:3000/customer`, { params: { email } })
       .then((response) => {
-        const users = response.data; // Extract the user data from the response
-  
-        console.log(users); // Log the number of users
-        console.log(users.email);   // Log the current user's email
-  
-        if (users.length === 0) {
-          // If no users are found, navigate to the business form
-          navigate("/businessform", { replace: false, state: { email } });
+        const customers = response.data;
+
+        if (!customers || customers.length === 0) {
+          navigate("/customerform", { replace: false, state: { email } });
         } else {
-          // Check if the current user's email matches any user in the list
-          const userExists = users.some((userObj) => userObj.email === user.email);
-         
-  
-          if (userExists) {
-            // If the user exists, navigate to the seller page
-            navigate("/sellerpage", { replace: false, state: { userEmail: user.email } });
-          } else {
-            // If the user doesn't exist, navigate to the business form
-            navigate("/businessform", { replace: false, state: { email } });
-          }
+          navigate("/userpage", { replace: false, state: { email } });
         }
       })
       .catch((err) => {
-        console.log(err); // Log any errors
+        if (err.response && err.response.status === 404) {
+          console.log("Customer not found. Navigating to the customer form...");
+          navigate("/customerform", { replace: false, state: { email } });
+        } else {
+          console.error("Error checking customer existence:", err);
+        }
       });
   };
-  
 
   const handleLogout = () => {
     signOut(auth)
       .then(() => {
         console.log("User logged out");
+        setUser(null);
+        setIsLoggedIn(false);
+        localStorage.removeItem('authToken')
       })
       .catch((error) => {
         console.error("Error logging out:", error);
@@ -138,25 +125,10 @@ const FirebaseAuth = () => {
     handleLogout();
   };
 
-  const toggleOptions = () => {
-    setShowOptions((prevState) => !prevState);
-  };
-
-  const handleOptionClick = (role) => {
-    setShowOptions(false);
-    handleLogin(role); // Pass role ("Seller" or "Customer") to the login function
-  };
-
-  const saveUserToMongoDB = async (user) => {
-    try {
-      const response = await axios.post('http://localhost:27017/api/users', {
-        name: user.displayName,
-        email: user.email,
-        phoneNumber: user.phoneNumber || 'N/A'
-      });
-      console.log('User data saved to MongoDB:', response.data);
-    } catch (error) {
-      console.error('Error saving user data to MongoDB:', error);
+  const handleProfileClick = () => {
+    setDropdownVisible(false);
+    if (user) {
+      checkCustomerExistence(user.email); // Navigate based on customer existence
     }
   };
 
@@ -167,6 +139,7 @@ const FirebaseAuth = () => {
           <ul>
             <li onClick={toggleDropdown} style={{ cursor: "pointer" }}>
               <p>{user.displayName}</p>
+
               {dropdownVisible && (
                 <ul className="dropdown-menu">
                   <li className="profile-button" onClick={handleProfileClick}>
@@ -181,27 +154,9 @@ const FirebaseAuth = () => {
           </ul>
         </div>
       ) : (
-        <>
-          <a href="#" onClick={toggleOptions}>
-            Sign Up
-          </a>
-          {showOptions && (
-            <ul className="dropdown-menu">
-              <li
-                onClick={() => handleOptionClick("Seller")}
-                style={{ cursor: "pointer" }}
-              >
-                As a Seller
-              </li>
-              <li
-                onClick={() => handleOptionClick("Customer")}
-                style={{ cursor: "pointer" }}
-              >
-                As a Customer
-              </li>
-            </ul>
-          )}
-        </>
+        <button onClick={handleLogin} className="customer-login">
+          Sign Up
+        </button>
       )}
     </div>
   );

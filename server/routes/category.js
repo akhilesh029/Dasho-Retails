@@ -1,5 +1,5 @@
 const express = require("express");
-const Category = require("../model/category");
+const Category = require("../models/category");
 const multer = require("multer");
 const path = require("path");
 
