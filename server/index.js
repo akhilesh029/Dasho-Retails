@@ -510,8 +510,20 @@ console.log(`Generated sellerId: ${sellerId}`);
 
 
 
-const PORT = process.env.PORT || 3000
+// const PORT = process.env.PORT || 3000
 
-app.listen(PORT, () => {
-  console.log(`server is running! on  ${PORT}`)
-})
+// app.listen(PORT, () => {
+//   console.log(`server is running! on  ${PORT}`)
+// })
+
+const PORT = process.env.PORT || 3000;
+
+// Only listen locally, not on Vercel
+if (process.env.NODE_ENV !== "production") {
+  app.listen(PORT, () => {
+    console.log(`server is running! on ${PORT}`);
+  });
+}
+
+// ✅ Export app for Vercel
+module.exports = app;
