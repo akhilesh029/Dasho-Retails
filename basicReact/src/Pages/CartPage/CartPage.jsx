@@ -138,7 +138,7 @@ console.log(orderData)
 
   return (
     <div className="cartPage">
-      <h1>Your Cart</h1>
+      <h2>Your Cart</h2>
       {cart.length > 0 ? (
         <>
           <ul className="cartList">

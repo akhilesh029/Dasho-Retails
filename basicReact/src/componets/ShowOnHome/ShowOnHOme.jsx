@@ -3,6 +3,7 @@ import axios from "axios";
 import "./ShowOnHome.css";
 import { useNavigate } from "react-router-dom";
 import Header from "../Header/Header";
+import { FaShoppingCart, FaMoneyBillWave } from "react-icons/fa";
 
 const ShowOnHome = () => {
   const [products, setProducts] = useState([]);
@@ -99,35 +100,41 @@ const ShowOnHome = () => {
     <>
       <Header />
       <div className="showonHomeMain">
-        {products.length > 0 ? (
-          products
-            .filter((item) => item.isActive)
-            .map((item) => (
-              <div className="showonHome" key={item.productId}>
+      {products.length > 0 ? (
+        products
+          .filter((item) => item.isActive)
+          .map((item) => (
+            <div className="showonHome" key={item.productId}>
+              <div className="image-container">
                 <img
                   className="homephoto"
                   src={`http://localhost:3000/${item.itemImage}`}
                   alt={item.itemName || "Item image"}
                 />
-                <h1>{item.itemName}</h1>
-                <p>{item.itemDescription || "No description available"}</p>
-                <p className="price">₹ {item.itemPrice}</p>
-                <div id="cartBuybtn">
-                  <button onClick={() => addToCart(item)}>Add to Cart</button>
-                  <button onClick={() => navigate("/buyitems", { state: { id: item.productId } })}>
-                    Buy Now
-                  </button>
-                </div>
               </div>
-            ))
-        ) : (
-          <p>No items to display</p>
-        )}
-      </div>
+              <h2>{item.itemName}</h2>
+              <p>{item.itemDescription || "No description available"}</p>
+              <p className="price">₹ {item.itemPrice}</p>
+              <div className="cartBuybtn">
+                <button onClick={() => addToCart(item)}>
+                  <FaShoppingCart /> Add to Cart
+                </button>
+                <button
+                  onClick={() => navigate("/buyitems", { state: { id: item.productId } })}
+                >
+                  <FaMoneyBillWave /> Buy Now
+                </button>
+              </div>
+            </div>
+          ))
+      ) : (
+        <p>No items to display</p>
+      )}
+    </div>
 
-      <button className="view-cart-items" onClick={toggleCartVisibility}>
+      {/* <button className="view-cart-items" onClick={toggleCartVisibility}>
         {isCartVisible ? "Hide Cart" : "View Cart"}
-      </button>
+      </button> */}
       
 
       {isCartVisible && (

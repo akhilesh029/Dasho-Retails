@@ -188,8 +188,6 @@ function SellerPage() {
   // ========================Orders-Logic========================================
 
   const [orders, setOrders] = useState([]);
-  // const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     const fetchOrders = async () => {
       const sellerToken = localStorage.getItem("authToken");

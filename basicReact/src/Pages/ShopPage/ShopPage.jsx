@@ -84,7 +84,7 @@ const ShopPage = () => {
   </div>
 
 
-      <div className="product-category">
+      {/* <div className="product-category">
         <h1>Available Products</h1>
         <div className="product-items">
           <img src={shopBag} alt="" />
@@ -97,10 +97,10 @@ const ShopPage = () => {
             <div className="item"><img src={image} alt="" /></div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div className="available-items-container">
-        <h1>Available Items</h1>
+        <h2>Available Items</h2>
         <div className="available-items">
           {items && items.length > 0  ? (
             items.map((product, index) => (
