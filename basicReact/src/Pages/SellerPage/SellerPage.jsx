@@ -236,7 +236,7 @@ const handleSubmit = (event) => {
 // deleting the items from database by seller
   const deleteData = async (id) => {
     try {
-      await axios.delete(`http://localhost:3000/delete/${id}`, { params: { id } });
+      await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/delete/${id}`, { params: { id } });
       // fetchData(); // Update the data after deletion
         console.log("data deleted susccessfully")
         window.location.reload()
@@ -276,7 +276,7 @@ const showInactiveProducts=()=>{
     // Fetch inactive products for the seller
     const fetchInactiveProducts = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/inactiveProducts/${m.userEmail}`);
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/inactiveProducts/${m.userEmail}`);
         setInactiveProducts(response.data.inactiveProducts);
         setLoading(false);
       } catch (err) {
@@ -297,7 +297,7 @@ const showInactiveProducts=()=>{
     }
 
     try {
-      const response = await axios.put(`http://localhost:3000/reactivateProduct/${reactivateProduct.productId}`, {
+      const response = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/reactivateProduct/${reactivateProduct.productId}`, {
         timeLimit: reactivateProduct.timeLimit,
         timeUnit: reactivateProduct.timeUnit,
       });

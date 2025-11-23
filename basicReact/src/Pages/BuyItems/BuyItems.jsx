@@ -20,7 +20,7 @@ const BuyItems = () => {
 
   const fetchProductDetails = async (id) => {
     try {
-      const response = await axios.get("http://localhost:3000/showproduct");
+      const response = await axios.get("${import.meta.env.VITE_BACKEND_URL}/showproduct");
       const productData = response.data.find((item) => item._id === id);
       setProduct(productData);
     } catch (error) {

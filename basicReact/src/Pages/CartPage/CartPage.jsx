@@ -26,7 +26,7 @@ const CartPage = () => {
           return;
         }
 
-        const response = await axios.get("http://localhost:3000/customer/details", {
+        const response = await axios.get("${import.meta.env.VITE_BACKEND_URL}/customer/details", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -124,7 +124,7 @@ const CartPage = () => {
     // };
 console.log(orderData)
     try {
-      const response = await axios.post("http://localhost:3000/orders", orderData);
+      const response = await axios.post("${import.meta.env.VITE_BACKEND_URL}/orders", orderData);
       console.log("Order placed:", response.data);
 
       localStorage.removeItem("cart");

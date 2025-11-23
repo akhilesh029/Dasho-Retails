@@ -54,7 +54,7 @@ const handleSubmit = async (e) => {
   }
 
   try {
-    const response = await axios.post("http://localhost:3000/businessform", formData, {
+    const response = await axios.post("${import.meta.env.VITE_BACKEND_URL}/businessform", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },

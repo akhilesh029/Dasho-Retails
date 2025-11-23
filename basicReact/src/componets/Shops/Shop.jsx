@@ -15,7 +15,7 @@ const CardSlider = () => {
 
   // Fetch trending shops from API
   useEffect(() => {
-    fetch("http://localhost:3000/api/shops/trending") // Replace with your actual API endpoint
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/api/shops/trending`) // Replace with your actual API endpoint
       .then((response) => response.json())
       .then((data) => {
         setTrendingShops(data);

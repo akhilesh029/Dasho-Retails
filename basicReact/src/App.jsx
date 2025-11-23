@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './Pages/Home/Home'
 
 
-import ShowOnHOme from './componets/ShowOnHome/ShowOnHome';
+//import ShowOnHOme from './componets/ShowOnHome/ShowOnHome';
 // import ShowOnHme from './componets/ShowOnHome/ShowOnHOme';
 
 // import ShowOnHOme from './componets/ShowOnHome/ShowOnHOme';

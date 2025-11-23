@@ -24,7 +24,7 @@ const WelcomePage = (props) => {
 
      // request to userdata from database
    useEffect(()=>{
-    axios.get('http://localhost:3000/seller')
+    axios.get('${import.meta.env.VITE_BACKEND_URL}/seller')
     .then(users => setUsers(users.data))
     .catch(err => console.log(err))
    },[])

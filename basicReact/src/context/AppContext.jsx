@@ -17,19 +17,19 @@ const ContextProvider = (props) => {
   useEffect(() => {
     const fetchShops = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/shops");
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/shops`);
         setShops(response.data);
-        setLoading(false); // Set loading to false when data is fetched
+        setLoading(false);
       } catch (err) {
         console.error("Error fetching shops:", err);
         setError("Failed to fetch shop details.");
-        setLoading(false); // Set loading to false even if there's an error
+        setLoading(false);
       }
     };
-
+  
     fetchShops();
-  }, []); // Run this effect once when the component mounts
-
+  }, []);
+  
 
 
   // =============================================ADD TO CART=======================================================================
