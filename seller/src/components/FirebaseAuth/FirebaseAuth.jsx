@@ -11,7 +11,7 @@ import {
 } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import "./FirebaseAuth.css";
-import { FaSignInAlt } from "react-icons/fa"; // Import the Font Awesome icon
+import { FaSignInAlt } from "react-icons/fa";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCxCsr0TFWAgTcgDq2X-DjHCNtKyI7OMOA",
@@ -30,9 +30,11 @@ const FirebaseAuth = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
   const [dropdownVisible, setDropdownVisible] = useState(false);
+
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
 
+  // ------------------ Auth State ------------------
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -45,48 +47,49 @@ const FirebaseAuth = () => {
     });
   }, []);
 
+  // ------------------ Google Login ------------------
   const handleLogin = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
       .then((result) => {
         const user = result.user;
 
-        // Using a different key name like "sellerToken"
         user.getIdToken().then((sellerToken) => {
-          localStorage.setItem("sellerToken", sellerToken); // Using "sellerToken" as the key
+          localStorage.setItem("sellerToken", sellerToken);
           console.log("Token saved to localStorage:", sellerToken);
-          setUser(user);
         });
 
-        console.log("Seller logged in:", user);
-
-        // checkSellerExistence(user.email);
+        setUser(user);
+        setIsLoggedIn(true);
       })
       .catch((error) => {
         console.error("Error logging in:", error);
       });
   };
 
+  // ------------------ Seller Check (Fixed) ------------------
   const checkSellerExistence = (email) => {
     axios
-      .get(`http://localhost:3000/seller`, { params: { email } })
+      .get(`${import.meta.env.VITE_BACKEND_URL}/seller`, { params: { email } })
       .then((response) => {
-        const sellers = response.data;
+        const seller = response.data; // backend returns a SINGLE object
 
-        if (!sellers || sellers.length === 0) {
-          // If seller does not exist, navigate to the business form
+        if (!seller || !seller.sellerId) {
+          console.log("Seller not found → redirecting to Business Form...");
           navigate("/businessform", { replace: false, state: { email } });
         } else {
-          // If seller exists, navigate to the seller page
+          console.log("Seller found → sellerId:", seller.sellerId);
           navigate("/sellerpage", {
             replace: false,
-            state: { userEmail: email, sellerId: sellers.sellerId },
+            state: {
+              userEmail: email,
+              sellerId: seller.sellerId, // FIXED
+            },
           });
         }
       })
       .catch((err) => {
-        if (err.response && err.response.status === 404) {
-          console.log("Seller not found. Navigating to the business form...");
+        if (err.response?.status === 404) {
           navigate("/businessform", { replace: false, state: { email } });
         } else {
           console.error("Error checking seller existence:", err);
@@ -94,26 +97,26 @@ const FirebaseAuth = () => {
       });
   };
 
+  // ------------------ Logout ------------------
   const handleLogout = () => {
     signOut(auth)
       .then(() => {
         console.log("User logged out");
+        localStorage.removeItem("sellerToken");
         setUser(null);
         setIsLoggedIn(false);
-        localStorage.removeItem("sellerToken");
+        navigate("/");
       })
       .catch((error) => {
         console.error("Error logging out:", error);
       });
-    navigate("/");
   };
 
-  const toggleDropdown = () => {
-    setDropdownVisible((prevState) => !prevState);
-  };
+  // ------------------ Dropdown ------------------
+  const toggleDropdown = () => setDropdownVisible((prev) => !prev);
 
-  const handleClickOutside = (event) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+  const handleClickOutside = (e) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
       setDropdownVisible(false);
     }
   };
@@ -129,11 +132,6 @@ const FirebaseAuth = () => {
       document.removeEventListener("click", handleClickOutside);
     };
   }, [dropdownVisible]);
-
-  const handleLogoutClick = () => {
-    setDropdownVisible(false);
-    handleLogout();
-  };
 
   return (
     <div>
@@ -151,7 +149,7 @@ const FirebaseAuth = () => {
                   >
                     Profile
                   </li>
-                  <li className="logout-button" onClick={handleLogoutClick}>
+                  <li className="logout-button" onClick={handleLogout}>
                     Logout
                   </li>
                 </ul>

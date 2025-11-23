@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { FaCheck, FaTimes, FaExclamationTriangle } from "react-icons/fa";
-import "./SellerOrderPage.css";
+import "./sellerOrderPage.css";
 
 const SellerOrderPage = () => {
   const [orders, setOrders] = useState([]);
@@ -10,7 +10,7 @@ const SellerOrderPage = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       const sellerToken = localStorage.getItem("authToken");
-      console.log(sellerToken)
+      console.log(sellerToken);
 
       if (!sellerToken) {
         alert("Please log in as a seller.");
@@ -18,14 +18,17 @@ const SellerOrderPage = () => {
       }
 
       try {
-        const response = await axios.get("http://localhost:3000/orders/seller", {
-          headers: {
-            Authorization: `Bearer ${sellerToken}`,
-          },
-        });
+        const response = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/orders/seller`,
+          {
+            headers: {
+              Authorization: `Bearer ${sellerToken}`,
+            },
+          }
+        );
 
         setOrders(response.data);
-        console.log(response.data)
+        console.log(response.data);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching orders:", error);
@@ -46,7 +49,7 @@ const SellerOrderPage = () => {
 
     try {
       const response = await axios.patch(
-        `http://localhost:3000/orders/${orderId}`,
+        `${import.meta.env.VITE_BACKEND_URL}/orders/${orderId}`,
         { status },
         {
           headers: {
@@ -54,9 +57,12 @@ const SellerOrderPage = () => {
           },
         }
       );
+
       setOrders((prevOrders) =>
         prevOrders.map((order) =>
-          order._id === orderId ? { ...order, status: response.data.status } : order
+          order._id === orderId
+            ? { ...order, status: response.data.status }
+            : order
         )
       );
     } catch (error) {

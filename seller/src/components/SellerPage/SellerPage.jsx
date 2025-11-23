@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./SellerPage.css";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { IoMdSettings } from "react-icons/io";
-import { Link } from "react-router-dom";
 import {
   FaBoxes,
   FaChartBar,
@@ -15,12 +14,14 @@ import {
   FaUserCog,
   FaCommentAlt,
   FaHome,
+  FaCheck,
+  FaTimes,
 } from "react-icons/fa";
-import { FaCheck, FaTimes } from "react-icons/fa";
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:3000";
 
 function SellerPage() {
   //-------------gettind data from state that is set in firebase page-----
-
   const location = useLocation(); // useLocation hook is used to get the data from the state
   const { sellerId, userEmail } = location.state;
   console.log("sellerId: ", sellerId, "userEmail: ", userEmail);
@@ -54,7 +55,8 @@ function SellerPage() {
   const [selectedItem, setSelectedItem] = useState("Dashboard");
 
   const handleClick = (itemName) => {
-    setSelectedItem(itemName), setShowContent(!showContent);
+    setSelectedItem(itemName);
+    setShowContent(!showContent);
     setShowShipping(false);
     setisOrder(false);
     setShipped(false);
@@ -104,10 +106,9 @@ function SellerPage() {
   //-------------------------------------------------
 
   // Handle form submission
-  // Handle form submission
   const handleSubmit = (event) => {
     event.preventDefault();
-
+    
     // Validation
     if (
       !id ||
@@ -140,10 +141,11 @@ function SellerPage() {
     formData.append("timeLimit", timeLimit); // Add time limit
     formData.append("timeUnit", timeUnit); // Add time unit (hours or days)
     formData.append("productCount", productCount); // Add product count
-
+    
+    console.log(formData);
     // Send data to server
     axios
-      .post("http://localhost:3000/uploadProduct", formData)
+      .post(`${BACKEND_URL}/uploadProduct`, formData)
       .then((response) => {
         console.log("Response:", response.data);
         alert("Item(s) added successfully!");
@@ -172,11 +174,18 @@ function SellerPage() {
 
   const [loading, setLoading] = useState(true);
 
+  // Fetch all products
   useEffect(() => {
     axios
-      .get("http://localhost:3000/showproduct")
-      .then((res) => {
-        setRes(res.data);
+      .get(`${BACKEND_URL}/showproduct`)
+      .then((response) => {
+        // If backend accidentally returns non-array (like HTML), guard it
+        if (Array.isArray(response.data)) {
+          setRes(response.data);
+        } else {
+          console.warn("Unexpected /showproduct response:", response.data);
+          setRes([]);
+        }
         setLoading(false); // Stop loading
       })
       .catch((err) => {
@@ -191,7 +200,7 @@ function SellerPage() {
   useEffect(() => {
     const fetchOrders = async () => {
       const sellerToken = localStorage.getItem("authToken");
-      console.log(sellerToken);
+      console.log("authToken:", sellerToken);
 
       if (!sellerToken) {
         alert("Please log in as a seller.");
@@ -199,14 +208,11 @@ function SellerPage() {
       }
 
       try {
-        const response = await axios.get(
-          "http://localhost:3000/orders/seller",
-          {
-            headers: {
-              Authorization: `Bearer ${sellerToken}`,
-            },
-          }
-        );
+        const response = await axios.get(`${BACKEND_URL}/orders/seller`, {
+          headers: {
+            Authorization: `Bearer ${sellerToken}`,
+          },
+        });
 
         setOrders(response.data);
         console.log(response.data);
@@ -231,7 +237,7 @@ function SellerPage() {
 
     try {
       const response = await axios.patch(
-        `http://localhost:3000/orders/${orderId}/items/${itemId}/status`,
+        `${BACKEND_URL}/orders/${orderId}/items/${itemId}/status`,
         { status },
         {
           headers: {
@@ -265,10 +271,9 @@ function SellerPage() {
   // deleting the items from database by seller
   const deleteData = async (id) => {
     try {
-      await axios.delete(`http://localhost:3000/delete/${id}`, {
+      await axios.delete(`${BACKEND_URL}/delete/${id}`, {
         params: { id },
       });
-      // fetchData(); // Update the data after deletion
       console.log("data deleted susccessfully");
       window.location.reload();
     } catch (error) {
@@ -292,7 +297,6 @@ function SellerPage() {
   // ==============================Inactive_products=================================
 
   const [inactiveProducts, setInactiveProducts] = useState([]);
-  // const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [reactivateProduct, setReactivateProduct] = useState({
     productId: "",
@@ -305,9 +309,9 @@ function SellerPage() {
     const fetchInactiveProducts = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/inactiveProducts/${userEmail}`
+          `${BACKEND_URL}/inactiveProducts/${userEmail}`
         );
-        setInactiveProducts(response.data.inactiveProducts);
+        setInactiveProducts(response.data.inactiveProducts || []);
         setLoading(false);
       } catch (err) {
         setError(err.response?.data?.message || "Error fetching products.");
@@ -317,6 +321,7 @@ function SellerPage() {
 
     fetchInactiveProducts();
   };
+
   // ===============================Reactivating Products==================================
   const handleReactivate = async (e) => {
     e.preventDefault();
@@ -332,7 +337,7 @@ function SellerPage() {
 
     try {
       const response = await axios.put(
-        `http://localhost:3000/reactivateProduct/${reactivateProduct.productId}`,
+        `${BACKEND_URL}/reactivateProduct/${reactivateProduct.productId}`,
         {
           timeLimit: reactivateProduct.timeLimit,
           timeUnit: reactivateProduct.timeUnit,
@@ -682,7 +687,7 @@ function SellerPage() {
                         <td>
                           <img
                             className="photo"
-                            src={`http://localhost:3000/` + item.itemImage}
+                            src={`${BACKEND_URL}/${item.itemImage}`}
                             alt="item"
                           />
                         </td>
@@ -732,10 +737,10 @@ function SellerPage() {
                       <td>
                         <img
                           className="photo"
-                          src={`http://localhost:3000/` + product.itemImage}
+                          src={`${BACKEND_URL}/${product.itemImage}`}
                           alt="productImage"
                         />
-                      </td>{" "}
+                      </td>
                       <td className="product-name">{product.itemName}</td>
                       <td className="product-price">₹{product.itemPrice}</td>
                       <td className="product-description">
@@ -833,38 +838,33 @@ function SellerPage() {
                           </div>
                           <div className="orderItems">
                             {order.items
-                              .filter(
-                                (item) => item.id === sellerId
-                              ) // Replace `currentSellerId` with the actual seller ID variable
+                              .filter((item) => item.id === sellerId) // Replace `currentSellerId` with the actual seller ID variable
                               .map((item) => (
                                 <div key={item.id} className="orderItemDetails">
                                   <div className="orderInfo">
-                                  <ul className="itemDetailsList">
-                                    <li>
-                                      <img
-                                        className="itemImage"
-                                        src={
-                                          `http://localhost:3000/` +
-                                          item.itemImage
-                                        }
-                                        alt="productImage"
-                                      />
-                                    </li>
-                                    <li className="itemName">
-                                      {item.itemName}
-                                    </li>
-                                    <li className="itemPrice">
-                                      {item.itemPrice}
-                                    </li>
-                                    <li className="itemQuantity">
-                                      {item.quantity}
-                                    </li>
-                                    <li className="itemStatus">
-                                      {item.status}
-                                    </li>
-                                  </ul>
+                                    <ul className="itemDetailsList">
+                                      <li>
+                                        <img
+                                          className="itemImage"
+                                          src={`${BACKEND_URL}/${item.itemImage}`}
+                                          alt="productImage"
+                                        />
+                                      </li>
+                                      <li className="itemName">
+                                        {item.itemName}
+                                      </li>
+                                      <li className="itemPrice">
+                                        {item.itemPrice}
+                                      </li>
+                                      <li className="itemQuantity">
+                                        {item.quantity}
+                                      </li>
+                                      <li className="itemStatus">
+                                        {item.status}
+                                      </li>
+                                    </ul>
                                   </div>
-                                 
+
                                   <div className="statusButtons orderInfo">
                                     <button
                                       className="statusButton shippedButton"
@@ -976,10 +976,9 @@ function SellerPage() {
                     {order.selectedItems.map((item, itemIndex) => (
                       <li key={`${orderIndex}-${itemIndex}`}>
                         <div className="orderdatalist">
-                          {/* <h4>Item {itemIndex + 1}</h4> */}
                           <img
                             className="orderdataimg"
-                            src={`http://localhost:3000/Images/` + item.image}
+                            src={`${BACKEND_URL}/${item.image}`}
                             alt={item.itemName}
                           />
                           <p> {item.itemName}</p>
@@ -996,15 +995,7 @@ function SellerPage() {
         )}
 
         {isShipped && (
-          // <h1>Shipped</h1>
           <div className="mainorderdata">
-            {/* <div className="orderdataCustomer">
-              <h2>Order Details</h2>
-              <p>Order ID: {orderData[0]._id}</p>
-              <p>Name: {orderData[0].name}</p>
-              <p>Total: {orderData[0].totalpay}</p>
-            </div> */}
-
             <ul className="orderdataUldiv">
               <h3>Shipped Items:</h3>
 
@@ -1012,17 +1003,14 @@ function SellerPage() {
                 {orderData.map((order, orderIndex) => (
                   <ul key={orderIndex}>
                     <div className="shippingBtn">
-                      {/* <button type="button" id="shippingBtn" data-order-id={order._id} onClick={()=>handleShipOrder(orderData,order._id)}>Ship</button> */}
-
                       <h4>Order {orderIndex + 1}</h4>
                     </div>
                     {order.selectedItems.map((item, itemIndex) => (
                       <li key={`${orderIndex}-${itemIndex}`}>
                         <div className="orderdatalist">
-                          {/* <h4>Item {itemIndex + 1}</h4> */}
                           <img
                             className="orderdataimg"
-                            src={`http://localhost:3000/Images/` + item.image}
+                            src={`${BACKEND_URL}/${item.image}`}
                             alt={item.itemName}
                           />
                           <p> {item.itemName}</p>

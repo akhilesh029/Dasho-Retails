@@ -2,13 +2,21 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./BusinessForm.css";
 import { useLocation, useNavigate } from "react-router-dom";
-import { FaUser, FaBuilding, FaPhone, FaFileAlt, FaCertificate, FaStore, FaShoppingCart } from "react-icons/fa";
+import {
+  FaUser,
+  FaBuilding,
+  FaPhone,
+  FaFileAlt,
+  FaCertificate,
+} from "react-icons/fa";
 
 function BusinessForm() {
   const location = useLocation();
-  const userEmail = location.state;
-  const email = userEmail.email;
   const navigate = useNavigate();
+
+  // FIXED — get email safely
+  const email = location.state?.email || location.state || "";
+  console.log("BusinessForm Email:", email);
 
   const [businessName, setBusinessName] = useState("");
   const [ownerName, setOwnerName] = useState("");
@@ -49,28 +57,24 @@ function BusinessForm() {
     }
 
     try {
-      const response = await axios.post("http://localhost:3000/businessform", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/businessform`,
+        formData,
+        { headers: { "Content-Type": "multipart/form-data" } }
+      );
+
+      console.log("Form submitted successfully:", response.data);
+
+      alert("Business registered successfully!");
+
+      // Redirect to seller profile page
+      navigate("/sellerpage", {
+        replace: false,
+        state: { email, sellerId: response.data.sellerId },
       });
-
-      console.log("Form data submitted successfully:", response.data);
-
-      setBusinessName("");
-      setOwnerName("");
-      setContactNumber("");
-      setBusinessContactNumber("");
-      setGstNumber("");
-      setGstCertificate(null);
-      setHasGst(false);
-      setShopCategory("");
-      setShopImage(null);
-
-      // navigate("/sellerpage", { replace: true, state: { email } });
-      return <div>Click on profile to go in your shop</div>
     } catch (error) {
-      console.error("Error submitting form data:", error);
+      console.error("Error submitting form:", error);
+      alert("Form submission failed. Check console for details.");
     }
   };
 
@@ -78,15 +82,14 @@ function BusinessForm() {
     <div className="business-container">
       <div className="business-left">
         <div className="icon-container">
-        
           <h2>Welcome to Business Registration</h2>
           <p>
             Set up your online store with us. Start selling your products and
             grow your business today!
           </p>
-          
         </div>
       </div>
+
       <div className="business-right">
         <form onSubmit={handleSubmit} className="business-form">
           <h1>Fill the Business Details</h1>
@@ -103,6 +106,7 @@ function BusinessForm() {
               required
             />
           </div>
+
           <div className="form-group">
             <label htmlFor="ownerName">
               <FaUser className="form-icon" /> Owner Name:
@@ -115,6 +119,7 @@ function BusinessForm() {
               required
             />
           </div>
+
           <div className="form-group">
             <label htmlFor="contactNumber">
               <FaPhone className="form-icon" /> Contact Number:
@@ -127,6 +132,7 @@ function BusinessForm() {
               required
             />
           </div>
+
           <div className="form-group">
             <label htmlFor="businessContactNumber">
               <FaPhone className="form-icon" /> Business Contact Number:
@@ -139,6 +145,7 @@ function BusinessForm() {
               required
             />
           </div>
+
           <div className="checkbox-container">
             <label className="checkbox-label">
               <input
@@ -148,6 +155,7 @@ function BusinessForm() {
               <span>I have GST</span>
             </label>
           </div>
+
           <div className="form-group">
             <label htmlFor="gstNumber">
               <FaFileAlt className="form-icon" /> GST Number:
@@ -160,6 +168,7 @@ function BusinessForm() {
               disabled={!hasGst}
             />
           </div>
+
           <div className="form-group">
             <label htmlFor="gstCertificate">
               <FaCertificate className="form-icon" /> GST Certificate:
@@ -172,6 +181,7 @@ function BusinessForm() {
               disabled={!hasGst}
             />
           </div>
+
           <div className="form-group">
             <label htmlFor="shopCategory">Shop Category:</label>
             <select
@@ -189,6 +199,7 @@ function BusinessForm() {
               <option value="general">General</option>
             </select>
           </div>
+
           <div className="form-group">
             <label htmlFor="shopImage">Shop Image:</label>
             <input
@@ -199,6 +210,7 @@ function BusinessForm() {
               required
             />
           </div>
+
           <button id="submitButton" type="submit">
             Submit
           </button>
