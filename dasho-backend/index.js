@@ -13,7 +13,7 @@ const mongodb = require('mongodb');
 // const categoryRoutes = require('./routes/category');
 const categoryRoutes = require('./routes/categoryRoutes')
 const productRoutes = require('./routes/productRoutes');
-const orderRoutes = require("./routes/orderRoutes");
+const orderRoutes = require('./routes/orderRoutes');
 
 
 
@@ -46,7 +46,7 @@ app.get("/health", (req, res) => {
 });
 
 
-app.use(orderRoutes)
+// app.use(orderRoutes)
 app.use('/api', trendinShopsRoutes);
 
 
@@ -76,38 +76,39 @@ const upload = multer({
 
 app.use("/api/categories", categoryRoutes);
 app.use('/api', productRoutes);
-// app.use("/", orderRoutes);
+app.use("/", orderRoutes);
+
 // Route to place an order
-app.post('/orders', async (req, res) => {
-  const { customer, items, totalAmount } = req.body;
-  console.log(req.body);
+// app.post('/orders', async (req, res) => {
+//   const { customer, items, totalAmount } = req.body;
+//   console.log(req.body);
 
-  // Check if the required fields are provided
-  if (!customer || !items || items.length === 0 || !totalAmount) {
-    return res.status(400).json({ error: 'Missing required fields.' });
-  }
+//   // Check if the required fields are provided
+//   if (!customer || !items || items.length === 0 || !totalAmount) {
+//     return res.status(400).json({ error: 'Missing required fields.' });
+//   }
 
-  try {
-    // Create a new order
-    const newOrder = new Order({
-      customer,
-      items,
-      totalAmount,
-    });
+//   try {
+//     // Create a new order
+//     const newOrder = new Order({
+//       customer,
+//       items,
+//       totalAmount,
+//     });
 
-    // Save the order to the database
-    const savedOrder = await newOrder.save();
+//     // Save the order to the database
+//     const savedOrder = await newOrder.save();
 
-    // Respond with success message and the saved order data
-    res.status(201).json({
-      message: 'Order placed successfully.',
-      order: savedOrder,
-    });
-  } catch (error) {
-    console.error('Error placing order:', error);
-    res.status(500).json({ error: 'Failed to place order.' });
-  }
-});
+//     // Respond with success message and the saved order data
+//     res.status(201).json({
+//       message: 'Order placed successfully.',
+//       order: savedOrder,
+//     });
+//   } catch (error) {
+//     console.error('Error placing order:', error);
+//     res.status(500).json({ error: 'Failed to place order.' });
+//   }
+// });
 
 
 // app.use("/api/categories",categoryRoutes)
