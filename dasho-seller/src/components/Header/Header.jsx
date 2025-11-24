@@ -2,7 +2,8 @@
 import React from 'react';
 import './Header.css'; 
 import { Link } from 'react-router-dom';
-import { assets } from '../../../../basicReact/src/assets/assets';
+
+import { assets } from '../../../../dasho-frontend/src/assets/assets';
 import { MdSearch } from 'react-icons/md'; 
 import FirebaseAuth from '../FirebaseAuth/FirebaseAuth';
 import { FaUserCircle } from 'react-icons/fa'; // Import user icon

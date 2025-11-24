@@ -1,0 +1,98 @@
+/* ===========================
+   NAVBAR STYLING
+=========================== */
+
+.navbar {
+    width: 100%;
+    padding: 14px 24px;
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+}
+
+.navbar-brand h2 {
+    margin: 0;
+    color: #007bff;
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.navbar-links {
+    list-style: none;
+    display: flex;
+    gap: 22px;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-links li {
+    margin: 0;
+}
+
+.navbar-links a {
+    text-decoration: none;
+    font-size: 1rem;
+    color: #555;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: 0.25s ease;
+    font-weight: 500;
+}
+
+.navbar-links a:hover {
+    background: rgba(0, 123, 255, 0.15);
+    color: #007bff;
+}
+
+/* Active Page Highlight */
+.active-link {
+    background: #007bff;
+    color: white !important;
+    border-radius: 8px;
+    padding: 8px 12px;
+}
+
+/* ===========================
+   RESPONSIVE NAVBAR 
+=========================== */
+
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        padding: 18px;
+        gap: 12px;
+    }
+
+    .navbar-brand h2 {
+        font-size: 1.4rem;
+    }
+
+    .navbar-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .navbar-links a {
+        font-size: 0.9rem;
+        padding: 8px 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar-links {
+        gap: 8px;
+    }
+
+    .navbar-links a {
+        padding: 6px 8px;
+        font-size: 0.85rem;
+    }
+}

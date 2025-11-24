@@ -10,20 +10,25 @@ require('dotenv').config();
 // const upload = multer({dest: 'uploads/'})
 const mongodb = require('mongodb');
 
-const categoryRoutes = require('./routes/category');
+// const categoryRoutes = require('./routes/category');
+const categoryRoutes = require('./routes/categoryRoutes')
+const productRoutes = require('./routes/productRoutes');
+const orderRoutes = require("./routes/orderRoutes");
+
+
+
 
 
 const BusinessformModel = require('./models/businessform')
-const Product = require('./models/product')
+const Product = require('./models/productModel')
 
 const trendinShopsRoutes = require('./routes/trendingshops');
 
 const Customer = require('./models/customerform');
-const Order = require('./models/Order')
+const Order = require('./models/orderModel')
   // Import the UUID library
 const { v4: uuidv4 } = require('uuid');   // Import the UUID library to generate unique IDs
 const jwt = require("jsonwebtoken");
-const orderRoutes = require('./routes/orderRoutes')
 
 
 const app = express()
@@ -69,7 +74,9 @@ const upload = multer({
   storage: storage
 })
 
-
+app.use("/api/categories", categoryRoutes);
+app.use('/api', productRoutes);
+app.use("/", orderRoutes);
 // Route to place an order
 app.post('/orders', async (req, res) => {
   const { customer, items, totalAmount } = req.body;

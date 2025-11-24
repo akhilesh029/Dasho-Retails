@@ -1,18 +1,34 @@
-// routes/orderRoutes.js
-const express = require('express');
-const authenticateSeller = require('../middleware/authenticateSeller');
-const { getOrdersForSeller, updateOrderStatus } = require('../controllers/orderController');
-
+const express = require("express");
 const router = express.Router();
+const Order = require("../models/orderModel");
 
-// Route to fetch orders for the seller
-router.get('/orders/seller', authenticateSeller, getOrdersForSeller);
+// ==========================================
+// GET ALL ORDERS
+// ==========================================
+router.get("/orders", async (req, res) => {
+  try {
+    const orders = await Order.find();
+    res.json(orders);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch orders" });
+  }
+});
 
-// Route to update the status of an order
-// router.patch('/orders/:orderId', authenticateSeller, updateOrderStatus);
+// ==========================================
+// CANCEL ENTIRE ORDER
+// ==========================================
+router.delete("/orders/cancel/:id", async (req, res) => {
+  try {
+    const deleted = await Order.findByIdAndDelete(req.params.id);
 
+    if (!deleted) {
+      return res.status(404).json({ error: "Order not found" });
+    }
 
-// Update the status of an item in an order
-router.patch('/orders/:orderId/items/:itemId/status', authenticateSeller, updateOrderStatus);
+    res.json({ message: "Order cancelled successfully" });
+  } catch (err) {
+    res.status(500).json({ error: "Failed to cancel order" });
+  }
+});
 
 module.exports = router;
