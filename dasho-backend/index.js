@@ -76,7 +76,7 @@ const upload = multer({
 
 app.use("/api/categories", categoryRoutes);
 app.use('/api', productRoutes);
-app.use("/", orderRoutes);
+// app.use("/", orderRoutes);
 // Route to place an order
 app.post('/orders', async (req, res) => {
   const { customer, items, totalAmount } = req.body;
